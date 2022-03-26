@@ -1,0 +1,53 @@
+:root{
+    --primary: #0F3249;
+    --secondary: #097AC0;
+    --accent: #0E6FE8;
+    --bg: linear-gradient(101.77deg, #097AC0 0%, #6509C0 100%);
+    --card_img_h: 23rem;
+    --title-size: 64px;
+}
+
+
+$primary: var(--primary);
+$secondary: var(--secondary);
+$accent: var(--accent);
+$bg: var(--bg);
+
+
+.btn-primary{
+    background: $accent !important;
+
+    &:hover{
+        background: $primary !important;
+    }
+}
+
+$card_img_h: var(--card_img_h);
+
+$title_size: var(--title-size);
+
+:root{
+    --text-body: 18px;
+    --text-mega-title: 76px;
+    --text-title: 58px;
+    --text-subtitle: 36px;
+    --text-h1: 48px;
+    --text-h2: 30px;
+    --text-h3: 26px;
+    --text-small: 16px;
+
+
+    --text-font-title: 'Cormorant Garamond', serif;
+    --text-font-body: 'Open Sans', sans-serif; 
+}
+
+$txt-body: var(--text-body);
+$txt-title: var(--text-title);
+$txt-title-xl: var(--text-mega-title);
+$txt-subtitle: var(--text-subtitle);
+$txt-h1: var(--text-h1);
+$txt-h2: var(--text-h2);
+$txt-h3: var(--text-h3);
+$txt-small: var(--text-small);
+
+$txt-font-title: var(--text-font-title);

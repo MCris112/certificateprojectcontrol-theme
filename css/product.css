@@ -1,0 +1,180 @@
+:root {
+  --primary: #0F3249;
+  --secondary: #097AC0;
+  --accent: #0E6FE8;
+  --bg: linear-gradient(101.77deg, #097AC0 0%, #6509C0 100%);
+  --card_img_h: 23rem;
+  --title-size: 64px;
+}
+
+.btn-primary {
+  background: var(--accent) !important;
+}
+.btn-primary:hover {
+  background: var(--primary) !important;
+}
+
+:root {
+  --text-body: 18px;
+  --text-mega-title: 76px;
+  --text-title: 58px;
+  --text-subtitle: 36px;
+  --text-h1: 48px;
+  --text-h2: 30px;
+  --text-h3: 26px;
+  --text-small: 16px;
+  --text-font-title: "Cormorant Garamond", serif;
+  --text-font-body: "Open Sans", sans-serif;
+}
+
+.cpc_product_section {
+  margin: 4rem 0;
+}
+.cpc_product_section.top {
+  margin: -2rem 0;
+  padding-top: 12rem;
+}
+.cpc_product_section .cpc_title {
+  font-size: 96px;
+  font-weight: bold;
+  color: white !important;
+}
+.cpc_product_section .cpc_subtitle {
+  color: white;
+  opacity: 0.8;
+}
+.cpc_product_section hr {
+  border-color: white;
+}
+.cpc_product_section .short_desc {
+  width: 500px;
+  max-width: 100%;
+  /* or 18px */
+  color: white;
+  margin-bottom: 3rem;
+}
+
+.cpc_product_price_c {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  padding-bottom: 9rem;
+  gap: 1rem;
+}
+.cpc_product_price_c .cpc_product_price {
+  font-size: var(--text-title);
+  font-family: var(--text-font-title);
+  color: white;
+}
+.cpc_product_price_c .cpc_product_price_btn {
+  width: 100%;
+}
+.cpc_product_price_c .cpc_product_price_btn .btn {
+  display: block;
+  width: 100%;
+}
+.cpc_product_price_c .cpc_product_price_btn .btn-outline-primary {
+  color: white;
+}
+
+.cpc_capacitacion_widget_info_3 {
+  width: 100%;
+  background: white;
+  padding: 2.5rem 0;
+  border-radius: 10px 10px 0 0;
+}
+.cpc_capacitacion_widget_info_3 .content {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (auto)[3];
+  grid-template-columns: repeat(3, auto);
+  padding: 0;
+  grid-auto-rows: 1fr;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
+}
+.cpc_capacitacion_widget_info_3 .cpc_capacitacion_widget_info_3_item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.6rem;
+}
+.cpc_capacitacion_widget_info_3 .cpc_capacitacion_widget_info_3_item i {
+  font-size: 40px;
+}
+.cpc_capacitacion_widget_info_3 .cpc_capacitacion_widget_info_3_item .title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 60%;
+  color: var(--primary);
+}
+.cpc_capacitacion_widget_info_3 .cpc_capacitacion_widget_info_3_item .information {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--secondary);
+}
+
+.cpc_product_box_desc {
+  font-size: 22px;
+  margin-bottom: 4rem;
+}
+.cpc_product_box_desc .cpc_head {
+  font-size: 36px;
+  font-weight: bold;
+  color: var(--secondary);
+}
+.cpc_product_box_desc .cpc_head hr {
+  width: 100px;
+  max-width: 30%;
+  opacity: 1;
+  border: 1px solid var(--secondary);
+}
+.cpc_product_box_desc .cpc_body {
+  padding-left: 2rem;
+}
+
+.accordion .accordion-item {
+  margin-bottom: 1rem;
+}
+.accordion .accordion-item .accordion-button {
+  background: var(--primary);
+  color: white;
+  border-radius: 10px !important;
+}
+.accordion .accordion-item .accordion_item_title {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--secondary);
+}
+.accordion .accordion-item .accordion_item_title hr {
+  width: 100px;
+  max-width: 30%;
+  opacity: 1;
+  border: 1px solid var(--secondary);
+}
+.accordion .accordion-item .accordion_item_body {
+  padding-left: 2rem;
+}
+
+.cpc_product_box_video_right iframe {
+  width: 100% !important;
+  height: 25vh !important;
+}

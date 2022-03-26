@@ -1,0 +1,48 @@
+/*
+
+Hover EFFECT ON NAVBAR ITEM
+*/
+
+.navbar{
+    .nav-link{
+        position: relative;
+
+        transition: all .3s;
+
+        &:after{
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            width: 100%;
+            
+            border: 1px solid $accent;
+
+            opacity: 0;
+
+            transition: all .3s;
+        }
+
+        &:hover{
+            &:after{
+                bottom: 0;
+                opacity: .9;
+            }
+        }
+    }
+}
+ 
+/*
+.cpc_menu_phone_c{
+    display: block !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+
+    .collapse{
+        display: block !important;
+    }
+}
+*/

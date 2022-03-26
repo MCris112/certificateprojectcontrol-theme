@@ -1,0 +1,163 @@
+@use 'vars' as *;
+
+.cpc_product_section{
+    margin: 4rem 0;
+    &.top{
+        margin: -2rem 0;
+        padding-top: 12rem;
+    }
+
+    .cpc_title{
+        font-size: 96px;
+        font-weight: bold;
+        color: white !important;
+    }
+
+    .cpc_subtitle{
+        color: white;
+        opacity: .8;
+    }
+
+    hr{
+        border-color: white;
+    }
+
+    .short_desc{
+        width: 500px;
+        max-width: 100%;
+        /* or 18px */
+
+        color: white;
+
+        margin-bottom: 3rem;
+    }
+}
+
+.cpc_product_price_c{
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    padding-bottom: 9rem;
+    gap: 1rem;
+
+    .cpc_product_price{
+        font-size: $txt-title;
+        font-family: $txt-font-title;
+        color: white;
+    }
+    .cpc_product_price_btn{
+        width: 100%;
+
+        .btn{
+            display: block;
+            width: 100%;
+        }
+
+        .btn-outline-primary{
+            color: white;
+        }
+    }
+}
+
+.cpc_capacitacion_widget_info_3{
+    width: 100%;
+    background: white;
+
+    padding: 2.5rem 0;
+    border-radius: 10px 10px 0 0;
+
+    .content{
+        width: 100%;
+
+        display:grid;
+        grid-template-columns: repeat(3, auto);
+        padding: 0;
+        grid-auto-rows: 1fr;
+        justify-content: space-around;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .cpc_capacitacion_widget_info_3_item{
+        display: flex;
+        align-items: center;
+        gap: .6rem;
+
+        i{
+            font-size: 40px;
+        }
+
+        .title{
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 60%;
+
+            color: $primary;
+        }
+
+        .information{
+            font-weight: 700;
+            font-size: 18px;
+            color: $secondary;
+        }
+    }
+}
+
+
+.cpc_product_box_desc{
+    font-size: 22px;
+
+    margin-bottom: 4rem;
+
+    .cpc_head{
+        font-size: 36px;
+        font-weight: bold;
+        color: $secondary;
+
+        hr{
+            width: 100px;
+            max-width: 30%;
+            opacity: 1;
+            border: 1px solid $secondary;
+        }
+    }
+
+    .cpc_body{
+        padding-left: 2rem;
+    }
+}
+
+.accordion{
+    .accordion-item{
+        margin-bottom: 1rem;
+        .accordion-button{
+            background: $primary;
+            color: white;
+            border-radius: 10px !important;
+        }
+
+        .accordion_item_title{
+            font-size: 24px;
+            font-weight: bold;
+            color: $secondary;
+
+            hr{
+                width: 100px;
+                max-width: 30%;
+                opacity: 1;
+                border: 1px solid $secondary;
+            }
+        }
+
+        .accordion_item_body{
+            padding-left: 2rem;
+        }
+    }
+}
+
+.cpc_product_box_video_right iframe{
+    width: 100% !important;
+    height: 25vh !important;
+}
