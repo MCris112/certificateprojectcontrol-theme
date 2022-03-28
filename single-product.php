@@ -3,6 +3,24 @@ get_header();
 
 $product = wc_get_product(get_the_id());
 
+
+function cpc_capacitacion_cpt_box_desc($title, $content)
+{
+?>
+
+    <div class="cpc_product_box_desc">
+        <div class="cpc_head">
+            <h2><?php echo $title; ?></h2>
+            <hr>
+        </div>
+        <div class="cpc_body">
+            <p class="desc"><?php echo $content; ?></p>
+        </div>
+    </div>
+
+<?php
+}
+
 ?>
 
 <section class="cpc_product_section top">
@@ -53,7 +71,7 @@ $product = wc_get_product(get_the_id());
                                         echo 'Sin definir';
                                     } else {
                                         global $locale;
-                                        $date= date_i18n( 'd \d\e F', strtotime ($inicio_clases) );
+                                        $date = date_i18n('d \d\e F', strtotime($inicio_clases));
                                         echo $date;
                                     }
                                     ?>
@@ -100,35 +118,33 @@ $product = wc_get_product(get_the_id());
             <div class="col-8">
                 <div class="cpc_product_section_content">
                     <div class="container">
-                        <div class="cpc_product_box_desc">
-                            <div class="cpc_head">
-                                <h2>Descripción del curso</h2>
-                                <hr>
-                            </div>
-                            <div class="cpc_body">
-                                <p class="desc"><?php echo $product->get_description(); ?></p>
-                            </div>
-                        </div>
+                        <?php
+                        
+                        cpc_capacitacion_cpt_box_desc('Descripción del curso', $product->get_description());
 
-                        <div class="cpc_product_box_desc">
-                            <div class="cpc_head">
-                                <h2>Logro del curso</h2>
-                                <hr>
-                            </div>
-                            <div class="cpc_body">
-                                <p class="desc"><?php echo $product->get_description(); ?></p>
-                            </div>
-                        </div>
+                        $has_logro = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_logro_select', true);
+                        $logro_content =  htmlspecialchars_decode(get_post_meta(get_the_ID(), '_cpc_capacitacion_field_logro', true));
 
-                        <div class="cpc_product_box_desc">
-                            <div class="cpc_head">
-                                <h2>Metodología</h2>
-                                <hr>
-                            </div>
-                            <div class="cpc_body">
-                                <p class="desc"><?php echo $product->get_description(); ?></p>
-                            </div>
-                        </div>
+                        if(!empty($logro_content) && $has_logro == true){
+                            cpc_capacitacion_cpt_box_desc('Logro del curso', $logro_content);
+                        }
+
+                        $has_metodologia = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_metodologia_select', true);
+                        $metodologia_content =  htmlspecialchars_decode(get_post_meta(get_the_ID(), '_cpc_capacitacion_field_metodologia', true));
+
+                        if(!empty($metodologia_content) && $has_metodologia == true){
+                            cpc_capacitacion_cpt_box_desc('Metodología del curso', $metodologia_content);
+                        }
+
+                        $has_beneficios = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_beneficios_select', true);
+                        $beneficios_content =  htmlspecialchars_decode(get_post_meta(get_the_ID(), '_cpc_capacitacion_field_beneficios', true));
+
+                        if(!empty($beneficios_content) && $has_beneficios == true){
+                            cpc_capacitacion_cpt_box_desc('Beneficios del curso', $beneficios_content);
+                        }
+
+                        
+                        ?>
 
                         <div class="cpc_product_box_desc">
                             <div class="cpc_head">
@@ -136,6 +152,12 @@ $product = wc_get_product(get_the_id());
                                 <hr>
                             </div>
                             <div class="cpc_body">
+                                <?php
+                                
+                                $temario = json_decode( get_post_meta(get_the_ID(), '_cpc_capacitacion_field_temario', true) );
+                                print_r($temario);
+                                
+                                ?>
                                 <div class="accordion accordion-flush" id="accordionFlushExample">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="flush-headingOne">
