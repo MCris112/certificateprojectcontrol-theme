@@ -2,7 +2,7 @@
 
 /************************************
  * 
- * PONENTES META BOXES AND CUSTOM FIELDS
+ * MODALIDAD META BOXES AND CUSTOM FIELDS
  */
 
 function cpc_capacitacion_register_meta_boxes()
@@ -17,13 +17,18 @@ function cpc_capacitacion_meta_box_callback($post)
     wp_nonce_field('cpc_capacitacion_save_meta_box_data_modalidad', 'cpc_capacitacion_meta_box_nonce_modalidad');
 
     $value = get_post_meta($post->ID, '_cpc_capacitacion_field_modalidad', true);
+    $inicio_clases = get_post_meta($post->ID, '_cpc_capacitacion_field_fecha_inicio', true);
 ?>
 
     <select name="cpc_capacitacion_field_modalidad" id="cpc_capacitacion_field_modalidad" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-        <option value="true" selected>Sincrónica</option>
-        <option value="false">Asincrónica</option>
+        <option value="true" <?php if ($value) echo "selected"; ?>>Sincrónica</option>
+        <option value="false" <?php if (!$value) echo "selected"; ?>>Asincrónica</option>
     </select>
 
+    <div id="cpc_field_datepicker_container" class="input-group mb-3" style="display: none;">
+        <span class="input-group-text" id="basic-addon1">Inicio</span>
+        <input type="text" class="form-control cpc_field_datepicker" name="cpc_capacitacion_field_modalidad_fecha" id="cpc_capacitacion_field_modalidad_fecha" value="<?php echo $inicio_clases; ?>">
+    </div>
 <?php
 }
 
@@ -51,11 +56,12 @@ function cpc_capacitacion_save_meta_box_data_modalidad($post_id)
         return;
     }
 
-    if ( !isset($_POST['cpc_capacitacion_field_modalidad']) ) {
+    if ( !isset($_POST['cpc_capacitacion_field_modalidad'])) {
         return;
     }
 
-    update_post_meta($post_id, '_cpc_capacitacion_field_modalidad', $_POST['cpc_capacitacion_field_modalidad'] );
+    update_post_meta($post_id, '_cpc_capacitacion_field_modalidad', $_POST['cpc_capacitacion_field_modalidad']);
+    update_post_meta($post_id, '_cpc_capacitacion_field_fecha_inicio', $_POST['cpc_capacitacion_field_modalidad_fecha']);
 }
 
 add_action('save_post', 'cpc_capacitacion_save_meta_box_data_modalidad');

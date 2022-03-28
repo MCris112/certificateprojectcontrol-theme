@@ -44,7 +44,6 @@
 
     .cpc_product_price{
         font-size: $txt-title;
-        font-family: $txt-font-title;
         color: white;
     }
     .cpc_product_price_btn{
@@ -95,6 +94,7 @@
             line-height: 60%;
 
             color: $primary;
+            font-family: $txt-font-title;
         }
 
         .information{

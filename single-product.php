@@ -44,7 +44,20 @@ $product = wc_get_product(get_the_id());
                             <div class="icon"><i class="fa fa-calendar-o"></i></div>
                             <div class="text">
                                 <p class="title">Inicio de Clases</p>
-                                <div class="information">15 de marzo</div>
+                                <div class="information">
+                                    <?php
+
+                                    $inicio_clases = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_fecha_inicio', true);
+
+                                    if (empty($inicio_clases)) {
+                                        echo 'Sin definir';
+                                    } else {
+                                        global $locale;
+                                        $date= date_i18n( 'd \d\e F', strtotime ($inicio_clases) );
+                                        echo $date;
+                                    }
+                                    ?>
+                                </div>
                             </div>
                         </div>
                         <div class="cpc_capacitacion_widget_info_3_item">
@@ -74,6 +87,7 @@ $product = wc_get_product(get_the_id());
                 <div class="d-flex gap-4 cpc_product_price_btn">
                     <div class="btn btn-outline-primary">Contáctanos</div>
                     <div class="btn btn-primary">Comprar Ahora</div>
+
                 </div>
             </div>
         </div>
