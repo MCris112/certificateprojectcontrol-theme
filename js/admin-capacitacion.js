@@ -74,19 +74,41 @@ function cpc_field_temario_show_values(){
     var temario = cpc_field_temario_get_values();
 
     jQuery.each(temario, function(index, value) {
+        var post_id = jQuery('#post_ID').val();
+        var url = document.getElementById('site_url').value;
+
+        var ajax_url = url+'/wp-admin/admin-ajax.php';
+        data_title_val = value+'_title';
+
+        var data = {
+            'action': 'cpc_post_meta',
+            'post_id': post_id,
+            'meta_keys': {
+                'title': data_title_val,
+                'content': value
+            }
+        }
+
+        console.log(ajax_url);
+        console.log(data);
+
         jQuery.ajax({
-            url : "/wp-admin/admin-ajax.php",
+            url : ajax_url,
             type: "POST",
-            data: {'action': 'cpc_get_meta_field', 'postid': 12345},
+            data: data,
             success: function(response) {
+                console.log(response);
+
                 values = {
-                    title: response['Theme'], 
-                    content: response['Content']
+                    title: response[data_title_val],
+                    content: response[value]
                 };
+                
+                
                 const temario_item_id_collapse = value+"_collapse";
                 const temario_item_id_title = value+"_title";
 
-                cpc_field_temario_show_item(value, temario_item_id_collapse, temario_item_id_title);
+                cpc_field_temario_show_item(value, temario_item_id_collapse, temario_item_id_title, values);
             }
         });
 

@@ -18,10 +18,18 @@ function cpc_capacitacion_product_temario_meta_box_callback($post)
     wp_nonce_field('cpc_capacitacion_product_temario_save_meta_box', 'cpc_capacitacion_meta_box_nonce_information');
 
     $value = get_post_meta($post->ID, '_cpc_capacitacion_field_temario', true);
+    $test_value = get_post_meta($post->ID, '_cpc_capacitacion_field_temario_item_1648490548675', true);
+
+    $temario_field = '["_cpc_capacitacion_field_temario_item_1648567593553"]';
+    $temario = json_decode($temario_field, true);
+
+    var_dump($temario);
 ?>
     <button class="btn btn-primary" type="button" onclick="cpc_field_temario_add_item();">Añadir Contrnido</button>
 
     <input id="_cpc_capacitacion_field_temario" name="_cpc_capacitacion_field_temario" type="text" value='<?php echo $value; ?>'>
+    <input id="site_url" name="site_url" type="text" value='<?php echo site_url(); ?>'>
+    <input type="text" value="<?php echo $test_value; ?>">
 
     <div class="accordion" id="cpcTemarioContainer">
 
@@ -70,19 +78,30 @@ function cpc_capacitacion_product_temario_save_meta_box($post_id)
         return;
     }
 
-    update_post_meta($post_id, '_cpc_capacitacion_field_temario',$_POST['_cpc_capacitacion_field_temario']);
+    update_post_meta($post_id, '_cpc_capacitacion_field_temario', $_POST['_cpc_capacitacion_field_temario']);
 
-    $temario = json_decode($_POST['_cpc_capacitacion_field_temario'], true);
+    /*
+    $temario_field = get_post_meta($post_id, '_cpc_capacitacion_field_temario', true);;
 
-    foreach ($temario as $item => $value) {
-        if (!isset($_POST[$value]) || empty($value)) {
-            unset($temario[$item]);
-        } else {
-            update_post_meta($post_id, $value, $value);
-            update_post_meta($post_id, $value . '_title', $value);
+    try {
+       echo $temario_field;
+
+        $temario = json_decode($temario_field, true);
+        update_post_meta($post_id, '_test', print_r( json_decode($temario_field, true) , true) );
+
+        foreach ($temario as $item) {
+            if( !isset($_POST[$item]) || !empty($_POST[$item]) ){
+                update_post_meta($post_id, $item, $_POST[$item]);
+            }
+
+            if( !isset($_POST[$item . '_title']) || !empty($_POST[$item . '_title']) ){
+                update_post_meta($post_id, $item . '_title', $_POST[$item . '_title']);
+            }
         }
+    } catch (Exception $e) {
+        update_post_meta($post_id, '_test_error', $e->getMessage() );
     }
-
+    */
 }
 
 add_action('save_post', 'cpc_capacitacion_product_temario_save_meta_box');

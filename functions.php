@@ -138,3 +138,30 @@ add_action( 'init', 'cpc_capacitaciones_change_post_object_label' );
 
 //require __DIR__ . '/widgets/register_widgets.php';
 require __DIR__ . '/functions/capacitacion/cpt.func.php';
+
+function cpc_ajax_get_post_meta(){
+
+	if(empty(  $_POST['post_id'] )) {
+		wp_send_json_error('No se han enviado la ID');
+		wp_die();
+	}
+
+	if(empty(  $_POST['meta_keys'] )) {
+		wp_send_json_error('No se han enviado los datos');
+		wp_die();
+	}
+	
+    $ID = $_POST['post_id'];
+	$meta_keys = $_POST['meta_keys'];
+
+	$meta_values = [];
+
+	foreach ($meta_keys as $meta_key) {
+		$meta_values[$meta_key] = get_post_meta($ID, $meta_key, true);
+	}
+    
+    wp_send_json( $meta_values );
+    wp_die();
+}
+add_action( 'wp_ajax_nopriv_cpc_post_meta', 'cpc_ajax_get_post_meta');
+add_action( 'wp_ajax_cpc_post_meta', 'cpc_ajax_get_post_meta' );
