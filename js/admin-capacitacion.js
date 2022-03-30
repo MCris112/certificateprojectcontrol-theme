@@ -30,18 +30,20 @@ class CPC_TEMARIO{
         jQuery(this.temario_input_id).val( JSON.stringify(values) );
     }
 
-    remove(key){
+    remove(remove_key){
         var values = this.get_values();
-
         var new_values = {};
 
-        jQuery(values).each(function(index, content){
-            console.log("index: " + index + " content: " + content);
-
-            if(content.key != key){
-               new_values[content.key] = content.value;
+        jQuery.each(values, function(key, val){
+            if(key == remove_key){
+                tinymce.editors[key].remove();
+                jQuery('#'+key+"_accordion").remove();
+            }else{
+                new_values[key] = val;
             }
         });
+
+        this.update(new_values);
     }
     add(key, value){
         var values = this.get_values();
@@ -99,16 +101,16 @@ function cpc_field_temario_show_item(temario_item_id, temario_item_id_collapse, 
 
     input_val = "value='"+values.title+"'";
 
-    btn_trash = "cpc_field_temario_remove_item('temario_item_id');";
+    btn_trash = "cpc_field_temario_remove_item('"+temario_item_id+"');";
 
-    $item_html = '<div class="accordion-item">'+
+    $item_html = '<div class="accordion-item" id="'+temario_item_id+'_accordion">'+
                     '<h2 class="accordion-header" id="headingOne">'+
                         '<button class="accordion-button border border-primary" type="button" data-bs-toggle="collapse" data-bs-target="#'+temario_item_id_collapse+'" aria-expanded="false" aria-controls="'+temario_item_id_collapse+'">'+
                             '<div class="container-fluid"><div class="row"><div class="col">'+
                                 '<input type="text" class="form-control" id="'+temario_item_id_title+'" placeholder="Módulo" name='+temario_item_id_title+' '+input_val+'>'+
                             '</div><div class="col d-flex justify-content-end">'+
-                                '<div class="btn btn-danger">'+
-                                    '<i class="fa fa-trash fa-lg" aria-hidden="true" onclick="'+btn_trash+'"></i>'+
+                                '<div class="btn btn-danger"  onclick="'+btn_trash+'">'+
+                                    '<i class="fa fa-trash fa-lg" aria-hidden="true""></i>'+
                                 '</div>'+
                             '</div></div></div>'+
                         '</button>'+
@@ -223,6 +225,68 @@ function  cpc_field_temario_reset(){
 }
 
 function cpc_field_temario_remove_item(temario_item_id){
-    cpc_temario = new CPC_TEMARIO(cpc_input_data_id);
-    cpc_temario.remove(temario_item_id);
+
+    console.log("ON CPCP FIELD TEMARIO REMOVE ITEM");
+    cpc_temario_modal('¿Está seguro que desea eliminar este módulo/Elemento?', 
+        'Eliminar módulo',
+        function(){
+            cpc_temario = new CPC_TEMARIO(cpc_input_data_id);
+            cpc_temario.remove(temario_item_id);
+        });
+}
+
+function cpc_temario_modal(title, content, func_yes){
+    console.log("ON CPC_TEMARIO_MODAL");
+
+    var modal_id = 'cpc_temario_modal_'+Date.now();
+    var modal_html = '<div class="modal fade" id="'+modal_id+'" tabindex="-1" role="dialog" aria-labelledby="'+modal_id+'Label" aria-hidden="true">'+
+                        '<div class="modal-dialog" role="document">'+
+                            '<div class="modal-content">'+
+                                '<div class="modal-header">'+
+                                    '<h5 class="modal-title" id="'+modal_id+'Label">'+title+'</h5>'+
+                                    '<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">'+
+                                        '<span aria-hidden="true">&times;</span>'+
+                                    '</button>'+
+                                '</div>'+
+                                '<div class="modal-body">'+
+                                    content+
+                                '</div>'+
+                                '<div class="modal-footer">'+
+                                    '<button id="'+modal_id+'_btn" type="button" class="btn btn-primary" data-bs-dismiss="modal" >Aceptar</button>'+
+                                    '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  data-bs-dismiss="modal" ">Cancelar</button>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'+
+                    '</div>';
+    jQuery('body').append(modal_html);
+    jQuery('#'+modal_id+"_btn").on('click', function() {
+        func_yes();
+    });
+
+    var options = {};
+    var delete_modal = new bootstrap.Modal(document.getElementById(modal_id), options);
+    delete_modal.show();
+}
+
+/************************************************************************************************
+ * 
+ * 
+ * CPC INFORMACION
+ * 
+ * 
+ * 
+ */
+
+function cpc_informacion_field_select_is_default(select_id, container_id, container_default_id)
+{
+    console.log("ON CPC_INFORMACION_FIELD_SELECT_IS_DEFAULT");
+    var is_default = jQuery('#'+select_id).val();
+
+    if(is_default == 'true'){
+        jQuery('#'+container_default_id).show();
+        jQuery('#'+container_id).hide();
+    }else{
+        jQuery('#'+container_default_id).hide();
+        jQuery('#'+container_id).show();
+    }
 }

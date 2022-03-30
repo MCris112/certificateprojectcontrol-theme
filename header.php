@@ -203,7 +203,15 @@ $cpc_menu_user = array(
 
                                     <div class="row justify-content-around w-100">
                                         <div class="col-auto cpc_menu_phone_c">
+                                            <div class="cpcp_menu_phone_bg" onClick="cpc_manu_open_close();"></div>
                                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                                                <div class="col-auto">
+                                                    <button class="navbar-toggler" type="button">
+                                                        <span class="navbar-toggler-icon me-2"></span>
+                                                        Cerrar Menu
+                                                    </button>
+                                                </div>
                                                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 justify-content-around ">
                                                     <?php
                                                     foreach ($hierarchy as $menuitem) {

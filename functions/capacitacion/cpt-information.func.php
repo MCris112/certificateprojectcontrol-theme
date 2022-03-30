@@ -33,36 +33,41 @@ function cpc_capacitacion_product_information_meta_box_callback()
         </div>
         <div class="tab-content w-100 p-3" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                <select id="_cpc_capacitacion_field_logro_select" name="_cpc_capacitacion_field_logro_select" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                    <option value="true" selected>Mostrar valor por defecto</option>
-                    <option value="false">Valor Personalizado</option>
+                <select id="_cpc_capacitacion_field_logro_select" name="_cpc_capacitacion_field_logro_select" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" onChange="cpc_informacion_field_select_is_default('_cpc_capacitacion_field_logro_select', 'cpc_info_container_logro', 'cpc_info_container_logro_default');">
+                    <option value="true" >Mostrar valor por defecto</option>
+                    <option value="false" selected>Valor Personalizado</option>
                 </select>
 
-                <div class="mb-3">
+                <div id="cpc_info_container_logro" class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Logro de la capacitación</label>
-                    <?php wp_editor('', '_cpc_capacitacion_field_logro', array('textarea_name' => '_cpc_capacitacion_field_logro', "media_buttons" => false)); ?>
+                    <?php wp_editor( htmlspecialchars_decode( get_post_meta(get_the_ID(), '_cpc_capacitacion_field_logro', true) ), '_cpc_capacitacion_field_logro', array('textarea_name' => '_cpc_capacitacion_field_logro', "media_buttons" => false)); ?>
+                </div>
+
+                <div id="cpc_info_container_logro_default" class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Logro de la capacitación</label>
+                    <p>defauylt</p>
                 </div>
             </div>
             <div class="tab-pane fade" id="v-pills-metodologia" role="tabpanel" aria-labelledby="v-pills-metodologia-tab">
                 <select id="_cpc_capacitacion_field_metodologia_select" name="_cpc_capacitacion_field_metodologia_select" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                    <option value="true" selected>Mostrar valor por defecto</option>
-                    <option value="false">Valor Personalizado</option>
+                    <option value="true" >Mostrar valor por defecto</option>
+                    <option value="false" selected>Valor Personalizado</option>
                 </select>
 
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Metodología</label>
-                    <?php wp_editor('', '_cpc_capacitacion_field_metodologia', array('textarea_name' => '_cpc_capacitacion_field_metodologia', "media_buttons" => false)); ?>
+                    <?php wp_editor( htmlspecialchars_decode( get_post_meta(get_the_ID(), '_cpc_capacitacion_field_metodologia', true) ), '_cpc_capacitacion_field_metodologia', array('textarea_name' => '_cpc_capacitacion_field_metodologia', "media_buttons" => false)); ?>
                 </div>
             </div>
             <div class="tab-pane fade w-100 p-3" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                 <select id="_cpc_capacitacion_field_beneficios_select" name="_cpc_capacitacion_field_beneficios_select" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                    <option value="true" selected>Mostrar valor por defecto</option>
-                    <option value="false">Valor Personalizado</option>
+                    <option value="true" >Mostrar valor por defecto</option>
+                    <option value="false" selected>Valor Personalizado</option>
                 </select>
 
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Beneficios</label>
-                    <?php wp_editor('', '_cpc_capacitacion_field_beneficios', array('textarea_name' => '_cpc_capacitacion_field_beneficios', "media_buttons" => false)); ?>
+                    <?php wp_editor( htmlspecialchars_decode( get_post_meta(get_the_ID(), '_cpc_capacitacion_field_beneficios', true) ), '_cpc_capacitacion_field_beneficios', array('textarea_name' => '_cpc_capacitacion_field_beneficios', "media_buttons" => false)); ?>
                 </div>
             </div>
             <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>

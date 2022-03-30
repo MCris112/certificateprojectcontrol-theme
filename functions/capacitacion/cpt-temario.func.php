@@ -26,7 +26,7 @@ function cpc_capacitacion_product_temario_meta_box_callback($post)
 ?>
     <button class="btn btn-primary" type="button" onclick="cpc_field_temario_add_item();">Añadir Contenido</button>
 
-    <input id="_cpc_capacitacion_field_temario" name="_cpc_capacitacion_field_temario" type="text" value='<?php echo $value; ?>'>
+    <input id="_cpc_capacitacion_field_temario" name="_cpc_capacitacion_field_temario" type="hidden" value='<?php echo $value; ?>'>
     <input id="site_url" name="site_url" type="hidden" value='<?php echo site_url(); ?>'>
 
     <div class="accordion" id="cpcTemarioContainer">

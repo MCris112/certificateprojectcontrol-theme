@@ -83,3 +83,11 @@ ScrollTrigger.create({
 });
 
 */
+
+function cpc_manu_open_close(){
+  if(jQuery('#navbarSupportedContent').hasClass('cpc_menu_phone_c_active')){
+    jQuery('#navbarSupportedContent').removeClass('cpc_menu_phone_c_active');
+  }else{
+    jQuery('#navbarSupportedContent').addClass('cpc_menu_phone_c_active');
+  }
+}
