@@ -18,21 +18,19 @@ function cpc_capacitacion_product_temario_meta_box_callback($post)
     wp_nonce_field('cpc_capacitacion_product_temario_save_meta_box', 'cpc_capacitacion_meta_box_nonce_information');
 
     $value = get_post_meta($post->ID, '_cpc_capacitacion_field_temario', true);
-    $test_value = get_post_meta($post->ID, '_cpc_capacitacion_field_temario_item_1648490548675', true);
 
-    $temario_field = '["_cpc_capacitacion_field_temario_item_1648567593553"]';
-    $temario = json_decode($temario_field, true);
+    if (empty($value)) {
+        $value = '{}';
+    }
 
-    var_dump($temario);
 ?>
-    <button class="btn btn-primary" type="button" onclick="cpc_field_temario_add_item();">Añadir Contrnido</button>
+    <button class="btn btn-primary" type="button" onclick="cpc_field_temario_add_item();">Añadir Contenido</button>
 
     <input id="_cpc_capacitacion_field_temario" name="_cpc_capacitacion_field_temario" type="text" value='<?php echo $value; ?>'>
-    <input id="site_url" name="site_url" type="text" value='<?php echo site_url(); ?>'>
-    <input type="text" value="<?php echo $test_value; ?>">
+    <input id="site_url" name="site_url" type="hidden" value='<?php echo site_url(); ?>'>
 
     <div class="accordion" id="cpcTemarioContainer">
-
+        
     </div>
 
     <div class="modal fade" id="cpcModalResetValue" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

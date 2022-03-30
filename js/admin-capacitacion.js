@@ -1,12 +1,81 @@
+class CPC_TEMARIO{
+    temario_input_id;
+    temario;
+
+    constructor(temario_input_id){
+        this.temario_input_id = temario_input_id;
+    }
+
+    get_values(){
+        var temario_c = jQuery(this.temario_input_id).val();
+
+        if(temario_c == ''){
+            this.temario = {};
+        }else{
+            try{
+                this.temario = JSON.parse(temario_c);
+            }catch(e){
+                var options = {};
+                var myModal = new bootstrap.Modal(document.getElementById('cpcModalResetValue'), options);
+                myModal.show();
+                return {};
+            }
+        }
+
+        return this.temario;
+    }
+
+    update(values){
+        this.temario = [];
+        jQuery(this.temario_input_id).val( JSON.stringify(values) );
+    }
+
+    remove(key){
+        var values = this.get_values();
+
+        var new_values = {};
+
+        jQuery(values).each(function(index, content){
+            console.log("index: " + index + " content: " + content);
+
+            if(content.key != key){
+               new_values[content.key] = content.value;
+            }
+        });
+    }
+    add(key, value){
+        var values = this.get_values();
+
+        values[key] = value;
+    
+        var string_values = JSON.stringify(values);
+
+        document.getElementById("_cpc_capacitacion_field_temario").value = string_values;
+        //jQuery(this.temario_input_id).val( string_values );
+    }
+
+    reset(){
+        this.temario = [];
+        jQuery(this.temario_input_id).val( '[]' );
+    }
+}
+
+const cpc_input_data_id = '#_cpc_capacitacion_field_temario';
+
 jQuery(document).ready(function() {
     cpc_field_datepicker_activate_func();
 
-    cpc_field_temario_show_values();
+    const cpc_temario = new CPC_TEMARIO(cpc_input_data_id);
+
+    cpc_field_temario_show_values(cpc_temario.get_values());
 
     jQuery('#cpc_capacitacion_field_modalidad').on('change', function() {
         cpc_field_datepicker_activate_func();
     });
 });
+
+
+
 
 function cpc_field_datepicker_activate_func(){
     if(jQuery('#cpc_capacitacion_field_modalidad').val() == 'true'){
@@ -21,118 +90,139 @@ function cpc_field_datepicker_activate_func(){
 }
 
 
-function cpc_field_temario_show_item(temario_item_id, temario_item_id_collapse, temario_item_id_title, values = {title: null, content: null}){
+function cpc_field_temario_show_item(temario_item_id, temario_item_id_collapse, temario_item_id_title, values = {title: 'Módulo', content: 'Contenido del módulo'}){
     const cpc_editor_settings ={
         tinymce: true,
         mediaButtons: false,
         quicktags: true
     }
 
-    $input_val = values[title] == null ? '' : "value='"+values[title]+"'";
+    input_val = "value='"+values.title+"'";
+
+    btn_trash = "cpc_field_temario_remove_item('temario_item_id');";
 
     $item_html = '<div class="accordion-item">'+
                     '<h2 class="accordion-header" id="headingOne">'+
-                        '<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#'+temario_item_id_collapse+'" aria-expanded="false" aria-controls="'+temario_item_id_collapse+'">'+
-                            '<input type="text" class="form-control" id="'+temario_item_id_title+'" placeholder="Módulo" name='+temario_item_id_title+' '+$input_val+'>'+
+                        '<button class="accordion-button border border-primary" type="button" data-bs-toggle="collapse" data-bs-target="#'+temario_item_id_collapse+'" aria-expanded="false" aria-controls="'+temario_item_id_collapse+'">'+
+                            '<div class="container-fluid"><div class="row"><div class="col">'+
+                                '<input type="text" class="form-control" id="'+temario_item_id_title+'" placeholder="Módulo" name='+temario_item_id_title+' '+input_val+'>'+
+                            '</div><div class="col d-flex justify-content-end">'+
+                                '<div class="btn btn-danger">'+
+                                    '<i class="fa fa-trash fa-lg" aria-hidden="true" onclick="'+btn_trash+'"></i>'+
+                                '</div>'+
+                            '</div></div></div>'+
                         '</button>'+
                     '</h2>'+
                     '<div id="'+temario_item_id_collapse+'" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#cpcTemarioContainer">'+
                         '<div class="accordion-body">'+
-                            '<textarea id="'+temario_item_id+'" name="'+temario_item_id+'" rows="5">'+values[content]+'</textarea>'+
+                            '<textarea id="'+temario_item_id+'" name="'+temario_item_id+'" rows="5">'+values.content+'</textarea>'+
                         '</div>'+
                     '</div>'+
                 '</div>';
     jQuery('#cpcTemarioContainer').append($item_html);
+
+    //Start the TextEditor
     wp.editor.initialize( temario_item_id ,cpc_editor_settings );
-}
-function cpc_field_temario_get_values(){
-    var temario = jQuery('#_cpc_capacitacion_field_temario').val();
 
-    if(temario == ''){
-        temario = [];
-    }else{
-        try{
-            temario = JSON.parse(temario);
-        }catch(e){
-            temario = "no";
+    temario_class = new CPC_TEMARIO(cpc_input_data_id);
+
+    
+    jQuery("#"+temario_item_id_title).on('change input', function() {
+        var temario = temario_class.get_values();
+
+        if(temario_item_id in temario){
+            temario[temario_item_id]['title'] = jQuery("#"+temario_item_id_title).val();
         }
-    }
 
-    if(!Array.isArray(temario)){
-        var options = [];
-        var myModal = new bootstrap.Modal(document.getElementById('cpcModalResetValue'), options);
-        myModal.show();
-        
-        return [];
-    }
+        temario_class.update(temario);
+    });
 
-    return temario;
+    //Get the content of the texteditor and show it into the var array on input
+    tinymce.editors[temario_item_id].on('change input', function() {
+        var temario = temario_class.get_values();
+
+        if(temario_item_id in temario){
+            temario[temario_item_id]['content'] = tinymce.editors[temario_item_id].getContent();
+        }
+
+        temario_class.update(temario);
+    });
 }
-function cpc_field_temario_show_values(){
+
+function cpc_field_temario_show_values(values){
     //foreach of var values in value array js
 
-    var temario = cpc_field_temario_get_values();
+    var temario = values;
 
-    jQuery.each(temario, function(index, value) {
-        var post_id = jQuery('#post_ID').val();
-        var url = document.getElementById('site_url').value;
+   jQuery.each(temario, function(key, val){
+        var value = {
+            title: val.title,
+            content: val.content
+        };
 
-        var ajax_url = url+'/wp-admin/admin-ajax.php';
-        data_title_val = value+'_title';
-
-        var data = {
-            'action': 'cpc_post_meta',
-            'post_id': post_id,
-            'meta_keys': {
-                'title': data_title_val,
-                'content': value
-            }
-        }
-
-        console.log(ajax_url);
-        console.log(data);
-
-        jQuery.ajax({
-            url : ajax_url,
-            type: "POST",
-            data: data,
-            success: function(response) {
-                console.log(response);
-
-                values = {
-                    title: response[data_title_val],
-                    content: response[value]
-                };
-                
-                
-                const temario_item_id_collapse = value+"_collapse";
-                const temario_item_id_title = value+"_title";
-
-                cpc_field_temario_show_item(value, temario_item_id_collapse, temario_item_id_title, values);
-            }
-        });
-
-        
+        cpc_field_temario_show_item(key, key+'_collapse', key+'_title', value);
     });
 }
 
 
 function cpc_field_temario_add_item(){
-
-    var temario = cpc_field_temario_get_values();
+    
+    cpc_temario = new CPC_TEMARIO(cpc_input_data_id);
 
     const temario_item_id = "_cpc_capacitacion_field_temario_item_"+Date.now();
     const temario_item_id_collapse = temario_item_id+"_collapse";
     const temario_item_id_title = temario_item_id+"_title";
 
+    var values = cpc_temario.get_values();
+
+    values[temario_item_id] = {
+        title: 'Módulo',
+        content: 'Contenido del módulo'
+    };
+    /*
+    values.push( key );
+
+    jQuery(values).each(function(index, content){
+        console.log(content ==  key);
+        
+        if(content ==  key) {
+            values[content] = value;
+        }
+    });
+
+    */
+
+    var string_values = JSON.stringify(values);
+
+    jQuery(cpc_input_data_id).val( string_values );
+    /*
+    cpc_temario.add(temario_item_id, {
+        title: 'Módulo',
+        content: 'Contenido del módulo'
+    });
+    */
+
     cpc_field_temario_show_item(temario_item_id, temario_item_id_collapse, temario_item_id_title);
     
-
-    temario.push(temario_item_id)
-    jQuery('#_cpc_capacitacion_field_temario').val( JSON.stringify(temario) );
-
+    
 }
 
-function cpc_field_temario_reset(){
-    jQuery('#_cpc_capacitacion_field_temario').val('');
+function cpc_field_temario_on_change(temario_class, parent, type, input_id){
+    var temario = temario_class.get_values();
+
+    if(parent in temario){
+        temario[parent][type] = jQuery(input_id).val();
+    }
+
+    temario_class.update(temario);
+}
+
+function  cpc_field_temario_reset(){
+    cpc_temario = new CPC_TEMARIO(cpc_input_data_id);
+    cpc_temario.reset();
+}
+
+function cpc_field_temario_remove_item(temario_item_id){
+    cpc_temario = new CPC_TEMARIO(cpc_input_data_id);
+    cpc_temario.remove(temario_item_id);
 }
