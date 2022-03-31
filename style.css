@@ -265,10 +265,10 @@ Hover EFFECT ON NAVBAR ITEM
     transition: all 1s;
     position: relative;
     top: 0;
-    left: 0;
+    left: -100%;
   }
   .navbar-collapse.cpc_menu_phone_c_active {
-    left: -100%;
+    left: 0%;
   }
 
   .cpc_menu_phone_c {
@@ -279,6 +279,7 @@ Hover EFFECT ON NAVBAR ITEM
     height: 100vh;
     z-index: 999;
     padding: 0;
+    display: none;
   }
   .cpc_menu_phone_c .cpcp_menu_phone_bg {
     position: absolute;
@@ -289,6 +290,9 @@ Hover EFFECT ON NAVBAR ITEM
     z-index: -1;
     background: rgba(0, 0, 0, 0.4);
     cursor: pointer;
+    opacity: 0;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
   }
 }
 .swiper {

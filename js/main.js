@@ -85,9 +85,23 @@ ScrollTrigger.create({
 */
 
 function cpc_manu_open_close(){
+  bg = jQuery('#cpcp_menu_phone_bg');
+  container = jQuery('#cpc_menu_phone_c');
+
   if(jQuery('#navbarSupportedContent').hasClass('cpc_menu_phone_c_active')){
     jQuery('#navbarSupportedContent').removeClass('cpc_menu_phone_c_active');
+    bg.css("opacity", "0");
+    
+    setTimeout(function(){
+      container.hide();
+    }, 900);
+
   }else{
-    jQuery('#navbarSupportedContent').addClass('cpc_menu_phone_c_active');
+    container.show();
+    
+    setTimeout(function(){
+      bg.css("opacity", "1");
+      jQuery('#navbarSupportedContent').addClass('cpc_menu_phone_c_active');
+    }, 100);
   }
 }

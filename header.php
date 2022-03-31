@@ -202,12 +202,12 @@ $cpc_menu_user = array(
                                 <div class="container-fluid">
 
                                     <div class="row justify-content-around w-100">
-                                        <div class="col-auto cpc_menu_phone_c">
-                                            <div class="cpcp_menu_phone_bg" onClick="cpc_manu_open_close();"></div>
+                                        <div id="cpc_menu_phone_c" class="col-auto cpc_menu_phone_c">
+                                            <div id="cpcp_menu_phone_bg" class="cpcp_menu_phone_bg" onClick="cpc_manu_open_close();"></div>
                                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                                                 <div class="col-auto">
-                                                    <button class="navbar-toggler" type="button">
+                                                    <button class="navbar-toggler" type="button" onClick="cpc_manu_open_close();">
                                                         <span class="navbar-toggler-icon me-2"></span>
                                                         Cerrar Menu
                                                     </button>
@@ -285,7 +285,7 @@ $cpc_menu_user = array(
                                         </div>
 
                                         <div class="col-auto">
-                                            <button class="navbar-toggler" type="button">
+                                            <button class="navbar-toggler" type="button" onClick="cpc_manu_open_close();">
                                                 <span class="navbar-toggler-icon"></span>
                                             </button>
                                         </div>
