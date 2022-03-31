@@ -13,8 +13,14 @@ function cpc_menu_function_display(cpt_display, is_display = false) {
   $(cpt_display).attr("style", "display: " + text_display + " !important");
 }
 
-function cpc_menu_function_display_menu_items(tablet_screen, is_sticky = false) {
+function cpc_menu_function_display_menu_items(tablet_screen, phone_screen_down, is_sticky = false) {
   if (tablet_screen.matches) {
+    cpc_menu_function_display(".cpc_navbar_hide_on_sticky");
+    cpc_menu_function_display(".cpc_navbar_show_on_sticky",true);
+    return;
+  }
+
+  if (phone_screen_down.matches) {
     cpc_menu_function_display(".cpc_navbar_hide_on_sticky");
     cpc_menu_function_display(".cpc_navbar_show_on_sticky",true);
     return;
@@ -32,27 +38,35 @@ function cpc_menu_function_display_menu_items(tablet_screen, is_sticky = false) 
   cpc_menu_function_display(".cpc_logo_sticky");
 
 }
-function onToggleNavbar(tablet_screen) {
+function onToggleNavbar(tablet_screen, phone_screen_down) {
   if ($(window).scrollTop() > cpc_trigger_menu.offset().top) {
     $(".cpc_navbar").addClass("cpc_navbar_sticky");
-    cpc_menu_function_display_menu_items(tablet_screen, true);
+    cpc_menu_function_display_menu_items(tablet_screen, phone_screen_down, true);
   } else {
     $(".cpc_navbar").removeClass("cpc_navbar_sticky");
-    cpc_menu_function_display_menu_items(tablet_screen);
+    cpc_menu_function_display_menu_items(tablet_screen, phone_screen_down);
   }
 }
 
 tablet_screen = window.matchMedia("(min-width: 992px) and (max-width: 1200px)");
+phone_screen = window.matchMedia("(min-width: 992px)");
+phone_screen_down = window.matchMedia("(max-width: 600px)");
 
-onToggleNavbar(tablet_screen);
-cpc_menu_function_display_menu_items(tablet_screen);
+
+onToggleNavbar(tablet_screen, phone_screen_down);
+cpc_menu_function_display_menu_items(tablet_screen, phone_screen_down);
 
 $(window).scroll(function () {
-  onToggleNavbar(tablet_screen);
+  onToggleNavbar(tablet_screen, phone_screen_down);
 });
 
 $( window ).resize(function () {
-  cpc_menu_function_display_menu_items(tablet_screen);
+  cpc_menu_function_display_menu_items(tablet_screen, phone_screen_down);
+
+
+  if(phone_screen.matches ){
+    $('#cpc_menu_phone_c').show();
+  }
 });
 
 
@@ -105,3 +119,11 @@ function cpc_manu_open_close(){
     }, 100);
   }
 }
+
+
+
+/*******
+ * 
+ * ANIMATIONS
+ * 
+ */

@@ -51,3 +51,24 @@ $txt-h3: var(--text-h3);
 $txt-small: var(--text-small);
 
 $txt-font-title: var(--text-font-title);
+
+@media only screen and (max-width: 992px) {
+    :root{
+        --text-mega-title: 4rem;
+        --text-subtitle: 2rem;
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    :root{
+        --text-mega-title: 3rem;
+        --text-subtitle: 1.8rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    :root{
+        --text-mega-title: 2rem;
+    }
+}

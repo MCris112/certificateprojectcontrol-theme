@@ -43,6 +43,23 @@ Text Domain: certificateprojectcontroltheme
   --text-font-body: "Open Sans", sans-serif;
 }
 
+@media only screen and (max-width: 992px) {
+  :root {
+    --text-mega-title: 4rem;
+    --text-subtitle: 2rem;
+  }
+}
+@media only screen and (max-width: 600px) {
+  :root {
+    --text-mega-title: 3rem;
+    --text-subtitle: 1.8rem;
+  }
+}
+@media only screen and (max-width: 500px) {
+  :root {
+    --text-mega-title: 2rem;
+  }
+}
 body, p, .desc {
   font-size: var(--text-body);
   font-family: var(--text-font-body);
@@ -243,6 +260,10 @@ Hover EFFECT ON NAVBAR ITEM
   font-weight: normal;
 }
 
+.cpc_menu_phone_c .cpc_menu_phone_div {
+  display: none;
+}
+
 @media only screen and (max-width: 1200px) {
   .cpc_navbar_hide_on_sticky {
     display: none !important;
@@ -280,6 +301,78 @@ Hover EFFECT ON NAVBAR ITEM
     z-index: 999;
     padding: 0;
     display: none;
+  }
+  .cpc_menu_phone_c .cpc_menu_phone_content {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+    -ms-grid-rows: auto 1rem 80vh 1rem auto;
+    grid-template-rows: auto 80vh auto;
+    gap: 1rem;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .cpc_menu_phone_c .cpc_menu_phone_content > *:nth-child(1) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+  }
+  .cpc_menu_phone_c .cpc_menu_phone_content > *:nth-child(2) {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+  }
+  .cpc_menu_phone_c .cpc_menu_phone_content > *:nth-child(3) {
+    -ms-grid-row: 5;
+    -ms-grid-column: 1;
+  }
+  .cpc_menu_phone_c .cpc_menu_phone_content .cpc_menu_phone_menu {
+    width: 100%;
+    height: 100%;
+  }
+  .cpc_menu_phone_c .cpc_menu_phone_content .cpc_menu_phone_menu .nav-link {
+    padding: 1rem 0;
+  }
+  .cpc_menu_phone_c .cpc_menu_phone_div {
+    display: block;
+  }
+  .cpc_menu_phone_c .cpc_menu_phone_btn {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .cpc_menu_phone_c .cpc_menu_phone_logo {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    -ms-grid-rows: 1fr;
+    grid-template-rows: 1fr;
+  }
+  .cpc_menu_phone_c .cpc_menu_phone_logo > *:nth-child(1) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+  }
+  .cpc_menu_phone_c .cpc_menu_phone_logo > *:nth-child(2) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+  }
+  .cpc_menu_phone_c .cpc_menu_phone_logo img {
+    width: 100%;
+    -o-object-fit: contain;
+       object-fit: contain;
   }
   .cpc_menu_phone_c .cpcp_menu_phone_bg {
     position: absolute;
@@ -351,7 +444,7 @@ Hover EFFECT ON NAVBAR ITEM
 .cpc_btn.icon_side .btn_text {
   padding: 0 1rem;
   font-weight: 500;
-  font-size: 1.5rem;
+  font-size: var(--text-body);
   letter-spacing: 0.11em;
 }
 .cpc_btn:hover {

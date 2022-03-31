@@ -14,10 +14,10 @@ get_header();
 
                 <div class="text">
                     <div class="container content">
-                        <h1 class="cpc_title">PROPONEMOS SOLUCIONES GENERANDO VALOR</h1>
-                        <span class="cpc_subtitle">¿Listos para comenzar?</span>
+                        <h1 class="cpc_title cpc_hero_title">PROPONEMOS SOLUCIONES GENERANDO VALOR</h1>
+                        <span class="cpc_subtitle cpc_hero_subtitle">¿Listos para comenzar?</span>
 
-                        <a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>" class="cpc_btn icon_side side_down">
+                        <a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>" class="cpc_btn icon_side side_down cpc_hero_btn">
                             <div class="icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="none" viewBox="0 0 27 27">
                                     <path fill="#fff" d="M21.129 18.953a37.98 37.98 0 01-1.484-1.501c-.403-.41-.646-.709-.646-.709l-3.038-1.45a7.554 7.554 0 001.888-4.995c0-4.187-3.407-7.595-7.595-7.595s-7.595 3.408-7.595 7.595c0 4.187 3.407 7.595 7.595 7.595a7.559 7.559 0 004.994-1.887l1.45 3.038s.299.243.71.647c.419.394.971.927 1.5 1.483l1.474 1.51.655.701 2.302-2.3-.701-.656c-.411-.404-.96-.94-1.51-1.476zm-10.875-3.23a5.431 5.431 0 01-5.425-5.425 5.431 5.431 0 015.425-5.425 5.431 5.431 0 015.425 5.425 5.431 5.431 0 01-5.425 5.425z" />
@@ -40,10 +40,10 @@ get_header();
 
                 <div class="text">
                     <div class="container content">
-                        <h1 class="cpc_title">Nuestros Proximos Inicios</h1>
-                        <span class="cpc_subtitle">¿Listos para comenzar?</span>
+                        <h1 class="cpc_title cpc_hero_title">Nuestros Proximos Inicios</h1>
+                        <span class="cpc_subtitle cpc_hero_subtitle">¿Listos para comenzar?</span>
 
-                        <a href="" class="cpc_btn icon_side">
+                        <a href="" class="cpc_btn icon_side cpc_hero_btn">
                             <div class="icon">
                                 <i class="fa fa-book"></i>
                             </div>

@@ -27,6 +27,23 @@
   --text-font-body: "Open Sans", sans-serif;
 }
 
+@media only screen and (max-width: 992px) {
+  :root {
+    --text-mega-title: 4rem;
+    --text-subtitle: 2rem;
+  }
+}
+@media only screen and (max-width: 600px) {
+  :root {
+    --text-mega-title: 3rem;
+    --text-subtitle: 1.8rem;
+  }
+}
+@media only screen and (max-width: 500px) {
+  :root {
+    --text-mega-title: 2rem;
+  }
+}
 .cpc_product_section {
   margin: 4rem 0;
 }

@@ -25,7 +25,7 @@ function pcertificate_register_styles()
 		wp_enqueue_script('pcertificate-front-page-js', get_template_directory_uri() . '/js/front-page.js', array(), '1.0.0', true);
 	}
 
-	if(! is_admin() && is_product() ){
+	if (!is_admin() && is_product()) {
 		wp_enqueue_style('pcertificate-product-css', get_template_directory_uri() . '/css/product.css', array(), '1.0.0', 'all');
 	}
 }
@@ -37,6 +37,7 @@ function twentytwenty_menus()
 
 	$locations = array(
 		'cpc_primary'  => "Menu Principal",
+		'cpc_social_media' => "Redes Sociales",
 	);
 
 	register_nav_menus($locations);
@@ -62,6 +63,7 @@ function cpc_customize_logo_white($wp_customize)
 		)
 	);
 }
+
 add_action('customize_register', 'cpc_customize_logo_white');
 
 function cpc_customize_logo_blue($wp_customize)
@@ -82,6 +84,7 @@ function cpc_customize_logo_blue($wp_customize)
 		)
 	);
 }
+
 add_action('customize_register', 'cpc_customize_logo_blue');
 
 
@@ -96,14 +99,15 @@ function cpc_get_meta_field($meta_key, $single = true)
 }
 
 
-function cpc_capacitaciones_change_post_object_label() {
-    global $wp_post_types;
-    $labels = &$wp_post_types['product']->labels;
-    $labels->name = 'Capacitación';
-    $labels->singular_name = 'Capacitación';
+function cpc_capacitaciones_change_post_object_label()
+{
+	global $wp_post_types;
+	$labels = &$wp_post_types['product']->labels;
+	$labels->name = 'Capacitación';
+	$labels->singular_name = 'Capacitación';
 	$labels->menu_name = 'Capacitaciones';
 	$labels->all_items = 'Todas las capacitaciones';
-    $labels->add_new = 'Añadir nueva Capacitación';
+	$labels->add_new = 'Añadir nueva Capacitación';
 	$labels->add_new_item = 'Añadir nueva Capacitación';
 	$labels->edit_item = 'Editar Capacitación';
 	$labels->new_item = 'Nueva Capacitación';
@@ -134,24 +138,25 @@ function cpc_capacitaciones_change_post_object_label() {
 	$labels->not_found = 'No se encontraron Capacitaciones';
 }
 
-add_action( 'init', 'cpc_capacitaciones_change_post_object_label' );
+add_action('init', 'cpc_capacitaciones_change_post_object_label');
 
 //require __DIR__ . '/widgets/register_widgets.php';
 require __DIR__ . '/functions/capacitacion/cpt.func.php';
 
-function cpc_ajax_get_post_meta(){
+function cpc_ajax_get_post_meta()
+{
 
-	if(empty(  $_POST['post_id'] )) {
+	if (empty($_POST['post_id'])) {
 		wp_send_json_error('No se han enviado la ID');
 		wp_die();
 	}
 
-	if(empty(  $_POST['meta_keys'] )) {
+	if (empty($_POST['meta_keys'])) {
 		wp_send_json_error('No se han enviado los datos');
 		wp_die();
 	}
-	
-    $ID = $_POST['post_id'];
+
+	$ID = $_POST['post_id'];
 	$meta_keys = $_POST['meta_keys'];
 
 	$meta_values = [];
@@ -159,9 +164,37 @@ function cpc_ajax_get_post_meta(){
 	foreach ($meta_keys as $meta_key) {
 		$meta_values[$meta_key] = get_post_meta($ID, $meta_key, true);
 	}
-    
-    wp_send_json( $meta_values );
-    wp_die();
+
+	wp_send_json($meta_values);
+	wp_die();
 }
-add_action( 'wp_ajax_nopriv_cpc_post_meta', 'cpc_ajax_get_post_meta');
-add_action( 'wp_ajax_cpc_post_meta', 'cpc_ajax_get_post_meta' );
+add_action('wp_ajax_nopriv_cpc_post_meta', 'cpc_ajax_get_post_meta');
+add_action('wp_ajax_cpc_post_meta', 'cpc_ajax_get_post_meta');
+
+
+function cpc_menu_get_social_links($classes = array(), $args = array('order' => 'ASC') )
+{
+
+	$menu_name = 'cpc_social_media';
+	$locations = get_nav_menu_locations();
+	$menu = wp_get_nav_menu_object(array_key_exists( $menu_name, $locations ) ? $locations[$menu_name] : false);
+	
+	if( empty($menu) ) return;
+
+	$menuitems = wp_get_nav_menu_items($menu->term_id, array('order' => array_key_exists('order', $args) ? $args['order'] : 'ASC' ));
+
+?>
+	<div <?php echo array_key_exists('div', $classes) ? 'class="'.$classes['div'].'"' : ''; ?>>
+		<ul <?php echo array_key_exists('ul', $classes) ? 'class="'.$classes['ul'].'"' : ''; ?>>
+			<?php foreach ($menuitems as $item) : ?>
+				<li <?php echo array_key_exists('li', $classes) ? 'class="'.$classes['li'].'"' : ''; ?>>
+					<a href="<?php echo $item->url; ?>" target="_blank">
+						<i class="<?php echo implode(' ', $item->classes); ?>"></i>
+					</a>
+				</li>
+			<?php endforeach; ?>
+		</ul>
+	</div>
+
+<?php
+}

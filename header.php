@@ -177,15 +177,13 @@ $cpc_menu_user = array(
                     $logo_url = (is_front_page() == true) ? $white : $blue;  ?>
                     <img src="<?php echo $logo_url ?>" alt="">
                 </div>
-                <div class="col d-flex justify-content-end align-items-center">
-                    <ul class="header_icons">
-                        <li><a href=""><i class="fa fa-facebook-square"></i></a></li>
-                        <li><a href=""><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href=""><i class="fa fa-youtube"></i></a></li>
-                        <li><a href=""><i class="fa fa-whatsapp"></i></a></li>
-                        <li><a href=""><i class="fa fa-envelope"></i></a></li>
-                    </ul>
-                </div>
+
+                <?php cpc_menu_get_social_links(
+                    array(
+                        'div' => 'col d-flex justify-content-end align-items-center',
+                        'ul' => 'header_icons',
+                    )
+                ); ?>
             </div>
 
             <div class="cpc_trigger_menu"></div>
@@ -204,21 +202,36 @@ $cpc_menu_user = array(
                                     <div class="row justify-content-around w-100">
                                         <div id="cpc_menu_phone_c" class="col-auto cpc_menu_phone_c">
                                             <div id="cpcp_menu_phone_bg" class="cpcp_menu_phone_bg" onClick="cpc_manu_open_close();"></div>
-                                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                                                <div class="cpc_menu_phone_content">
+                                                    <div class="cpc_menu_phone_div cpc_menu_phone_logo">
+                                                        <img src="<?php echo get_theme_mod('cpc_logo_white') ?>" alt="">
+                                                        <div class="cpc_menu_phone_btn">
+                                                            <button class="navbar-toggler" type="button" onClick="cpc_manu_open_close();">
+                                                                <span class="fa fa-close"></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
 
-                                                <div class="col-auto">
-                                                    <button class="navbar-toggler" type="button" onClick="cpc_manu_open_close();">
-                                                        <span class="navbar-toggler-icon me-2"></span>
-                                                        Cerrar Menu
-                                                    </button>
+                                                    <div class="cpc_menu_phone_menu">
+                                                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 justify-content-around ">
+                                                            <?php
+                                                            foreach ($hierarchy as $menuitem) {
+                                                                show_menu_items($menuitem);
+                                                            }
+                                                            ?>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="cpc_menu_phone_div">
+                                                        <?php cpc_menu_get_social_links(
+                                                            array(
+                                                                'div' => 'col d-flex justify-content-around align-items-center w-100',
+                                                                'ul' => 'header_icons justify-content-around w-100',
+                                                            )
+                                                        ); ?>
+                                                    </div>
                                                 </div>
-                                                <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 justify-content-around ">
-                                                    <?php
-                                                    foreach ($hierarchy as $menuitem) {
-                                                        show_menu_items($menuitem);
-                                                    }
-                                                    ?>
-                                                </ul>
                                             </div>
                                         </div>
                                         <div class="col">

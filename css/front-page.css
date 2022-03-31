@@ -28,6 +28,23 @@
   --text-font-body: "Open Sans", sans-serif;
 }
 
+@media only screen and (max-width: 992px) {
+  :root {
+    --text-mega-title: 4rem;
+    --text-subtitle: 2rem;
+  }
+}
+@media only screen and (max-width: 600px) {
+  :root {
+    --text-mega-title: 3rem;
+    --text-subtitle: 1.8rem;
+  }
+}
+@media only screen and (max-width: 500px) {
+  :root {
+    --text-mega-title: 2rem;
+  }
+}
 .cpc_slider_front_page_hero {
   width: 100%;
   height: 100vh !important;
@@ -85,6 +102,8 @@
       -ms-flex-direction: column;
           flex-direction: column;
   z-index: 3;
+  width: 90%;
+  margin: auto;
   position: relative;
 }
 .cpc_hero .text .content .cpc_title {
@@ -95,7 +114,7 @@
 }
 .cpc_hero .text .content .side_down {
   position: absolute;
-  bottom: -40%;
+  bottom: -50%;
   left: 0;
 }
 
@@ -623,9 +642,11 @@
           transform: scale(0.8);
 }
 
-@media (max-width: 801px) {
-  .cri-slider .wrapper .slide .contain.slider_presentation div.padding ul {
-    font-size: 3vw;
+@media screen and (max-width: 992px) {
+  .cpc_hero .text .content .side_down {
+    position: relative;
+    bottom: auto;
+    left: auto;
   }
 }
 @media (max-width: 700px) {

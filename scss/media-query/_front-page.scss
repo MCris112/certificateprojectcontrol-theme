@@ -1,0 +1,112 @@
+
+@media screen and (max-width: 992px){
+    .cpc_hero{
+        .text{
+            .content{
+                .side_down{
+                    position: relative;
+                    bottom: auto;
+                    left: auto;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:700px)  {
+        
+    .cri-slider {
+        .wrapper {
+            .slide {     
+                .contain.style-left{
+                    div.padding{
+                        text-align: center;
+        
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+        
+                        h1{
+                            text-align: center;
+                            width: 90%;
+
+                            font-size: 14vw;
+                        }
+
+                        p{
+                            font-size: 7vw !important;
+                        }
+                    }
+                }
+
+                .contain.slider_presentation{
+                    div.padding{
+                        ul{
+                            font-size: 3vw;
+                        }
+                    }
+
+                }
+
+                h1{
+                    font-size: 12vw !important;
+                }
+                h2{
+                    font-size: 6vw !important;
+                }
+
+                p{
+                    width: 90% !important;
+                    font-size: 4vw !important;
+                    margin-top: 1rem;
+                }
+            }
+
+            .slide.promocion{
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-template-rows: 70% 30%;
+                align-items: center;
+                justify-content: center;
+                justify-items: center;
+        
+                div.background{
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: flex-end;
+        
+                    img{
+                        width: 100%;
+                        height: 100%;
+                    }
+        
+                    div.filter{
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+        
+                div.contain{
+                    width: 90%;
+                    div.padding{
+                        width: 100%;
+                        h1{
+                            font-size: 9vw;
+                        }
+                        
+                        p{
+                            width: 90%;
+                            font-size: 3vw;
+                        }
+        
+                        p.number{
+                            font-size: 9vw !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
