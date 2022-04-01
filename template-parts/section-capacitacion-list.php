@@ -1,9 +1,17 @@
+<?php
+
+$modalidad_txt = "Sincrónicas";
+
+if($args['is_sincronico'] == 'false') $modalidad_txt = "Asincrónicos";
+
+?>
+
 <section class="cpc_cursos_list">
     <div class="container">
         <div class="row cpc_title">
             <div class="col">
-                <p class="cpc_title sm">Cursos</p>
-                <p class="cpc_title">Asincrónicos</p>
+                <p class="cpc_title sm">Capacitaciones</p>
+                <p class="cpc_title"><?php echo $modalidad_txt; ?></p>
                 <hr class="cpc_hr">
             </div>
             <div class="col d-flex align-items-center justify-content-end">
@@ -15,14 +23,14 @@
 
         <div class="cpc_card_c mt-5">
             <?php
-            $args = array(
+            $args_query = array(
                 'post_type'      => 'product',
                 'posts_per_page' => 10,
-                'meta_key'       => 'modalidad',
-                'meta_value'     => $args['modalidad'],
+                'meta_key'       => '_cpc_capacitacion_field_modalidad',
+                'meta_value'     => $args['is_sincronico'],
             );
 
-            $loop = new WP_Query($args);
+            $loop = new WP_Query($args_query);
 
             if ($loop->have_posts()) {
                 while ($loop->have_posts()) : $loop->the_post();
