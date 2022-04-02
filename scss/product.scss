@@ -1,11 +1,7 @@
 @use 'vars' as *;
 
 .cpc_product_section{
-    margin: 4rem 0;
-    &.top{
-        margin: -2rem 0;
-        padding-top: 12rem;
-    }
+    margin: 0;
 
     .cpc_title{
         font-size: 96px;

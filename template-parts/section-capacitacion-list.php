@@ -1,74 +1,98 @@
 <?php
 
 $modalidad_txt = "Sincrónicas";
+$is_list = false;
 
-if($args['is_sincronico'] == 'false') $modalidad_txt = "Asincrónicos";
+$args_query = array();
+
+if (array_key_exists('is_sincronico', $args)) {
+    if (!$args['is_sincronico']) $modalidad_txt = "Asincrónicos";
+
+    $args_query = array(
+        'post_type'      => 'product',
+        'posts_per_page' => 10,
+        'meta_key'       => '_cpc_capacitacion_field_modalidad',
+        'meta_value'     => $args['is_sincronico'],
+    );
+}
+
+if (array_key_exists('all', $args) && $args['all'] == true) {
+    $is_list = true;
+
+    $args_query = array(
+        'post_type'      => 'product',
+        'posts_per_page' => 10,
+    );
+}
+
+$loop = new WP_Query($args_query);
+$count = $loop->post_count;
 
 ?>
 
 <section class="cpc_cursos_list">
     <div class="container">
-        <div class="row cpc_title">
-            <div class="col">
-                <p class="cpc_title sm">Capacitaciones</p>
-                <p class="cpc_title"><?php echo $modalidad_txt; ?></p>
-                <hr class="cpc_hr">
-            </div>
-            <div class="col d-flex align-items-center justify-content-end">
-                <p class="text text-end">
-                    Estudia donde sea y cuando quieras, con nuestras clases en modalidad asincronica. Directo desde nuestra plataforma.
-                </p>
-            </div>
-        </div>
+        <?php
 
-        <div class="cpc_card_c mt-5">
+        if ($is_list) {
+        } else {
+        ?>
+
+            <div class="row cpc_title">
+                <div class="col">
+                    <p class="cpc_title sm">Capacitaciones</p>
+                    <p class="cpc_title"><?php echo $modalidad_txt; ?></p>
+                    <hr class="cpc_hr">
+                </div>
+                <div class="col d-flex align-items-center justify-content-end">
+                    <p class="text text-end">
+                        Estudia donde sea y cuando quieras, con nuestras clases en modalidad asincronica. Directo desde nuestra plataforma.
+                    </p>
+                </div>
+            </div>
+
+        <?php
+        }
+
+
+        ?>
+
+        <div class="cpc_card_c <?php if ($count == 1) echo 'cpc_card_c_one '; ?>mt-5">
             <?php
-            $args_query = array(
-                'post_type'      => 'product',
-                'posts_per_page' => 10,
-                'meta_key'       => '_cpc_capacitacion_field_modalidad',
-                'meta_value'     => $args['is_sincronico'],
-            );
 
-            $loop = new WP_Query($args_query);
-
-            if ($loop->have_posts()) {
+            if ($loop->have_posts() && $count >= 2) {
+                $args['count'] = $count;
+                
                 while ($loop->have_posts()) : $loop->the_post();
-                    global $product;
-            ?>
-                    <div class="cpc_card">
-                        <span class="info_pill">Curso</span>
-                        <a href="<?php echo get_permalink(); ?>"  class="head">
-                            <div class="img">
-                                <img src="<?php echo woocommerce_get_product_thumbnail(); ?>" alt="">
-                                <div class="cover"></div>
-                            </div>
-                            <div class="text">
-                                <h3 class="card_title"><?php echo get_the_title(); ?></h3>
-                            </div>
-                        </a>
+                    get_template_part('template-parts/cpt/block', 'cpt-item', $args);
+                endwhile;
+            }
 
-                        <div class="content">
-                            <div class="info">
-                                <span class="time"><i class="fa fa-clock-o"></i>12 horas</span>
-                                <span class="sessions"><i class="fa fa-archive"></i>10:00 a.m</span>
-                                <span class="price">$<?php echo $product->get_price(); ?></span>
-                            </div>
-
-                            <a href="<?php echo get_permalink(); ?>" class="btn btn-primary d-block">Ver Curso</a>
-                        </div>
-                    </div>
+            if ($count == 1) {
+                while ($loop->have_posts()) : $loop->the_post();
+                    get_template_part('template-parts/cpt/block', 'cpt-item', $args);
+                ?>
 
             <?php
                 endwhile;
-            } else {
+            }
+
+            if ($count == 0) {
                 echo "none";
             }
 
             wp_reset_query();
-            ?>  
+            ?>
         </div>
 
-        <a href="" class="btn cpc_btn d-block mt-3 link-primary">Ver Todo Ahora</a>
+        <?php
+
+        if (!$is_list) {
+        ?>
+            <a href="" class="btn cpc_btn d-block mt-3 link-primary">Ver Todo Ahora</a>
+        <?php
+        }
+        ?>
+
     </div>
 </section>

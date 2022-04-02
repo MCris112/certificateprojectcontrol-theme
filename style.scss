@@ -159,6 +159,13 @@ Text Domain: certificateprojectcontroltheme
     line-height: 100%;
 }
 
+.cpc_mega_title{
+    font-weight: bold;
+    font-size: $txt-title-xl;
+    font-family: $txt-font-title;
+    line-height: 100%;
+}
+
 .cpc_section{
     margin: 2rem 0;
 
@@ -340,6 +347,25 @@ Text Domain: certificateprojectcontroltheme
     align-items: center;
     justify-content: center;
 
+    &.cpc_card_one{
+        grid-template-columns: repeat( auto-fit , minmax(300px, 1fr));
+        grid-template-rows: 1fr;
+        gap: 2rem;
+
+        .info_pill{
+            position: relative;
+            top: 0;
+            left: 0;
+            transform: translate(0%);
+        }
+
+        .head{
+            height: auto;
+            min-height: $card_img_h_one;
+
+        }
+    }
+
     &:hover{
         .card_title{
             transform: translateY(-10px);
@@ -413,10 +439,14 @@ Text Domain: certificateprojectcontroltheme
 
     .content{
         padding-top: 1rem;
+
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
     }
     .card_title{
         font-weight: 500;
-        font-size: 36px;
+        font-size: $txt-subtitle;
         color: white;
 
         margin-top: 2rem;
@@ -424,10 +454,13 @@ Text Domain: certificateprojectcontroltheme
     }
 
     .sub{
-        font-size: 26px;
+        font-size: $txt-h3;
+        font-family: $txt-font-title;
         display: block;
         font-weight: light;
         opacity: .9;
+        color: white;
+        padding-top: 10px;
     }
 
     .info{
@@ -759,7 +792,7 @@ footer{
         font-size: 1.5rem;
 
         img{
-            width: 80%;
+            width: 50%;
         }
 
         a{

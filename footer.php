@@ -24,7 +24,7 @@
 <footer>
     <div class="container">
         <div class="cpc_footer_i">
-            <?php the_custom_logo() ?>
+            <img src="<?php echo get_site_icon_url() ?>" alt="">
         </div>
         <div class="cpc_footer_i">
             <a href="">Cursos en vivo <i class="fa fa-arrow-right" aria-hidden="true"></i></a>

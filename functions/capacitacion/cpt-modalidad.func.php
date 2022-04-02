@@ -60,7 +60,9 @@ function cpc_capacitacion_save_meta_box_data_modalidad($post_id)
         return;
     }
 
-    update_post_meta($post_id, '_cpc_capacitacion_field_modalidad', $_POST['cpc_capacitacion_field_modalidad']);
+    $is_sincronico = filter_var(  $_POST['cpc_capacitacion_field_modalidad'], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+
+    update_post_meta($post_id, '_cpc_capacitacion_field_modalidad', $is_sincronico);
     update_post_meta($post_id, '_cpc_capacitacion_field_fecha_inicio', $_POST['cpc_capacitacion_field_modalidad_fecha']);
 }
 

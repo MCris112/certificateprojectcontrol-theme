@@ -87,13 +87,13 @@ get_header();
 <?php
 
 $args = array(
-    'is_sincronico' => 'true',
+    'is_sincronico' => true,
 );
 get_template_part('template-parts/section', 'capacitacion-list', $args);
 
 
 $args = array(
-    'is_sincronico' => 'false',
+    'is_sincronico' => false,
 );
 get_template_part('template-parts/section', 'capacitacion-list', $args); ?>
 

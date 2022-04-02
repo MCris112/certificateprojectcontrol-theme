@@ -1,22 +1,15 @@
 .cpc_header{
     width: 100%;
 
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    z-index: 9999;
+
     .header_icons{
         i{
-            color: black;
-        }
-    }
-    &.front_page{
-        position: absolute;
-        top: 0;
-        left: 0;
-
-        z-index: 9999;
-
-        .header_icons{
-            i{
-                color: white;
-            }
+            color: white;
         }
     }
 
@@ -84,6 +77,19 @@
 .cpc_menu_phone_c{
     .cpc_menu_phone_div{
         display: none;
+    }
+}
+
+.cpc_section_title{
+    margin: 0;
+    padding-top: 25vh;
+    padding-bottom: 1rem;
+
+    .cpc_content{
+        text-align: center;
+        color: white;
+
+        margin: 6rem 0;
     }
 }
 

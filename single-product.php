@@ -23,12 +23,12 @@ function cpc_capacitacion_cpt_box_desc($title, $content)
 
 ?>
 
-<section class="cpc_product_section top">
+<section class="cpc_product_section cpc_near_menu_top">
     <div class="cpc_bg_section">
         <img src="<?php echo get_template_directory_uri(); ?>/images/backgrounds/bg_product.jpg" alt="">
         <div class="cover"></div>
     </div>
-    <div class="container">
+    <div class="container pt-5">
         <div class="row">
             <div class="col-8">
                 <h1 class="cpc_title"><?php the_title(); ?></h1>
@@ -48,7 +48,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content)
                                     if (empty($modalidad)) {
                                         echo "Sin definir";
                                     } else {
-                                        if ($modalidad || $modalidad == '1') {
+                                        if ($modalidad) {
                                             echo 'Sincrónica';
                                         } else {
                                             echo 'Asincrónica';

@@ -2,7 +2,7 @@
 
 add_theme_support('post-thumbnails');
 add_theme_support('custom-logo', array('header-text' => array('site-title', 'site-description')));
-
+add_theme_support('woocommerce');
 
 function pcertificate_register_styles()
 {
@@ -27,6 +27,10 @@ function pcertificate_register_styles()
 
 	if (!is_admin() && is_product()) {
 		wp_enqueue_style('pcertificate-product-css', get_template_directory_uri() . '/css/product.css', array(), '1.0.0', 'all');
+	}
+
+	if ( is_page_template( 'templates/page-about-us.php' ) ) {
+		wp_enqueue_style('pcertificate-about-css', get_template_directory_uri() . '/css/about-us.css', array(), '1.0.0', 'all');
 	}
 }
 

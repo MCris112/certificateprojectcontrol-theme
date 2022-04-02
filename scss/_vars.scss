@@ -4,6 +4,7 @@
     --accent: #0E6FE8;
     --bg: linear-gradient(101.77deg, #097AC0 0%, #6509C0 100%);
     --card_img_h: 23rem;
+    --card_img_h_one: 10rem;
     --title-size: 64px;
 }
 
@@ -23,6 +24,7 @@ $bg: var(--bg);
 }
 
 $card_img_h: var(--card_img_h);
+$card_img_h_one: var(--card_img_h_one);
 
 $title_size: var(--title-size);
 

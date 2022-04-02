@@ -98,6 +98,18 @@ ScrollTrigger.create({
 
 */
 
+$(document).ready(function() {
+  header = $(".cpc_header");
+$('.cpc_near_menu_top').css('padding-top', (header.outerHeight() + 30) + 'px');
+});
+
+
+/*******
+ * 
+ * ANIMATIONS
+ * 
+ */
+
 function cpc_manu_open_close(){
   bg = jQuery('#cpcp_menu_phone_bg');
   container = jQuery('#cpc_menu_phone_c');
@@ -121,9 +133,3 @@ function cpc_manu_open_close(){
 }
 
 
-
-/*******
- * 
- * ANIMATIONS
- * 
- */

@@ -20,6 +20,7 @@ Text Domain: certificateprojectcontroltheme
   --accent: #0E6FE8;
   --bg: linear-gradient(101.77deg, #097AC0 0%, #6509C0 100%);
   --card_img_h: 23rem;
+  --card_img_h_one: 10rem;
   --title-size: 64px;
 }
 
@@ -188,17 +189,12 @@ Hover EFFECT ON NAVBAR ITEM
 */
 .cpc_header {
   width: 100%;
-}
-.cpc_header .header_icons i {
-  color: black;
-}
-.cpc_header.front_page {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 9999;
 }
-.cpc_header.front_page .header_icons i {
+.cpc_header .header_icons i {
   color: white;
 }
 .cpc_header .cpc_menu_container {
@@ -262,6 +258,17 @@ Hover EFFECT ON NAVBAR ITEM
 
 .cpc_menu_phone_c .cpc_menu_phone_div {
   display: none;
+}
+
+.cpc_section_title {
+  margin: 0;
+  padding-top: 25vh;
+  padding-bottom: 1rem;
+}
+.cpc_section_title .cpc_content {
+  text-align: center;
+  color: white;
+  margin: 6rem 0;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -524,6 +531,13 @@ Hover EFFECT ON NAVBAR ITEM
   line-height: 100%;
 }
 
+.cpc_mega_title {
+  font-weight: bold;
+  font-size: var(--text-mega-title);
+  font-family: var(--text-font-title);
+  line-height: 100%;
+}
+
 .cpc_section {
   margin: 2rem 0;
   position: relative;
@@ -680,6 +694,23 @@ Hover EFFECT ON NAVBAR ITEM
   -ms-grid-row: 2;
   -ms-grid-column: 1;
 }
+.cpc_card.cpc_card_one {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  -ms-grid-rows: 1fr;
+  grid-template-rows: 1fr;
+  gap: 2rem;
+}
+.cpc_card.cpc_card_one .info_pill {
+  position: relative;
+  top: 0;
+  left: 0;
+  -webkit-transform: translate(0%);
+          transform: translate(0%);
+}
+.cpc_card.cpc_card_one .head {
+  height: auto;
+  min-height: var(--card_img_h_one);
+}
 .cpc_card:hover .card_title {
   -webkit-transform: translateY(-10px);
           transform: translateY(-10px);
@@ -736,20 +767,31 @@ Hover EFFECT ON NAVBAR ITEM
 }
 .cpc_card .content {
   padding-top: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
 }
 .cpc_card .card_title {
   font-weight: 500;
-  font-size: 36px;
+  font-size: var(--text-subtitle);
   color: white;
   margin-top: 2rem;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 .cpc_card .sub {
-  font-size: 26px;
+  font-size: var(--text-h3);
+  font-family: var(--text-font-title);
   display: block;
   font-weight: light;
   opacity: 0.9;
+  color: white;
+  padding-top: 10px;
 }
 .cpc_card .info {
   width: 100%;
@@ -1113,7 +1155,7 @@ footer .cpc_footer_i {
   font-size: 1.5rem;
 }
 footer .cpc_footer_i img {
-  width: 80%;
+  width: 50%;
 }
 footer .cpc_footer_i a {
   -webkit-transition: all 0.3s;

@@ -165,17 +165,14 @@ $cpc_menu_user = array(
     }
     ?>
 
-    <header class="cpc_header <?php if (is_front_page()) {
-                                    echo 'front_page';
-                                } ?>">
+    <header class="cpc_header">
         <div class="container-fluid cpc_menu_container">
             <div class="cpc_head_logo row">
                 <div class="col cpc_logo d-flex justify-content-start">
                     <?php
-                    $white = get_theme_mod('cpc_logo_white');
-                    $blue = get_theme_mod('cpc_logo_blue');
-                    $logo_url = (is_front_page() == true) ? $white : $blue;  ?>
-                    <img src="<?php echo $logo_url ?>" alt="">
+                    $logo_white = get_theme_mod('cpc_logo_white');
+                    ?>
+                    <img src="<?php echo $logo_white ?>" alt="">
                 </div>
 
                 <?php cpc_menu_get_social_links(

@@ -4,6 +4,7 @@
   --accent: #0E6FE8;
   --bg: linear-gradient(101.77deg, #097AC0 0%, #6509C0 100%);
   --card_img_h: 23rem;
+  --card_img_h_one: 10rem;
   --title-size: 64px;
 }
 
@@ -45,11 +46,7 @@
   }
 }
 .cpc_product_section {
-  margin: 4rem 0;
-}
-.cpc_product_section.top {
-  margin: -2rem 0;
-  padding-top: 12rem;
+  margin: 0;
 }
 .cpc_product_section .cpc_title {
   font-size: 96px;
