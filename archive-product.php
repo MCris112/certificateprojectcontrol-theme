@@ -2,11 +2,11 @@
 
 get_header();
 
-$args = array(
-    'all' => true,
-);
-get_template_part('template-parts/section', 'capacitacion-list', $args);
-
+if(is_tax()){
+    get_template_part('template-parts/cpt/view', 'taxonomy');
+}else{
+    get_template_part('template-parts/cpt/view', 'archive');
+}
 ?>
 
 

@@ -86,14 +86,19 @@ get_header();
 
 <?php
 
-$args = array(
-    'is_sincronico' => true,
-);
-get_template_part('template-parts/section', 'capacitacion-list', $args);
+$terms = get_terms( 'modalidad' );
+
+foreach ($terms as $term){
+    $args = array(
+        'modalidad' => $term->slug,
+    );
+    get_template_part('template-parts/section', 'capacitacion-list', $args);
+    
+}
 
 
 $args = array(
-    'is_sincronico' => false,
+    'modalidad' => 'asincronico',
 );
 get_template_part('template-parts/section', 'capacitacion-list', $args); ?>
 

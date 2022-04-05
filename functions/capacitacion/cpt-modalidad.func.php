@@ -1,5 +1,66 @@
 <?php
 
+
+
+
+function cpc_capacitacion_modalidad_register_taxonomy()
+{
+    $args = array(
+        'hierarchical'                      => true,
+        'labels' => array(
+            'name'                          => 'Modalidad',
+            'singular_name'                 => 'Modadlidad',
+            'search_items'                  => 'Buscar modadlidad',
+            'popular_items'                 => __('Popular Test Tax'),
+            'all_items'                     => __('All Test Tax'),
+            'edit_item'                     => __('Edit Test Tax'),
+            'edit_item'                     => __('Edit Test Tax'),
+            'update_item'                   => __('Update Test Tax'),
+            'add_new_item'                  => __('Add New Test Tax'),
+            'new_item_name'                 => __('New Test Tax Name'),
+            'separate_items_with_commas'    => __('Seperate Test Tax with Commas'),
+            'add_or_remove_items'           => __('Add or Remove Test Tax'),
+            'choose_from_most_used'         => __('Choose from Most Used Test Tax')
+        ),
+        'query_var'                         => true,
+        'rewrite'                           => array('slug' => 'modalidad'),
+        'hierarchical' => false,
+        'show_ui' => true,
+        'show_menu' => true,
+        'show_in_rest' => true,
+        'show_admin_column' => true,
+        'has_archive' => true,
+    );
+    register_taxonomy('modalidad', array('product'), $args);
+
+    //CODE TO REGISTER TAXONOMY
+
+    if (!term_exists('sincronico', 'modalidad')) {
+        wp_insert_term(
+            'Sincrónico',
+            'modalidad',
+            array(
+                'description' => 'Capacitaciones en vivo.',
+                'slug'        => 'sincronico'
+            )
+        );
+    }
+
+    if (!term_exists('asincronico', 'modalidad')) {
+        wp_insert_term(
+            'Asincrónico',
+            'modalidad',
+            array(
+                'description' => 'Capacitaciones con clases pre-grabadas.',
+                'slug'        => 'asincronico'
+            )
+        );
+    }
+}
+
+
+add_action('init', 'cpc_capacitacion_modalidad_register_taxonomy', 0);
+
 /************************************
  * 
  * MODALIDAD META BOXES AND CUSTOM FIELDS
@@ -8,6 +69,7 @@
 function cpc_capacitacion_register_meta_boxes()
 {
     add_meta_box('cpc_capacitacion_meta_box_modalidad', 'Modalidad', 'cpc_capacitacion_meta_box_callback', 'product', 'side', 'high');
+    remove_meta_box( 'tagsdiv-modalidad', 'product', 'side' );
 }
 
 add_action('add_meta_boxes', 'cpc_capacitacion_register_meta_boxes');
@@ -18,11 +80,25 @@ function cpc_capacitacion_meta_box_callback($post)
 
     $value = get_post_meta($post->ID, '_cpc_capacitacion_field_modalidad', true);
     $inicio_clases = get_post_meta($post->ID, '_cpc_capacitacion_field_fecha_inicio', true);
+
+    $terms = get_terms([
+        'taxonomy' => 'modalidad',
+        'hide_empty' => false,
+    ]);
 ?>
 
     <select name="cpc_capacitacion_field_modalidad" id="cpc_capacitacion_field_modalidad" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-        <option value="true" <?php if ($value) echo "selected"; ?>>Sincrónica</option>
-        <option value="false" <?php if (!$value) echo "selected"; ?>>Asincrónica</option>
+        <?php
+        
+        foreach ($terms as $term) {
+            $checked = '';
+            if ($value == $term->slug) {
+                $checked = 'selected';
+            }
+            echo '<option value="' . $term->slug . '" ' . $checked . '>' . $term->name . '</option>';
+        }
+        
+        ?>
     </select>
 
     <div id="cpc_field_datepicker_container" class="input-group mb-3" style="display: none;">
@@ -56,13 +132,13 @@ function cpc_capacitacion_save_meta_box_data_modalidad($post_id)
         return;
     }
 
-    if ( !isset($_POST['cpc_capacitacion_field_modalidad'])) {
+    if (!isset($_POST['cpc_capacitacion_field_modalidad'])) {
         return;
     }
 
-    $is_sincronico = filter_var(  $_POST['cpc_capacitacion_field_modalidad'], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+    wp_set_object_terms( $post_id, $_POST['cpc_capacitacion_field_modalidad'], 'modalidad' );
 
-    update_post_meta($post_id, '_cpc_capacitacion_field_modalidad', $is_sincronico);
+    update_post_meta($post_id, '_cpc_capacitacion_field_modalidad', $_POST['cpc_capacitacion_field_modalidad']);
     update_post_meta($post_id, '_cpc_capacitacion_field_fecha_inicio', $_POST['cpc_capacitacion_field_modalidad_fecha']);
 }
 

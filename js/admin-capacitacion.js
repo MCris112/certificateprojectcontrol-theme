@@ -80,7 +80,7 @@ jQuery(document).ready(function() {
 
 
 function cpc_field_datepicker_activate_func(){
-    if(jQuery('#cpc_capacitacion_field_modalidad').val() == 'true'){
+    if(jQuery('#cpc_capacitacion_field_modalidad').val() == 'sincronico'){
         jQuery("#cpc_field_datepicker_container").show();
         jQuery(".cpc_field_datepicker").datepicker({
             dateFormat: "dd-mm-yy",

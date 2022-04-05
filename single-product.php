@@ -2,6 +2,7 @@
 get_header();
 
 $product = wc_get_product(get_the_id());
+$modalidad = cpc_get_meta_field('_cpc_capacitacion_field_modalidad');
 
 
 function cpc_capacitacion_cpt_box_desc($title, $content)
@@ -43,12 +44,11 @@ function cpc_capacitacion_cpt_box_desc($title, $content)
                                 <p class="title">Modalidad</p>
                                 <div class="information">
                                     <?php
-                                    $modalidad = cpc_get_meta_field('_cpc_capacitacion_field_modalidad');
 
                                     if (empty($modalidad)) {
                                         echo "Sin definir";
                                     } else {
-                                        if ($modalidad) {
+                                        if ($modalidad == 'sincronico') {
                                             echo 'Sincrónica';
                                         } else {
                                             echo 'Asincrónica';
@@ -59,24 +59,34 @@ function cpc_capacitacion_cpt_box_desc($title, $content)
                             </div>
                         </div>
                         <div class="cpc_capacitacion_widget_info_3_item">
-                            <div class="icon"><i class="fa fa-calendar-o"></i></div>
-                            <div class="text">
-                                <p class="title">Inicio de Clases</p>
-                                <div class="information">
-                                    <?php
+                            <?php
 
-                                    $inicio_clases = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_fecha_inicio', true);
+                            if ($modalidad == 'sincronico') {
+                            ?>
 
-                                    if (empty($inicio_clases)) {
-                                        echo 'Sin definir';
-                                    } else {
-                                        global $locale;
-                                        $date = date_i18n('d \d\e F', strtotime($inicio_clases));
-                                        echo $date;
-                                    }
-                                    ?>
+                                <div class="icon"><i class="fa fa-calendar-o"></i></div>
+                                <div class="text">
+                                    <p class="title">Inicio de Clases</p>
+                                    <div class="information">
+                                        <?php
+
+                                        $inicio_clases = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_fecha_inicio', true);
+
+                                        if (empty($inicio_clases)) {
+                                            echo 'Sin definir';
+                                        } else {
+                                            global $locale;
+                                            $date = date_i18n('d \d\e F', strtotime($inicio_clases));
+                                            echo $date;
+                                        }
+                                        ?>
+                                    </div>
                                 </div>
-                            </div>
+
+                            <?php
+                            }
+
+                            ?>
                         </div>
                         <div class="cpc_capacitacion_widget_info_3_item">
                             <div class="icon"><i class="fa fa-clock-o"></i></div>
