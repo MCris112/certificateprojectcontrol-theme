@@ -96,13 +96,6 @@ foreach ($terms as $term){
     
 }
 
-
-$args = array(
-    'modalidad' => 'asincronico',
-);
-get_template_part('template-parts/section', 'capacitacion-list', $args); ?>
-
-
 ?>
 
 

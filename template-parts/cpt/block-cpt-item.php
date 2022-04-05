@@ -3,6 +3,8 @@ global $product;
 
 $duracion = get_post_meta(get_the_ID(), '_cpc_product_duration', true);
 
+$duracion_txt = empty($duracion) ? '' : $duracion . ' horas';
+
 $inicio_clases = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_fecha_inicio', true);
 $subtitle = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_sub_title', true);
 
@@ -56,11 +58,7 @@ if($args['count'] == 1){
             <span class="time"><i class="fa fa-clock-o"></i>
 
                 <?php
-                if (empty($duracion)) {
-                    echo 'Sin definir';
-                } else {
-                    echo $duracion . ' horas';
-                }
+                    echo $duracion_txt;
                 ?>
             </span>
             <span class="sessions"><i class="fa fa-archive"></i>10:00 a.m</span>
@@ -88,7 +86,7 @@ if($args['count'] == 1){
 
     <div class="content">
         <div class="info">
-            <span class="time"><i class="fa fa-clock-o"></i>12 horas</span>
+            <span class="time"><i class="fa fa-clock-o"></i><?php echo $duracion_txt;?></span>
             <span class="sessions"><i class="fa fa-archive"></i>10:00 a.m</span>
             <span class="price">$<?php echo $product->get_price(); ?></span>
         </div>

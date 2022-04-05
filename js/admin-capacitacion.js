@@ -65,31 +65,13 @@ class CPC_TEMARIO{
 const cpc_input_data_id = '#_cpc_capacitacion_field_temario';
 
 jQuery(document).ready(function() {
-    cpc_field_datepicker_activate_func();
-
     const cpc_temario = new CPC_TEMARIO(cpc_input_data_id);
-
     cpc_field_temario_show_values(cpc_temario.get_values());
-
-    jQuery('#cpc_capacitacion_field_modalidad').on('change', function() {
-        cpc_field_datepicker_activate_func();
-    });
 });
 
 
 
 
-function cpc_field_datepicker_activate_func(){
-    if(jQuery('#cpc_capacitacion_field_modalidad').val() == 'sincronico'){
-        jQuery("#cpc_field_datepicker_container").show();
-        jQuery(".cpc_field_datepicker").datepicker({
-            dateFormat: "dd-mm-yy",
-        });
-    }else{
-        jQuery("#cpc_field_datepicker_container").hide();
-    }
-    
-}
 
 
 function cpc_field_temario_show_item(temario_item_id, temario_item_id_collapse, temario_item_id_title, values = {title: 'Módulo', content: 'Contenido del módulo'}){
@@ -290,3 +272,14 @@ function cpc_informacion_field_select_is_default(select_id, container_id, contai
         jQuery('#'+container_id).show();
     }
 }
+
+
+
+
+
+
+
+
+
+
+

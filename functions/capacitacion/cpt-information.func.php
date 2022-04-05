@@ -5,11 +5,6 @@
  * INFORMACIÓN META BOX AND CUSTOM FIELDS
  */
 
-if ( ! class_exists( '_WP_Editors', false ) ) {
-    require( ABSPATH . WPINC . '/class-wp-editor.php' );
-}
-add_action( 'admin_print_footer_scripts', array( '_WP_Editors', 'print_default_editor_scripts' ) );
-
 function cpc_capacitacion_product_information_register_meta_box()
 {
     add_meta_box('cpc_capacitacion_product_information_meta_box_info', 'Información', 'cpc_capacitacion_product_information_meta_box_callback', 'product', 'normal', 'high');
@@ -78,7 +73,6 @@ function cpc_capacitacion_product_information_meta_box_callback()
 
 function cpc_capacitacion_product_information_save_meta_box($post_id)
 {
-
     if (!isset($_POST['cpc_capacitacion_meta_box_nonce_information'])) {
         return;
     }
@@ -103,7 +97,6 @@ function cpc_capacitacion_product_information_save_meta_box($post_id)
 
     update_post_meta($post_id, '_cpc_capacitacion_field_beneficios_select', $_POST['_cpc_capacitacion_field_beneficios_select']);
     update_post_meta($post_id, '_cpc_capacitacion_field_beneficios', htmlspecialchars( $_POST['_cpc_capacitacion_field_beneficios'] ) );
-    wp_die();
 }
 
 add_action('save_post', 'cpc_capacitacion_product_information_save_meta_box');

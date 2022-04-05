@@ -69,7 +69,7 @@ add_action('init', 'cpc_capacitacion_modalidad_register_taxonomy', 0);
 function cpc_capacitacion_register_meta_boxes()
 {
     add_meta_box('cpc_capacitacion_meta_box_modalidad', 'Modalidad', 'cpc_capacitacion_meta_box_callback', 'product', 'side', 'high');
-    remove_meta_box( 'tagsdiv-modalidad', 'product', 'side' );
+    remove_meta_box('tagsdiv-modalidad', 'product', 'side');
 }
 
 add_action('add_meta_boxes', 'cpc_capacitacion_register_meta_boxes');
@@ -80,6 +80,8 @@ function cpc_capacitacion_meta_box_callback($post)
 
     $value = get_post_meta($post->ID, '_cpc_capacitacion_field_modalidad', true);
     $inicio_clases = get_post_meta($post->ID, '_cpc_capacitacion_field_fecha_inicio', true);
+    $time_desde = get_post_meta($post->ID, '_cpc_capacitacion_field_modalidad_time_desde', true);
+    $time_hasta = get_post_meta($post->ID, '_cpc_capacitacion_field_modalidad_time_hasta', true);
 
     $terms = get_terms([
         'taxonomy' => 'modalidad',
@@ -89,7 +91,7 @@ function cpc_capacitacion_meta_box_callback($post)
 
     <select name="cpc_capacitacion_field_modalidad" id="cpc_capacitacion_field_modalidad" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
         <?php
-        
+
         foreach ($terms as $term) {
             $checked = '';
             if ($value == $term->slug) {
@@ -97,14 +99,39 @@ function cpc_capacitacion_meta_box_callback($post)
             }
             echo '<option value="' . $term->slug . '" ' . $checked . '>' . $term->name . '</option>';
         }
-        
+
         ?>
     </select>
 
-    <div id="cpc_field_datepicker_container" class="input-group mb-3" style="display: none;">
-        <span class="input-group-text" id="basic-addon1">Inicio</span>
-        <input type="text" class="form-control cpc_field_datepicker" name="cpc_capacitacion_field_modalidad_fecha" id="cpc_capacitacion_field_modalidad_fecha" value="<?php echo $inicio_clases; ?>">
+    <div id="cpc_field_datepicker_container" style="display: none;">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Inicio</span>
+            <input type="text" class="form-control cpc_field_datepicker" name="cpc_capacitacion_field_modalidad_fecha" id="cpc_capacitacion_field_modalidad_fecha" value="<?php echo $inicio_clases; ?>">
+        </div>
+        <div id="cpc_field_timepicker_container" class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Desde</span>
+            <input type="text" class="form-control cpc_field_timepicker" name="cpc_capacitacion_field_modalidad_time_desde" id="cpc_capacitacion_field_modalidad_time_desde" value="<?php echo '' ?>">
+        </div>
+
+        <div id="cpc_field_timepicker_container" class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Hasta</span>
+            <input type="text" class="form-control cpc_field_timepicker" name="cpc_capacitacion_field_modalidad_time_hasta" id="cpc_capacitacion_field_modalidad_time_hasta" value="<?php echo '' ?>">
+        </div>
+
+        <div id="cpc_field_multidays_container">
+            Días de clases:
+            <hr>
+            <input type="text" id="cpc_field_fechas_array">
+
+            <div id="cpc_field_multidays_container_items">
+
+            </div>
+
+            <input type="text" id="datepicker_fechas"  class="form-control">
+        </div>
     </div>
+
+
 <?php
 }
 
@@ -136,10 +163,12 @@ function cpc_capacitacion_save_meta_box_data_modalidad($post_id)
         return;
     }
 
-    wp_set_object_terms( $post_id, $_POST['cpc_capacitacion_field_modalidad'], 'modalidad' );
+    wp_set_object_terms($post_id, $_POST['cpc_capacitacion_field_modalidad'], 'modalidad');
 
     update_post_meta($post_id, '_cpc_capacitacion_field_modalidad', $_POST['cpc_capacitacion_field_modalidad']);
     update_post_meta($post_id, '_cpc_capacitacion_field_fecha_inicio', $_POST['cpc_capacitacion_field_modalidad_fecha']);
+    update_post_meta($post_id, '_cpc_capacitacion_field_modalidad_time_desde', $_POST['cpc_capacitacion_field_modalidad_time_desde']);
+    update_post_meta($post_id, '_cpc_capacitacion_field_modalidad_time_hasta', $_POST['cpc_capacitacion_field_modalidad_time_hasta']);
 }
 
 add_action('save_post', 'cpc_capacitacion_save_meta_box_data_modalidad');

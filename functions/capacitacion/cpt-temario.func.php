@@ -5,6 +5,12 @@
  * INFORMACIÓN META BOX AND CUSTOM FIELDS
  */
 
+
+if ( ! class_exists( '_WP_Editors', false ) ) {
+    require( ABSPATH . WPINC . '/class-wp-editor.php' );
+}
+add_action( 'admin_print_footer_scripts', array( '_WP_Editors', 'print_default_editor_scripts' ) );
+
 function cpc_capacitacion_product_temario_register_meta_box()
 {
     add_meta_box('cpc_capacitacion_product_temario_meta_box_info', 'Temario de la capacitación', 'cpc_capacitacion_product_temario_meta_box_callback', 'product', 'normal', 'high');
@@ -15,7 +21,7 @@ add_action('add_meta_boxes', 'cpc_capacitacion_product_temario_register_meta_box
 function cpc_capacitacion_product_temario_meta_box_callback($post)
 {
 
-    wp_nonce_field('cpc_capacitacion_product_temario_save_meta_box', 'cpc_capacitacion_meta_box_nonce_information');
+    wp_nonce_field('cpc_capacitacion_product_temario_save_meta_box', 'cpc_capacitacion_meta_box_nonce_temario');
 
     $value = get_post_meta($post->ID, '_cpc_capacitacion_field_temario', true);
 
@@ -56,11 +62,11 @@ function cpc_capacitacion_product_temario_meta_box_callback($post)
 function cpc_capacitacion_product_temario_save_meta_box($post_id)
 {
 
-    if (!isset($_POST['cpc_capacitacion_meta_box_nonce_information'])) {
+    if (!isset($_POST['cpc_capacitacion_meta_box_nonce_temario'])) {
         return;
     }
 
-    if (!wp_verify_nonce($_POST['cpc_capacitacion_meta_box_nonce_information'], 'cpc_capacitacion_product_temario_save_meta_box')) {
+    if (!wp_verify_nonce($_POST['cpc_capacitacion_meta_box_nonce_temario'], 'cpc_capacitacion_product_temario_save_meta_box')) {
         return;
     }
 
