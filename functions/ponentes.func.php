@@ -122,7 +122,7 @@ function cpc_ponentes_meta_box_callback($post)
 
     <label for="cpc_ponententes_field_subtitle" class="form-label">Descripción del Ponente</label>
     <div class="form-floating">
-        <textarea class="form-control" placeholder="Por favor escriba la descripción aquí." id="floatingTextarea2" style="height: 400px" rows="6" name="cpc_ponententes_field_desc"><?php echo esc_attr($value_desc); ?></textarea>
+        <?php wp_editor(htmlspecialchars_decode($value_desc), 'cpc_ponententes_field_desc',  array('textarea_name' => 'cpc_ponententes_field_desc', "media_buttons" => false) ); ?>
         <label for="floatingTextarea2">Comments</label>
     </div>
 </div>
@@ -161,11 +161,11 @@ function cpc_ponentes_save_meta_box_data_certificados($post_id)
 
     $data_certificados = sanitize_text_field($_POST['cpc_ponententes_field_certificados']);
     $data_subtitle = sanitize_text_field($_POST['cpc_ponententes_field_subtitle']);
-    $data_desc = sanitize_textarea_field($_POST['cpc_ponententes_field_desc']);
+    $data_desc = $_POST['cpc_ponententes_field_desc'];
 
     update_post_meta($post_id, '_cpc_ponentes_meta_box_certificados_key', $data_certificados);
     update_post_meta($post_id, '_cpc_ponentes_meta_box_subtitle_key', $data_subtitle);
-    update_post_meta($post_id, '_cpc_ponentes_meta_box_desc_key', $data_desc);
+    update_post_meta($post_id, '_cpc_ponentes_meta_box_desc_key', htmlspecialchars($data_desc));
 }
 
 add_action('save_post', 'cpc_ponentes_save_meta_box_data_certificados');

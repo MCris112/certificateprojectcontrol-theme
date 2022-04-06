@@ -3,7 +3,8 @@ get_header();
 
 $product = wc_get_product(get_the_id());
 $modalidad = cpc_get_meta_field('_cpc_capacitacion_field_modalidad');
-
+$fechas = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_modalidad_fechas', true);
+if( !empty($fechas) ) $fechas = json_decode($fechas, true);
 
 function cpc_capacitacion_cpt_box_desc($title, $content)
 {
@@ -70,13 +71,11 @@ function cpc_capacitacion_cpt_box_desc($title, $content)
                                     <div class="information">
                                         <?php
 
-                                        $inicio_clases = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_fecha_inicio', true);
-
-                                        if (empty($inicio_clases)) {
+                                        if (empty($fechas)) {
                                             echo 'Sin definir';
                                         } else {
                                             global $locale;
-                                            $date = date_i18n('d \d\e F', strtotime($inicio_clases));
+                                            $date = date_i18n('d \d\e F', strtotime($fechas[0]));
                                             echo $date;
                                         }
                                         ?>

@@ -5,8 +5,17 @@ $duracion = get_post_meta(get_the_ID(), '_cpc_product_duration', true);
 
 $duracion_txt = empty($duracion) ? '' : $duracion . ' horas';
 
-$inicio_clases = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_fecha_inicio', true);
+$fechas = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_modalidad_fechas', true);
 $subtitle = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_sub_title', true);
+$sessiones = 'Sin definir';
+$sessiones_txt = get_post_meta(get_the_ID(), '_cpc_product_sessions', true);
+
+if(!empty($sessiones_txt)){
+    $sessiones = $sessiones_txt.' sesiones';
+}
+
+if( !empty($fechas) ) $fechas = json_decode($fechas, true);
+
 
 if($args['count'] == 1){
 ?>
@@ -39,11 +48,11 @@ if($args['count'] == 1){
             <span class="info_pill">
                 Inicio de clases:
                 <?php
-                if (empty($inicio_clases)) {
+                if (empty($fechas)) {
                     echo ' Sin definir';
                 } else {
                     global $locale;
-                    $date = date_i18n('d \d\e F', strtotime($inicio_clases));
+                    $date = date_i18n('d \d\e F', strtotime($fechas[0]));
                     echo $date;
                 }
 
@@ -61,7 +70,7 @@ if($args['count'] == 1){
                     echo $duracion_txt;
                 ?>
             </span>
-            <span class="sessions"><i class="fa fa-archive"></i>10:00 a.m</span>
+            <span class="sessions"><i class="fa fa-archive"></i><?php echo $sessiones; ?></span>
             <span class="price">$<?php echo $product->get_price(); ?></span>
         </div>
 
@@ -87,7 +96,7 @@ if($args['count'] == 1){
     <div class="content">
         <div class="info">
             <span class="time"><i class="fa fa-clock-o"></i><?php echo $duracion_txt;?></span>
-            <span class="sessions"><i class="fa fa-archive"></i>10:00 a.m</span>
+            <span class="sessions"><i class="fa fa-archive"></i><?php echo $sessiones; ?></span>
             <span class="price">$<?php echo $product->get_price(); ?></span>
         </div>
 

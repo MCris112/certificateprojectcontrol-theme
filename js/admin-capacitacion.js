@@ -89,10 +89,10 @@ function cpc_field_temario_show_item(temario_item_id, temario_item_id_collapse, 
                     '<h2 class="accordion-header" id="headingOne">'+
                         '<button class="accordion-button border border-primary" type="button" data-bs-toggle="collapse" data-bs-target="#'+temario_item_id_collapse+'" aria-expanded="false" aria-controls="'+temario_item_id_collapse+'">'+
                             '<div class="container-fluid"><div class="row"><div class="col">'+
-                                '<input type="text" class="form-control" id="'+temario_item_id_title+'" placeholder="Módulo" name='+temario_item_id_title+' '+input_val+'>'+
+                                '<input type="text" class="form-control" id="'+temario_item_id_title+'" placeholder="Módulo" name='+temario_item_id_title+' '+input_val+' autocomplete="off">'+
                             '</div><div class="col d-flex justify-content-end">'+
                                 '<div class="btn btn-danger"  onclick="'+btn_trash+'">'+
-                                    '<i class="fa fa-trash fa-lg" aria-hidden="true""></i>'+
+                                    '<i class="fa fa-trash fa-lg" aria-hidden="true"></i>'+
                                 '</div>'+
                             '</div></div></div>'+
                         '</button>'+

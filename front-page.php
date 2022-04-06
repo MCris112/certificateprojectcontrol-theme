@@ -25,7 +25,7 @@ get_header();
 
                             </div>
 
-                            <div class="btn_text">Vea nuestros cursos</div>
+                            <div class="btn_text">Ver nuestros cursos</div>
                         </a>
                     </div>
                 </div>

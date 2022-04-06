@@ -15,6 +15,7 @@ function cpc_edit_post_add_custom_scripts()
 {
 	wp_enqueue_script( 'cpc_admin_mainr_script', get_template_directory_uri().'/js/admin-capacitacion.js', array( ), '1.0.0', true );
 	wp_enqueue_script( 'cpc_admin_modaliad_script', get_template_directory_uri().'/js/admin-capacitacion-modalidad.js', array('jquery', 'jquery-ui-datepicker' ), '1.0.0', true );
+	wp_enqueue_script( 'cpc_admin_ponentes_script', get_template_directory_uri().'/js/admin-capacitacion-ponentes.js', array('jquery', 'jquery-ui-datepicker' ), '1.0.0', true );
 	wp_enqueue_script( 'cpc_time_picker_script', 'https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js', array(), '1.0.0', true );
 }
 

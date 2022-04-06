@@ -21,25 +21,42 @@ function cpc_capacitacion_func_meta_fields_add(){
         )
     );
 
-    woocommerce_wp_select( 
+    woocommerce_wp_text_input( 
         array( 
-            'id'      => '_product_type', 
-            'label'   => __( 'Select Field', 'woocommerce' ), 
-            'options' => array(
-                'one'   => __( 'Option 1', 'woocommerce' ),
-                'two'   => __( 'Option 2', 'woocommerce' ),
-                'three' => __( 'Option 3', 'woocommerce' )
-                )
-            )
-        );
- 
-	woocommerce_wp_checkbox( array(
-		'id'      => 'super_product',
-		'value'   => get_post_meta( get_the_ID(), 'super_product', true ),
-		'label'   => 'This is a super product',
-		'desc_tip' => true,
-		'description' => 'If it is not a regular WooCommerce product',
-	) );
+            'id'                => '_cpc_product_sessions', 
+            'label'             => 'N° de sesiones', 
+            'placeholder'       => '', 
+            'desc_tip'    => 'true',
+            'description'       => 'Por favor insertar las sesiones que tiene esta capacitación.',
+            'type'              => 'number', 
+            'custom_attributes' => array(
+                    'step' 	=> 'any',
+                    'min'	=> '0'
+                ) 
+        )
+    );
+
+    woocommerce_wp_text_input( 
+        array( 
+            'id'                => '_cpc_product_brochure_link', 
+            'label'             => 'Link del brochure', 
+            'placeholder'       => 'https://pcertificate.com/brochure', 
+            'desc_tip'    => 'true',
+            'description'       => 'Si desea que aparezca un link a la brochura de la capacitación, por favor ingrese el link aquí.',
+            'type'              => 'text',
+        )
+    );
+
+    woocommerce_wp_text_input( 
+        array( 
+            'id'                => '_cpc_product_video', 
+            'label'             => 'Link de video de presentación', 
+            'placeholder'       => 'https://youtu.be/9Vpe-dqscyM', 
+            'desc_tip'    => 'true',
+            'description'       => 'Si la capacitación tiene video, puede colocarlo aqui.',
+            'type'              => 'text',
+        )
+    );
  
 	echo '</div>';
  

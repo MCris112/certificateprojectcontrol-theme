@@ -22,12 +22,15 @@ class CPC_FECHAS{
             }
         }
 
-        console.log(this.temario);
+        console.log(JSON.parse(temario_c));
+        console.log(this.temario);  
         return this.temario;
     }
 
     update(values){
         jQuery(this.temario_input_id).val( JSON.stringify(values) );
+        jQuery("#cpc_field_multidays_container_items").empty();
+        cpc_fechas_show_values(values); 
     }
 
     remove(remove_key){
@@ -91,7 +94,6 @@ function cpc_field_datepicker_activate_func(){
         jQuery(".cpc_field_timepicker").timepicker({
             timeFormat: 'h:mm p',
             interval: 30,
-            defaultTime: '7',
             startTime: '10:00',
             dynamic: false,
             dropdown: true,
@@ -108,20 +110,16 @@ function cpc_fechas_show_values(values) {
     var temario = values;
 
     jQuery.each(temario, function(key, val){
-         var value = {
-             title: val.title,
-             content: val.content
-         };
  
-         cpc_fechas_show_item(val, key+'_collapse', key+'_title');
+         cpc_fechas_show_item(val, key);
      });
 }
 
-function cpc_fechas_show_item(val){
-    values = cpc_fechas.get_values().length;
-    $item_html = `<div class="input-group mb-3" id="#cpc_field_`+values+`_item">
-                        <button type="button"class="btn btn-danger" onclick="cpc_fechas_remove_item(`+values+`);"><i class="fa fa-trash-o fa-lg"></i></button>   
-                        <input type="text" class="form-control cpc_field_datepicker" name="cpc_capacitacion_field_modalidad_fechas[0]" id="cpc_capacitacion_field_modalidad_fecha_dia" value="`+val+`">
+function cpc_fechas_show_item(val, key){
+
+    $item_html = `<div class="input-group mb-3" id="#cpc_field_`+key+`_item">
+                        <button type="button"class="btn btn-danger" onclick="cpc_fechas_remove_item(`+key+`);"><i class="fa fa-trash-o fa-lg"></i></button>   
+                        <input type="text" class="form-control cpc_field_datepicker" name="cpc_capacitacion_field_modalidad_fechas[`+key+`]" value="`+val+`" autocomplete="off">
                 </div>`;
 
     jQuery('#cpc_field_multidays_container_items').append($item_html);
@@ -129,7 +127,10 @@ function cpc_fechas_show_item(val){
 
 function cpc_fechas_add_item(val){
     cpc_fechas.add(val);
-    cpc_fechas_show_item(val);
+    values = cpc_fechas.get_values();
+    key = values.length;
+
+    cpc_fechas_show_item(val, key);
 }
 
 function cpc_fechas_remove_item(key){
