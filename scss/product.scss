@@ -101,30 +101,6 @@
     }
 }
 
-
-.cpc_product_box_desc{
-    font-size: 22px;
-
-    margin-bottom: 4rem;
-
-    .cpc_head{
-        font-size: 36px;
-        font-weight: bold;
-        color: $secondary;
-
-        hr{
-            width: 100px;
-            max-width: 30%;
-            opacity: 1;
-            border: 1px solid $secondary;
-        }
-    }
-
-    .cpc_body{
-        padding-left: 2rem;
-    }
-}
-
 .accordion{
     .accordion-item{
         margin-bottom: 1rem;

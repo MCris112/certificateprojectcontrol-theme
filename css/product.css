@@ -23,6 +23,7 @@
   --text-h1: 48px;
   --text-h2: 30px;
   --text-h3: 26px;
+  --text-h4: 18px;
   --text-small: 16px;
   --text-font-title: "Cormorant Garamond", serif;
   --text-font-body: "Open Sans", sans-serif;
@@ -144,25 +145,6 @@
   font-weight: 700;
   font-size: 18px;
   color: var(--secondary);
-}
-
-.cpc_product_box_desc {
-  font-size: 22px;
-  margin-bottom: 4rem;
-}
-.cpc_product_box_desc .cpc_head {
-  font-size: 36px;
-  font-weight: bold;
-  color: var(--secondary);
-}
-.cpc_product_box_desc .cpc_head hr {
-  width: 100px;
-  max-width: 30%;
-  opacity: 1;
-  border: 1px solid var(--secondary);
-}
-.cpc_product_box_desc .cpc_body {
-  padding-left: 2rem;
 }
 
 .accordion .accordion-item {

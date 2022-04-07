@@ -37,7 +37,11 @@
     </div>
 </footer>
 
+
 <?php
+
+get_template_part('template-parts/modal', 'login-register');
+
 
 wp_footer();
 

@@ -39,6 +39,7 @@ Text Domain: certificateprojectcontroltheme
   --text-h1: 48px;
   --text-h2: 30px;
   --text-h3: 26px;
+  --text-h4: 18px;
   --text-small: 16px;
   --text-font-title: "Cormorant Garamond", serif;
   --text-font-body: "Open Sans", sans-serif;
@@ -174,6 +175,10 @@ Hover EFFECT ON NAVBAR ITEM
   opacity: 0.9;
 }
 
+.modal {
+  z-index: 9999 !important;
+}
+
 /*
 .cpc_menu_phone_c{
     display: block !important;
@@ -192,7 +197,7 @@ Hover EFFECT ON NAVBAR ITEM
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 99;
 }
 .cpc_header .header_icons i {
   color: white;
@@ -1181,4 +1186,30 @@ iframe {
   height: 40vw !important;
   background: var(--bg);
   border-radius: 10px;
+}
+
+.cpc_box_desc {
+  margin-bottom: 4rem;
+}
+.cpc_box_desc .cpc_head {
+  font-size: var(--text-subtitle);
+  font-weight: bold;
+  color: var(--secondary);
+}
+.cpc_box_desc .cpc_head .small {
+  font-size: var(--text-small);
+}
+.cpc_box_desc .cpc_head hr {
+  width: 100px;
+  max-width: 30%;
+  opacity: 1;
+  border: 1px solid var(--secondary);
+}
+.cpc_box_desc .cpc_body {
+  padding-left: 2rem;
+}
+.cpc_box_desc .cpc_body.small {
+  padding-left: 1rem;
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
 }

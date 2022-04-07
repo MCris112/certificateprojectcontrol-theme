@@ -3,8 +3,8 @@
 global $wp;
 
 $cpc_menu_user = array(
-    'login' => site_url() . '/wp-login.php',
-    'register' => site_url() . '/wp-login.php?action=register',
+    'login' => '#',
+    'register' => '#',
     'my-account' => get_permalink(get_option('woocommerce_myaccount_page_id')),
     'logout' => wp_logout_url(home_url()),
     'orders' => wc_get_account_endpoint_url('orders'),
@@ -245,9 +245,9 @@ $cpc_menu_user = array(
                                                         <?php
                                                         } else {
                                                         ?>
-                                                            <a class="nav-link" aria-current="page" href="<?php echo $cpc_menu_user['login']; ?>">Iniciar Sesión</a>
+                                                            <a class="nav-link" aria-current="page" href="<?php echo $cpc_menu_user['login']; ?>" data-bs-toggle="modal" data-bs-target="#cpc_modal_login">Iniciar Sesión</a>
                                                             <span class="text-white"> / </span>
-                                                            <a class="nav-link" aria-current="page" href="<?php echo $cpc_menu_user['register']; ?>">Regístrate</a>
+                                                            <a class="nav-link" aria-current="page" href="<?php echo $cpc_menu_user['register']; ?>" data-bs-toggle="modal" data-bs-target="#cpc_modal_login" cpc-target="register">Regístrate</a>
                                                         <?php
                                                         }
 
@@ -268,8 +268,8 @@ $cpc_menu_user = array(
                                                         <?php
                                                         } else {
                                                         ?>
-                                                            <li><a class="dropdown-item" href="<?php echo $cpc_menu_user['login']; ?>">Iniciar Sesión</a></li>
-                                                            <li><a class="dropdown-item" href="<?php echo $cpc_menu_user['register']; ?>">Regístrate</a></li>
+                                                            <li><a class="dropdown-item" href="<?php echo $cpc_menu_user['login']; ?>" data-bs-toggle="modal" data-bs-target="#cpc_modal_login">Iniciar Sesión</a></li>
+                                                            <li><a class="dropdown-item" href="<?php echo $cpc_menu_user['register']; ?>" data-bs-toggle="modal" data-bs-target="#cpc_modal_login" cpc-target="register">Regístrate</a></li>
                                                         <?php
                                                         }
 

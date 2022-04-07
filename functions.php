@@ -202,3 +202,18 @@ function cpc_menu_get_social_links($classes = array(), $args = array('order' => 
 
 <?php
 }
+
+
+/**************************
+ * 
+ * WHEN LOGIN/REGISTER ON WOOCOMMERCE
+ */
+
+function cpc_woo_wp_login_php(){
+	if( is_user_logged_in() ){
+		wp_redirect( home_url() );
+		return;
+	}
+}
+
+add_action( 'login_init', 'cpc_woo_wp_login_php' );
