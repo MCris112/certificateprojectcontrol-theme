@@ -13,11 +13,11 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: certificateprojectcontroltheme
 */
 
-@use 'scss/vars' as *;
+@use 'assets/scss/vars' as *;
 
-@import 'scss/root';
-@import 'scss/bootstrap';
-@import 'scss/header';
+@import 'assets/scss/root';
+@import 'assets/scss/bootstrap';
+@import 'assets/scss/header';
 
 .swiper {
   width: 100%;
@@ -827,4 +827,4 @@ iframe {
     border-radius: 10px;
 }
 
-@import 'scss/components';
+@import 'assets/scss/components';

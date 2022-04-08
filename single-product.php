@@ -25,7 +25,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content)
 
 ?>
 
-<section class="cpc_section cpc_near_menu_top">
+<section class="cpc_product_section cpc_near_menu_top">
     <div class="cpc_bg_section">
         <img src="<?php echo get_template_directory_uri(); ?>/images/backgrounds/bg_product.jpg" alt="">
         <div class="cover"></div>
@@ -109,12 +109,11 @@ function cpc_capacitacion_cpt_box_desc($title, $content)
                     </div>
                 </div>
             </div>
-            <div class="col-4 cpc_price_c">
-                <p class="cpc_price">$<?php echo $product->get_price(); ?></p>
-                <div class="d-flex gap-4 cpc_price_btn">
+            <div class="col-4 cpc_product_price_c">
+                <p class="cpc_product_price">$<?php echo $product->get_price(); ?></p>
+                <div class="d-flex gap-4 cpc_product_price_btn">
                     <div class="btn btn-outline-primary">Contáctanos</div>
-                    <div class="btn btn-primary">Comprar Ahora</div>
-
+                    <button onclick="cpc_add_capacitacion_to_cart('<?php echo esc_url( $product->add_to_cart_url() ); ?>')" rel="nofollow" data-product_id="<?php echo esc_attr( $product->get_id() );?>" data-product_sku="<?php echo esc_attr( $product->get_sku() );?>" class="btn btn-primary">Comprar Ahora</button>
                 </div>
             </div>
         </div>
@@ -486,7 +485,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content)
                 </div>
             </div>
             <div class="col-4">
-                <div class="cpc_box_video_right">
+                <div class="cpc_product_box_video_right ">
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/9Vpe-dqscyM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
                 <div class="cpc_box_desc">

@@ -279,16 +279,59 @@ $cpc_menu_user = array(
                                                 </li>
 
                                                 <li class="nav-item dropdown">
-                                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <button id="cpc_menu_shop_btn" class="nav-link dropdown-toggle btn" onclick="cpc_menu_shop_open();" cpc-data-menu-state="close">
                                                         <i class="fa fa-shopping-cart"></i>
-                                                    </a>
-                                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                    </button>
+                                                    <ul id="cpc_menu_shop_content" class="dropdown-menu">
+
+                                                        <?php
+
+                                                        $cart = WC()->cart;
+                                                        $cart_url = wc_get_cart_url();  // Set Cart URL
+
+                                                        $items = $cart->get_cart();
+
+                                                        if (count($items) == 0) {
+                                                            echo "<li class='cpc_menu_shop_empty text-center p-1 mb-5 mt-5'>No hay productos en el carrito</li>";
+                                                        }
+
+                                                        foreach ($items as $item => $values) {
+                                                            $_product =  wc_get_product($values['data']->get_id());
+                                                            $price = get_post_meta($values['product_id'], '_price', true);
+                                                            $getProductDetail = wc_get_product($values['product_id']);
+                                                        ?>
+
+                                                            <li class="cpc_menu_shop_content_item">
+                                                                <div class="d-flex">
+                                                                    <div class="img">
+                                                                        <?php echo $getProductDetail->get_image('woocommerce_thumbnail', array('class' => 'img-fluid rounded-start', 'style' => "width: 100%;")); ?>
+                                                                    </div>
+                                                                    <div class="body">
+                                                                        <h5 class="title"><?php echo $_product->get_title(); ?></h5>
+                                                                        <p class="quantity text-muted">Cantidad <?php echo $values['quantity']; ?></p>
+                                                                        <p class="price text-end"><?php echo $price; ?></p>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+
+
+                                                        <?php
+                                                        }
+                                                        ?>
                                                         <li>
                                                             <hr class="dropdown-divider">
                                                         </li>
-                                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                        <div class="p-3 cpc_menu_shop_content_subtotal">
+                                                            <div class="row mb-3">
+                                                                <div class="col-6">
+                                                                    Subtotal
+                                                                </div>
+                                                                <div class="col-6 subtotal text-end">
+                                                                    <?php echo $cart->get_cart_subtotal(); ?>
+                                                                </div>
+                                                            </div>
+                                                            <li class="d-flex justify-content-end"><a class="btn btn-primary" href="<?php echo $cart_url; ?>">Ver el carrito</a></li>
+                                                        </div>
                                                     </ul>
                                                 </li>
                                             </ul>

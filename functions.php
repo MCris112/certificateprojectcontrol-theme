@@ -14,23 +14,25 @@ function pcertificate_register_styles()
 	wp_enqueue_script('pcertificate-gsap_scroll_tigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/ScrollTrigger.min.js', array(), '1.0.0', true);
 	wp_enqueue_script('pcertificate-jquery', 'https://code.jquery.com/jquery-3.6.0.min.js', array(), '1.0.0', true);
 
-	wp_enqueue_style('pcertificate-swiper-css', 'https://unpkg.com/swiper@8/swiper-bundle.min.css', array(), '1.0.0', 'all');
-	wp_enqueue_script('pcertificate-swiper-js', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', array(), '1.0.0', true);
+	
 
 	wp_enqueue_style('pcertificate-style', get_template_directory_uri() . '/style.css', array(), '1.0.0', 'all');
-	wp_enqueue_script('pcertificate-js', get_template_directory_uri() . '/js/main.js', array(), '1.0.0', true);
+	wp_enqueue_script('pcertificate-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true);
 
 	if (is_front_page()) {
-		wp_enqueue_style('pcertificate-front-page-css', get_template_directory_uri() . '/css/front-page.css', array(), '1.0.0', 'all');
-		wp_enqueue_script('pcertificate-front-page-js', get_template_directory_uri() . '/js/front-page.js', array(), '1.0.0', true);
+		wp_enqueue_style('pcertificate-swiper-css', 'https://unpkg.com/swiper@8/swiper-bundle.min.css', array(), '1.0.0', 'all');
+		wp_enqueue_script('pcertificate-swiper-js', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', array(), '1.0.0', true);
+		
+		wp_enqueue_style('pcertificate-front-page-css', get_template_directory_uri() . '/assets/css/front-page.css', array(), '1.0.0', 'all');
+		wp_enqueue_script('pcertificate-front-page-js', get_template_directory_uri() . '/assets/js/front-page.js', array(), '1.0.0', true);
 	}
 
-	if (!is_admin() && is_product()) {
-		wp_enqueue_style('pcertificate-product-css', get_template_directory_uri() . '/css/product.css', array(), '1.0.0', 'all');
+	if ( is_product() ) {
+		wp_enqueue_style('pcertificate-product-css', get_template_directory_uri() . '/assets/css/product.css', array('pcertificate-style'), '1.0.0', 'all');
 	}
 
 	if ( is_page_template( 'templates/page-about-us.php' ) ) {
-		wp_enqueue_style('pcertificate-about-css', get_template_directory_uri() . '/css/about-us.css', array(), '1.0.0', 'all');
+		wp_enqueue_style('pcertificate-about-css', get_template_directory_uri() . '/assets/css/about-us.css', array(), '1.0.0', 'all');
 	}
 }
 

@@ -156,3 +156,30 @@ $('*[data-bs-target="#cpc_modal_login"]').click(function () {
   tabtrigger = new bootstrap.Tab(tab_select);
   tabtrigger.show();
 });
+
+var cpc_menu_shop_open_ani =  new TimelineLite({paused:true});
+cpc_menu_shop_btn = $("#cpc_menu_shop_btn");
+cpc_menu_shop_content = $("#cpc_menu_shop_content");
+
+cpc_menu_shop_open_ani.to(cpc_menu_shop_btn, {display: 'block'});
+cpc_menu_shop_open_ani.to(cpc_menu_shop_content, {display: 'block'});
+cpc_menu_shop_open_ani.from(cpc_menu_shop_content, {opacity: 0, duration: .4, ease: "power2.out"});
+
+function cpc_menu_shop_open(){
+  switch( cpc_menu_shop_btn.attr("cpc-data-menu-state") ){
+    case "open":
+      cpc_menu_shop_open_ani.reverse();
+      cpc_menu_shop_btn.attr("cpc-data-menu-state", "close");
+      break;
+
+    case "close":
+      cpc_menu_shop_open_ani.play();
+      cpc_menu_shop_btn.attr("cpc-data-menu-state", "open");
+      break;
+
+    default:
+      cpc_menu_shop_open_ani.play();
+      cpc_menu_shop_btn.attr("cpc-data-menu-state", "open");
+      break;
+  }
+}

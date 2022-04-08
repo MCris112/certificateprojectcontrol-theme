@@ -8,7 +8,7 @@ get_header();
         <div class="swiper-slide swiper-slide-prev" style="width: 1920px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;" role="group" aria-label="1 / 4">
             <div class="cpc_slider_item cpc_hero">
                 <div class="img">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/backgrounds/bg_hero_home.jpg" alt="">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/backgrounds/bg_hero_home.jpg" alt="">
                     <div class="cover"></div>
                 </div>
 
@@ -34,7 +34,7 @@ get_header();
         <div class="swiper-slide swiper-slide-visible swiper-slide-active" style="width: 1920px; opacity: 1; transform: translate3d(-1920px, 0px, 0px); transition-duration: 0ms;" role="group" aria-label="2 / 4">
             <div class="cpc_slider_item cpc_hero">
                 <div class="img">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/backgrounds/bg_hero_home_2.jpg" alt="">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/backgrounds/bg_hero_home_2.jpg" alt="">
                     <div class="cover"></div>
                 </div>
 
