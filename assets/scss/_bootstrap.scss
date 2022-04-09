@@ -38,6 +38,10 @@ Hover EFFECT ON NAVBAR ITEM
     
         transform: translateX(-50%);
 
+        #cpc_menu_shop_content_items{
+            max-height: 300px;
+            overflow-y: scroll;
+        }
         .cpc_menu_shop_content_item{
             margin-bottom: 1rem;
             padding: .6rem 1rem;

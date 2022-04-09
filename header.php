@@ -62,6 +62,7 @@ $cpc_menu_user = array(
 </head>
 
 <body <?php body_class(); ?>>
+    <input type="hidden" value="<?php echo site_url(); ?>" id="cpc_url_site_url">
 
     <?php
     /*
@@ -284,6 +285,7 @@ $cpc_menu_user = array(
                                                     </button>
                                                     <ul id="cpc_menu_shop_content" class="dropdown-menu">
 
+                                                    <div id="cpc_menu_shop_content_items">
                                                         <?php
 
                                                         $cart = WC()->cart;
@@ -299,12 +301,15 @@ $cpc_menu_user = array(
                                                             $_product =  wc_get_product($values['data']->get_id());
                                                             $price = get_post_meta($values['product_id'], '_price', true);
                                                             $getProductDetail = wc_get_product($values['product_id']);
+                                                            $cart_delete_url = wc_get_cart_remove_url($values['data']->get_id());
+
                                                         ?>
 
-                                                            <li class="cpc_menu_shop_content_item">
+                                                            <li id="cpc_capacitacion_cart_item_<?php echo $values['data']->get_id(); ?>" class="cpc_menu_shop_content_item">
                                                                 <div class="d-flex">
                                                                     <div class="img">
                                                                         <?php echo $getProductDetail->get_image('woocommerce_thumbnail', array('class' => 'img-fluid rounded-start', 'style' => "width: 100%;")); ?>
+                                                                        <button onclick="cpc_remove_capacitacion_to_cart($(this), '<?php echo $cart_delete_url; ?>');" class="btn btn-danger" cpc-data-cpt-id="<?php echo $values['data']->get_id(); ?>"><i class="fa fa-trash-o fa-lg"></i></button>
                                                                     </div>
                                                                     <div class="body">
                                                                         <h5 class="title"><?php echo $_product->get_title(); ?></h5>
@@ -318,6 +323,7 @@ $cpc_menu_user = array(
                                                         <?php
                                                         }
                                                         ?>
+                                                        </div>
                                                         <li>
                                                             <hr class="dropdown-divider">
                                                         </li>

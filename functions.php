@@ -29,6 +29,7 @@ function pcertificate_register_styles()
 
 	if ( is_product() ) {
 		wp_enqueue_style('pcertificate-product-css', get_template_directory_uri() . '/assets/css/product.css', array('pcertificate-style'), '1.0.0', 'all');
+		wp_enqueue_script('pcertificate-product-js', get_template_directory_uri() . '/assets/js/product.js', array(), '1.0.0', true);
 	}
 
 	if ( is_page_template( 'templates/page-about-us.php' ) ) {
@@ -97,6 +98,7 @@ add_action('customize_register', 'cpc_customize_logo_blue');
 
 require __DIR__ . '/functions/ponentes.func.php';
 require __DIR__ . '/functions/admin.func.php';
+require __DIR__ . '/functions/ajax.func.php';
 require __DIR__ . '/functions/front-page.func.php';
 
 function cpc_get_meta_field($meta_key, $single = true)
@@ -148,34 +150,6 @@ add_action('init', 'cpc_capacitaciones_change_post_object_label');
 
 //require __DIR__ . '/widgets/register_widgets.php';
 require __DIR__ . '/functions/capacitacion/cpt.func.php';
-
-function cpc_ajax_get_post_meta()
-{
-
-	if (empty($_POST['post_id'])) {
-		wp_send_json_error('No se han enviado la ID');
-		wp_die();
-	}
-
-	if (empty($_POST['meta_keys'])) {
-		wp_send_json_error('No se han enviado los datos');
-		wp_die();
-	}
-
-	$ID = $_POST['post_id'];
-	$meta_keys = $_POST['meta_keys'];
-
-	$meta_values = [];
-
-	foreach ($meta_keys as $meta_key) {
-		$meta_values[$meta_key] = get_post_meta($ID, $meta_key, true);
-	}
-
-	wp_send_json($meta_values);
-	wp_die();
-}
-add_action('wp_ajax_nopriv_cpc_post_meta', 'cpc_ajax_get_post_meta');
-add_action('wp_ajax_cpc_post_meta', 'cpc_ajax_get_post_meta');
 
 
 function cpc_menu_get_social_links($classes = array(), $args = array('order' => 'ASC') )

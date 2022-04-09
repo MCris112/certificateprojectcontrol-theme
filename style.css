@@ -180,6 +180,10 @@ Hover EFFECT ON NAVBAR ITEM
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
 }
+.navbar .dropdown-menu #cpc_menu_shop_content_items {
+  max-height: 300px;
+  overflow-y: scroll;
+}
 .navbar .dropdown-menu .cpc_menu_shop_content_item {
   margin-bottom: 1rem;
   padding: 0.6rem 1rem;
