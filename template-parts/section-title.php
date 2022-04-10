@@ -5,7 +5,7 @@
 
 <section class="cpc_section_title cpc_near_menu_top">
     <div class="cpc_bg_section">
-        <img src="<?php echo get_template_directory_uri(); ?>/images/backgrounds/bg_product.jpg" alt="">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/backgrounds/bg_product.jpg" alt="">
         <div class="cover"></div>
     </div>
     <div class="container">
