@@ -49,7 +49,7 @@ function cpc_capacitacion_func_meta_fields_add(){
 
     woocommerce_wp_text_input( 
         array( 
-            'id'                => '_cpc_product_video', 
+            'id'                => '_cpc_product_video_link', 
             'label'             => 'Link de video de presentación', 
             'placeholder'       => 'https://youtu.be/9Vpe-dqscyM', 
             'desc_tip'    => 'true',
@@ -67,8 +67,21 @@ add_action( 'woocommerce_product_options_general_product_data', 'cpc_capacitacio
 function cpc_capacitacion_func_meta_fields_save( $post_id ){
  
     $woocommerce_number_field = $_POST['_cpc_product_duration'];
+    $woo_sessions = $_POST['_cpc_product_sessions'];
+    $woo_brochure_link = $_POST['_cpc_product_brochure_link'];
+    $woo_video = $_POST['_cpc_product_video_link'];
+
 	if( !empty( $woocommerce_number_field ) )
 		update_post_meta( $post_id, '_cpc_product_duration', esc_attr( $woocommerce_number_field ) );
+
+    if( !empty( $woo_sessions ) )
+        update_post_meta( $post_id, '_cpc_product_sessions', esc_attr( $woo_sessions ) );
+    
+    if( !empty( $woo_brochure_link ) )
+        update_post_meta( $post_id, '_cpc_product_brochure_link', esc_attr( $woo_brochure_link ) );
+    
+    if( !empty( $woo_video ) )
+        update_post_meta( $post_id, '_cpc_product_video_link', esc_attr( $woo_video ) );
 
 	//if( !empty( $_POST['super_product'] ) ) {
 		//update_post_meta( $id, 'super_product', $_POST['super_product'] );

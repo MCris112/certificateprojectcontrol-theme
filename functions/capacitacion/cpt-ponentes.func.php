@@ -49,7 +49,7 @@ function cpc_capacitacion_product_ponentes_meta_box_callback()
             if(has_post_thumbnail()){
                 the_post_thumbnail('post-thumbnail', ['class' => 'card-img-top', 'height' => '18rem', 'style' => 'height: 18rem;min-height: 18rem; background: black; object-fit:cover;']);
             }else{
-                echo '<img src="' . get_template_directory_uri() . '/images/ponentes/ponente-unknow-img.jpg" alt="Certificate Project Control No ahay ponetnes" class="card-img-top" style="height: 18rem;">';
+                echo '<img src="' . get_template_directory_uri() . '/assets/images/ponentes/ponente-unknow-img.jpg" alt="Certificate Project Control No ahay ponetnes" class="card-img-top" style="height: 18rem;">';
             }
             
             ?>
@@ -92,7 +92,7 @@ function cpc_capacitacion_product_ponentes_save_meta_box($post_id)
         return;
     }
 
-    if (!wp_verify_nonce($_POST['cpc_capacitacion_meta_box_nonce_information'], 'cpc_capacitacion_product_ponentes_save_meta_box')) {
+    if (!wp_verify_nonce($_POST['cpc_capacitacion_meta_box_nonce_ponentes'], 'cpc_capacitacion_product_ponentes_save_meta_box')) {
         return;
     }
 

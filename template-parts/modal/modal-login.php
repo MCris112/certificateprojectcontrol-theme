@@ -1,4 +1,4 @@
-<form class="woocommerce-form woocommerce-form-login login" method="post">
+<form class="woocommerce-form woocommerce-form-login login text-center" method="post">
 	<?php do_action('woocommerce_login_form_start'); ?>
 
 	<img class="mb-4" src="<?php echo get_site_icon_url() ?>" alt="" width="72" height="72">

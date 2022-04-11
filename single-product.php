@@ -4,9 +4,9 @@ get_header();
 $product = wc_get_product(get_the_id());
 $modalidad = cpc_get_meta_field('_cpc_capacitacion_field_modalidad');
 $fechas = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_modalidad_fechas', true);
-if( !empty($fechas) ) $fechas = json_decode($fechas, true);
+if (!empty($fechas)) $fechas = json_decode($fechas, true);
 
-function cpc_capacitacion_cpt_box_desc($title, $content)
+function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
 {
 ?>
 
@@ -17,6 +17,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content)
         </div>
         <div class="cpc_body">
             <p class="desc"><?php echo $content; ?></p>
+            <?php echo $content_extra; ?>
         </div>
     </div>
 
@@ -95,7 +96,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content)
 
                                     <?php
 
-                                    $duracion = get_post_meta(get_the_ID(), '_cpc_duration', true);
+                                    $duracion = get_post_meta(get_the_ID(), '_cpc_product_duration', true);
 
                                     if (empty($duracion)) {
                                         echo 'Sin definir';
@@ -113,7 +114,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content)
                 <p class="cpc_product_price">$<?php echo $product->get_price(); ?></p>
                 <div class="d-flex gap-4 cpc_product_price_btn">
                     <div class="btn btn-outline-primary">Contáctanos</div>
-                    <button onclick="cpc_add_capacitacion_to_cart($(this), '<?php echo esc_url( $product->add_to_cart_url() ); ?>')" rel="nofollow" data-product_id="<?php echo esc_attr( $product->get_id() );?>" data-product_sku="<?php echo esc_attr( $product->get_sku() );?>" class="btn btn-primary">Comprar Ahora</button>
+                    <button onclick="cpc_add_capacitacion_to_cart($(this), '<?php echo esc_url($product->add_to_cart_url()); ?>')" rel="nofollow" data-product_id="<?php echo esc_attr($product->get_id()); ?>" data-product_sku="<?php echo esc_attr($product->get_sku()); ?>" class="btn btn-primary">Comprar Ahora</button>
                 </div>
             </div>
         </div>
@@ -128,7 +129,12 @@ function cpc_capacitacion_cpt_box_desc($title, $content)
                     <div class="container">
                         <?php
 
-                        cpc_capacitacion_cpt_box_desc('Descripción del curso', $product->get_description());
+                        $brochure_link = get_post_meta(get_the_ID(), '_cpc_product_brochure_link', true);
+                        $brochure_link_a = '<a href="' . $brochure_link . '" class="btn btn-outline-primary d-block mt-3" target="_blank">Ver Brochure Online</a>';
+
+                        if (empty($brochure_link)) $brochure_link_a = '';
+
+                        cpc_capacitacion_cpt_box_desc('Descripción del curso', $product->get_description(), $brochure_link_a);
 
                         $has_logro = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_logro_select', true);
                         $logro_content =  htmlspecialchars_decode(get_post_meta(get_the_ID(), '_cpc_capacitacion_field_logro', true));
@@ -485,20 +491,60 @@ function cpc_capacitacion_cpt_box_desc($title, $content)
                 </div>
             </div>
             <div class="col-4">
-                <div class="cpc_product_box_video_right ">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/9Vpe-dqscyM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <div class="cpc_box_desc">
-                    <div class="cpc_head">
-                        <h2>Ponente</h2>
-                        <hr>
+
+                <?php
+
+                $video_link = get_post_meta(get_the_ID(), '_cpc_product_video_link', true);
+
+                if (!empty($video_link)) {
+                ?>
+                    <div class="cpc_product_box_video_right mb-3">
+                        <iframe width="560" height="315" src="<?php echo $video_link; ?>?showinfo=0&enablejsapi=1&origin=https://localhost:8848/" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
-                    <div class="cpc_body">
-                        <strong class="desc">Frich Gonzalo Torres Vega</strong>
-                        <p class="desc">CERTIFICADOS: MBA - CIP</p>
-                        <p class="desc">Más de 15 años de experiencia en la gestión, gerenciamiento, control de proyecto, planificación y ejecución de proyectos civiles de infraestructura, movimiento de tierras, puentes, viales, mineros de mediana y gran envergadura. Líder en la gestión de oficinas de proyectos (PMI), en administración de contratos, control de proyectos, produccion y construccion. Senior de control de proyectos, costos y claims en empresas como SNC Lavalin, WOOD, ANDDES y APPLUS para clientes como MINSUR, CHINALCO; SOLGAS, MTC, Cerro Verde Y Antamina. – Docente Universitario para UPN y docente para CAPECO. – Magister en Administración de empresas MBA de CENTRUM. -Diplomado en gerencia de proyectos en UPC.</p>
-                    </div>
-                </div>
+                <?php
+                }
+                ?>
+
+                <?php
+
+                $ponentes = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_ponentes', true);
+
+                if (!empty($ponentes)) {
+
+                    $ponentes = json_decode($ponentes, true) ? json_decode($ponentes, true) : array();
+
+                    if (count($ponentes) > 0) {
+                ?>
+
+                        <div class="cpc_box_desc">
+                            <div class="cpc_head">
+                                <h2>Ponente<?php if (count($ponentes) >= 1) echo 's'; ?></h2>
+                                <hr>
+                            </div>
+
+                            <div class="cpc_body">
+                                <?php
+                                foreach ($ponentes as $poenente => $value) {
+                                ?>
+                                    <div class="mb-2">
+                                        <strong class="desc"><?php echo $value['name'] ?></strong>
+                                        <p class="desc">CERTIFICADOS: <?php echo $value['certificados'] ?></p>
+                                        <p class="desc"><?php echo $value['subtitle'] ?></p>
+                                        <p class="desc"><?php echo $value['desc'] ?></p>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                            </div>
+
+                        </div>
+                <?php
+                    }
+                }
+
+                ?>
+
+
 
                 <div class="cpc_box_desc">
                     <div class="cpc_head">

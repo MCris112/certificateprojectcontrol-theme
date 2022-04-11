@@ -149,6 +149,7 @@ function cpc_capacitaciones_change_post_object_label()
 add_action('init', 'cpc_capacitaciones_change_post_object_label');
 
 //require __DIR__ . '/widgets/register_widgets.php';
+require __DIR__ . '/functions/register.func.php';
 require __DIR__ . '/functions/capacitacion/cpt.func.php';
 
 
