@@ -141,7 +141,8 @@ $('*[data-bs-target="#cpc_modal_login"]').click(function () {
 
   switch (modal) {
     case "login":
-      tab_select = $("#cpc-login-tab");login_init
+      tab_select = $("#cpc-login-tab");
+      login_init;
       break;
 
     case "register":
@@ -157,16 +158,20 @@ $('*[data-bs-target="#cpc_modal_login"]').click(function () {
   tabtrigger.show();
 });
 
-var cpc_menu_shop_open_ani =  new TimelineLite({paused:true});
+var cpc_menu_shop_open_ani = new TimelineLite({ paused: true });
 cpc_menu_shop_btn = $("#cpc_menu_shop_btn");
 cpc_menu_shop_content = $("#cpc_menu_shop_content");
 
-cpc_menu_shop_open_ani.to(cpc_menu_shop_btn, {display: 'block'});
-cpc_menu_shop_open_ani.to(cpc_menu_shop_content, {display: 'block'});
-cpc_menu_shop_open_ani.from(cpc_menu_shop_content, {opacity: 0, duration: .4, ease: "power2.out"});
+cpc_menu_shop_open_ani.to(cpc_menu_shop_btn, { display: "block" });
+cpc_menu_shop_open_ani.to(cpc_menu_shop_content, { display: "block" });
+cpc_menu_shop_open_ani.from(cpc_menu_shop_content, {
+  opacity: 0,
+  duration: 0.4,
+  ease: "power2.out",
+});
 
-function cpc_menu_shop_open(){
-  switch( cpc_menu_shop_btn.attr("cpc-data-menu-state") ){
+function cpc_menu_shop_open() {
+  switch (cpc_menu_shop_btn.attr("cpc-data-menu-state")) {
     case "open":
       cpc_menu_shop_open_ani.reverse();
       cpc_menu_shop_btn.attr("cpc-data-menu-state", "close");
@@ -183,3 +188,70 @@ function cpc_menu_shop_open(){
       break;
   }
 }
+
+function cpc_email_btn_send() {
+  form_data = $("#cpc_email_form").serialize();
+  console.log(form_data);
+
+  /*******************************
+   $.ajax({
+    url: url_ajax,
+    type: "POST",
+    data: form_data,
+
+    beforeSend: function () {
+      btn.attr("disabled", true);
+      btn.html("<i class='fa fa-spinner fa-pulse fa-fw pe-2'></i> Añadiedo...");
+    },
+    success: function (data) {
+      menu = $(data).find("#cpc_menu_shop_content_items");
+      console.log(menu);
+
+      $("#cpc_menu_shop_content_items").html(menu);
+
+      btn.html("<i class='fa fa-check pe-2'></i> Añadido");
+    },
+    fail: function (xhr, textStatus, errorThrown) {
+      btn.html("<i class='fa fa-exclamation-triangle pe-2'></i> Falló");
+    },
+  });
+   */
+}
+
+$("form").on("submit", function (event) {
+  event.preventDefault();
+
+  base_url = $("#cpc_url_site_url").val();
+  url_ajax = base_url + "/wp-admin/admin-ajax.php";
+  form_data = $(this).serializeArray();
+
+  data = {
+    action: 'cpc_email_send',
+    type: 'capacitacion-single',
+    content: {}
+  };
+
+  $.each(form_data, function (key, value) {
+    data["content"][value.name] = value.value;
+  });
+
+  btn = $("#cpc_email_form_btn");
+
+  $.ajax({
+    url: url_ajax,
+    type: "POST",
+    data: data,
+
+    beforeSend: function () {
+      btn.attr("disabled", true);
+      btn.html("<i class='fa fa-spinner fa-pulse fa-fw pe-2'></i> Añadiedo...");
+    },
+    success: function (data) {
+      console.log(data);
+      btn.html("<i class='fa fa-check pe-2'></i> Añadido");
+    },
+    fail: function (xhr, textStatus, errorThrown) {
+      btn.html("<i class='fa fa-exclamation-triangle pe-2'></i> Falló");
+    },
+  });
+});

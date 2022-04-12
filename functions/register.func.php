@@ -1,3 +1,3 @@
 <?php
 
-require __DIR__ . '/emails/register.email.php';
+require __DIR__ . '/emails/email.func.php';
