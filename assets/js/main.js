@@ -219,16 +219,60 @@ function cpc_email_btn_send() {
 }
 
 $("form").on("submit", function (event) {
+  if (!$(this).attr("cpc-data-form-type")) return;
+
+  if (!$(this).attr("cpc-data-form-type") == "email") return;
+
   event.preventDefault();
+  was_validated = true;
+  var form = $(this);
+
+  inputs = form.find("input");
+  selects = form.find("select");
+  textareas = form.find("textarea");
+
+  $.each(inputs, function(key, input){
+    if(input.value ===""){
+      $(input).addClass("is-invalid");
+      was_validated = false;
+    }else{
+      $(input).removeClass("is-invalid");
+    }
+  });
+
+  $.each(selects, function(key, select){
+    if(select.value ===""){
+      $(select).addClass("is-invalid");
+      was_validated = false;
+    }else{
+      $(select).removeClass("is-invalid");
+    }
+  });
+
+  $.each(textareas, function(key, textarea){
+    if(textarea.value ===""){
+      $(textarea).addClass("is-invalid");
+      was_validated = false;
+    }else{
+      $(textarea).removeClass("is-invalid");
+    }
+  });
+
+
+  if(was_validated){
+    $(this) .addClass('was-validated')
+  }else{
+    return;
+  }
 
   base_url = $("#cpc_url_site_url").val();
   url_ajax = base_url + "/wp-admin/admin-ajax.php";
   form_data = $(this).serializeArray();
 
   data = {
-    action: 'cpc_email_send',
-    type: 'capacitacion-single',
-    content: {}
+    action: "cpc_email_send",
+    type: "capacitacion-single",
+    content: {},
   };
 
   $.each(form_data, function (key, value) {
@@ -244,11 +288,28 @@ $("form").on("submit", function (event) {
 
     beforeSend: function () {
       btn.attr("disabled", true);
-      btn.html("<i class='fa fa-spinner fa-pulse fa-fw pe-2'></i> Añadiedo...");
+      btn.html("<i class='fa fa-spinner fa-pulse fa-fw pe-2'></i> Enviando...");
     },
     success: function (data) {
-      console.log(data);
-      btn.html("<i class='fa fa-check pe-2'></i> Añadido");
+      data = jQuery.parseJSON(data);
+
+      if(data.error) {
+        if(data.error.field) {
+          //if its not null);
+          if(data.error.field.length > 0) {
+            form.removeClass('was-validated')
+
+            $.each(data.error.field, function (key, value) {
+              $('[name="'+value+'"]').addClass("is-invalid");
+              btn.removeAttr("disabled");
+            });
+          }
+          btn.html("<i class='fa fa-exclamation-triangle pe-2'></i> Por favor inserte todos los datos");
+          return;
+        }
+      }
+
+      btn.html("<i class='fa fa-check pe-2'></i> Se ha enviado correctamente");
     },
     fail: function (xhr, textStatus, errorThrown) {
       btn.html("<i class='fa fa-exclamation-triangle pe-2'></i> Falló");

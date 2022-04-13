@@ -29,3 +29,26 @@
         }
     }
 }
+
+.cpc_contactanos_icon_text{
+    display: flex;
+    font-size: $txt-small;
+
+    i{
+        color: $accent;
+        font-size: $txt-subtitle;
+        margin-right: 1.6rem;
+    }
+
+    .title{
+        font-weight: bold;
+    }
+
+    .desc{
+        opacity: 0.8;
+    }
+}
+
+.cpc_contactanos_iframe{
+    height: 300px !important;
+}

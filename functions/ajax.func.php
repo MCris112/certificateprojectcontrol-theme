@@ -85,6 +85,11 @@ function cpc_email_ajax_send()
     );
 
     foreach ($content as $key => $val) {
+        if(empty($val)) {
+            $response['error']['field'][] = $key;
+            echo json_encode($response);
+            wp_die();
+        }
         if (is_array($val)) {
             $table_data[$key] = json_encode($val);
         } else {

@@ -194,3 +194,68 @@ function cpc_woo_wp_login_php(){
 }
 
 add_action( 'login_init', 'cpc_woo_wp_login_php' );
+
+function cpc_var_get_latam_countries(){
+	return array(
+		'AR' => 'Argentina',
+		'BO' => 'Bolivia',
+		'BR' => 'Brasil',
+		'CL' => 'Chile',
+		'CO' => 'Colombia',
+		'CR' => 'Costa Rica',
+		'CU' => 'Cuba',
+		'EC' => 'Ecuador',
+		'SV' => 'El Salvador',
+		'GW' => 'Guayana Francesa',
+		'GD' => 'Grenada',
+		'GT' => 'Guatemala',
+		'GY' => 'Guyana',
+		'HT' => 'Haiti',
+		'HN' => 'Honduras',
+		'MX' => 'México',
+		'NI' => 'Nicaragua',
+		'PA' => 'Panamá',
+		'PY' => 'Paraguay',
+		'PE' => 'Perú',
+		'PR' => 'Puerto Rico',
+		'DO' => 'República Dominicana',
+		'UY' => 'Uruguay',
+		'VE' => 'Venezuela',
+	);
+}
+
+function cpc_cpt_html_select($data, $args){
+	$name = isset($data['name']) ? 'name="'.$data['name'].'"' : '';
+	$id = isset($data['id']) ? 'id="'.$data['id'].'"' : '';
+	$class = isset($data['class']) ? 'class="'.$data['class'].'"' : '';
+	$select = isset($data['select']) ? $data['select'] : '';
+
+	$selected_default = empty($value) ? 'selected' : '';
+
+	echo '<select ' . $name . ' ' .$id.' '.$class.'>';
+		echo '<option value="" '.$selected_default.'>Seleccione una opción</option>';
+		foreach ($args as $key => $value) {
+			$selected = "";
+
+			if( $value == $select ){
+				$selected = "selected";
+			}
+
+			echo '<option value="'.$key.'" '.$selected.'>'.$value.'</option>';
+		}
+	echo '</select>';
+}
+
+function cpc_print_if_isset($var, $txt = null) {
+    if (isset($var)) {
+        if($txt == null) {
+			echo $var;
+		} else {
+			echo $txt;
+		}
+
+		return;
+    }
+
+	echo $txt;
+}

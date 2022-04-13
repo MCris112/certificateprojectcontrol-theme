@@ -339,7 +339,7 @@ class CPC_EMAILS_LIST
             ?>
 
             <div class="container-fluid">
-                <h2>Correos enviados</h2>
+                <h2>Correos recibidos</h2>
 
                 <?php
 

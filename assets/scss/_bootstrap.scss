@@ -90,3 +90,13 @@ Hover EFFECT ON NAVBAR ITEM
 }
 */
 
+
+
+.btn-whatsapp{
+    background: #27ae60;
+    color: white;
+
+    &:hover{
+        background: #2ecc71;
+    }
+}

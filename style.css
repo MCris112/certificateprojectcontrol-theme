@@ -226,6 +226,14 @@ Hover EFFECT ON NAVBAR ITEM
     }
 }
 */
+.btn-whatsapp {
+  background: #27ae60;
+  color: white;
+}
+.btn-whatsapp:hover {
+  background: #2ecc71;
+}
+
 .cpc_header {
   width: 100%;
   position: absolute;
@@ -1246,4 +1254,26 @@ iframe {
   padding-left: 1rem;
   -webkit-transform: scale(0.9);
           transform: scale(0.9);
+}
+
+.cpc_contactanos_icon_text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: var(--text-small);
+}
+.cpc_contactanos_icon_text i {
+  color: var(--accent);
+  font-size: var(--text-subtitle);
+  margin-right: 1.6rem;
+}
+.cpc_contactanos_icon_text .title {
+  font-weight: bold;
+}
+.cpc_contactanos_icon_text .desc {
+  opacity: 0.8;
+}
+
+.cpc_contactanos_iframe {
+  height: 300px !important;
 }
