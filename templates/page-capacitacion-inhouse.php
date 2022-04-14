@@ -23,10 +23,11 @@ get_template_part('template-parts/section', 'title', $args);
         <div class="col col-md-8 pe-md-5">
             <h2 class="cpc_title mb-5">¡Solicita tu cotización!</h2>
             <form id="cpc_email_form" cpc-data-form-type="email" class="row gap-3">
+                <input type="hidden" name="cpc_type" value="inhouse">
                 <div class="row">
                     <div class="col">
-                        <label for="cpc_form_input_name" class="form-label">Nombre de empresa</label>
-                        <input type="text" class="form-control" id="cpc_form_input_name" placeholder="Su nombre" name="cpc_name">
+                        <label for="cpc_form_input_company_name" class="form-label">Nombre de empresa</label>
+                        <input type="text" class="form-control cpc_extra_info" id="cpc_form_input_company_name" placeholder="Su nombre" name="cpc_company_name">
                         <div class="invalid-feedback">
                             Por favor escriba su nombre.
                         </div>
@@ -58,8 +59,8 @@ get_template_part('template-parts/section', 'title', $args);
 
                 <div class="row">
                     <div class="col">
-                        <label for="cpc_form_input_phone" class="form-label">N° alumnos</label>
-                        <input type="number" class="form-control" id="cpc_form_input_phone" placeholder="xxx xxx xxx" name="cpc_phone">
+                        <label for="cpc_company_classmates" class="form-label">N° alumnos</label>
+                        <input type="number" class="form-control cpc_extra_info" id="cpc_company_classmates" placeholder="xxx xxx xxx" name="cpc_company_classmates">
                         <div class="invalid-feedback">
                             Por favor escriba su número télefonico.
                         </div>
@@ -91,9 +92,9 @@ get_template_part('template-parts/section', 'title', $args);
                     <?php
 
                     cpc_cpt_html_select(array(
-                        'name' => 'cpc_country',
-                        'class' => 'form-select',
-                        'id' => 'cpc_form_select_country',
+                        'name' => 'cpc_country_2',
+                        'class' => 'form-select cpc_extra_info',
+                        'id' => 'cpc_form_select_country_2',
                     ), cpc_var_get_latam_countries());
 
 

@@ -94,13 +94,6 @@ function cpc_customize_logo_blue($wp_customize)
 
 add_action('customize_register', 'cpc_customize_logo_blue');
 
-
-
-require __DIR__ . '/functions/ponentes.func.php';
-require __DIR__ . '/functions/admin.func.php';
-require __DIR__ . '/functions/ajax.func.php';
-require __DIR__ . '/functions/front-page.func.php';
-
 function cpc_get_meta_field($meta_key, $single = true)
 {
 	return get_post_meta(get_queried_object_id(), $meta_key, $single);
@@ -148,9 +141,6 @@ function cpc_capacitaciones_change_post_object_label()
 
 add_action('init', 'cpc_capacitaciones_change_post_object_label');
 
-//require __DIR__ . '/widgets/register_widgets.php';
-require __DIR__ . '/functions/register.func.php';
-require __DIR__ . '/functions/capacitacion/cpt.func.php';
 
 
 function cpc_menu_get_social_links($classes = array(), $args = array('order' => 'ASC') )
@@ -259,3 +249,5 @@ function cpc_print_if_isset($var, $txt = null) {
 
 	echo $txt;
 }
+
+require __DIR__ . '/functions/register.func.php';

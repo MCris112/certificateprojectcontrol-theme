@@ -228,6 +228,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                             </div>
                             <div class="cpc_body">
                                 <form id="cpc_email_form" cpc-data-form-type="email">
+                                    <input type="hidden" name="cpc_type" value="capacitacion-single">
                                     <div class="mb-3">
                                         <label for="cpc_form_input_name" class="form-label">Nombres</label>
                                         <input type="text" class="form-control" id="cpc_form_input_name" placeholder="Su nombre" name="cpc_name">

@@ -66,22 +66,54 @@ function cpc_email_ajax_send()
     $response['status'] = 'success';
     $response['message'] = 'Email enviado correctamente';
 
+    if(!isset($_POST['content']['cpc_type'])){
+        $response['status'] = 'error';
+        $resonse['error'] = 'No se ha enviado el tipo de email';
+        $response['code'] = 'no_type';
+        $response['message'] = 'No se ha enviado el tipo de email';
+        echo json_encode($response);
+        wp_die();
+    }
+
+    if(!isset($_POST['content']['cpc_message'])){
+        $response['status'] = 'error';
+        $response['error'] = 'No se ha enviado el mensaje';
+        $response['code'] = 'no_message';
+        $response['message'] = 'No se ha enviado el mensaje';
+        echo json_encode($response);
+        wp_die();
+    }
+
     //CONFIGURE OPTION TO SET WHOS IS GONNA BE SEND IT
-    $to = "quinonesvillanueva@gmail.com";
-    $subject = "NUEVO MENSAJE TIPO: " . $_POST['type'];;
+
+    $subject = "Nuevo email";
+
+    switch ($_POST['type']){
+        case 'capacitacion-single':
+            $subject = "Nueva capacitación";
+        break;
+    }
+
     $content = $_POST['content'];
 
-    $message = "";
+    $message = "mensaje:";
 
-    if (is_array($content)) {
-        $message = implode('<br>', $content);
+    foreach( $content as $key => $value ){
+        $message .= $key . ": " . $value . "\n";
     }
+
+    $extra_info = $content['extra_info'];
+
+    if( empty($extra_info) || !isset($extra_info) ) $extra_info = array();
+
+    if( is_array($extra_info) ) $extra_info = json_encode($extra_info);
 
     $table_data = array(
         'cpc_email_subject' => $subject,
         'cpc_date' => date("Y-m-d"),
         'cpc_time' => date("H:i:s"),
         'cpc_status' => 'pending',
+        'cpc_extra_info' => $extra_info,
     );
 
     foreach ($content as $key => $val) {
@@ -109,14 +141,18 @@ function cpc_email_ajax_send()
         $response['wp']['status'] = 'success';
         $response['wp']['message'] = 'Email enviado correctamente';
 
-        $headers = array('Content-Type: text/html; charset=UTF-8');
+        $to = get_option('cpc_settings_email_to');
 
-        $result = wp_mail($to, $subject, $message, $headers);
+        if(!empty($to)){
+            $headers = array('Content-Type: text/html; charset=UTF-8');
+            $result = wp_mail($to, $subject, $message, $headers);
 
-        if (!$result) {
-            $response['status'] = 'error';
-            $response['message'] = 'Error al enviar el email';
+            if (!$result) {
+                $response['status'] = 'error';
+                $response['message'] = 'Error al enviar el email';
+            }
         }
+        
     } else {
         $response['wp']['status'] = 'error';
         $response['wp']['message'] = 'Error al salvar el email';

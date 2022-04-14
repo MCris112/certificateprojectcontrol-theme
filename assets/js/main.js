@@ -231,7 +231,27 @@ $("form").on("submit", function (event) {
   selects = form.find("select");
   textareas = form.find("textarea");
 
+  data = {
+    action: "cpc_email_send",
+    content: {},
+  };
+
+  form_data = $(this).serializeArray();
+  
+  $.each(form_data, function (key, value) {
+    console.log("Key: " + key + " Value: " + value);
+    data["content"][value.name] = value.value;
+    console.log(data);
+  });
+
+  console.log(form_data);
+  console.log(data);
+  console.log("before!-----------");
+
   $.each(inputs, function(key, input){
+
+    data['content'] = cpc_form_extra_info(input, data['content']);
+
     if(input.value ===""){
       $(input).addClass("is-invalid");
       was_validated = false;
@@ -241,6 +261,8 @@ $("form").on("submit", function (event) {
   });
 
   $.each(selects, function(key, select){
+    data['content'] = cpc_form_extra_info(select, data['content']);
+
     if(select.value ===""){
       $(select).addClass("is-invalid");
       was_validated = false;
@@ -250,6 +272,8 @@ $("form").on("submit", function (event) {
   });
 
   $.each(textareas, function(key, textarea){
+    data['content'] = cpc_form_extra_info(textarea, data['content']);
+
     if(textarea.value ===""){
       $(textarea).addClass("is-invalid");
       was_validated = false;
@@ -267,19 +291,10 @@ $("form").on("submit", function (event) {
 
   base_url = $("#cpc_url_site_url").val();
   url_ajax = base_url + "/wp-admin/admin-ajax.php";
-  form_data = $(this).serializeArray();
-
-  data = {
-    action: "cpc_email_send",
-    type: "capacitacion-single",
-    content: {},
-  };
-
-  $.each(form_data, function (key, value) {
-    data["content"][value.name] = value.value;
-  });
 
   btn = $("#cpc_email_form_btn");
+
+  console.log(data);
 
   $.ajax({
     url: url_ajax,
@@ -287,11 +302,11 @@ $("form").on("submit", function (event) {
     data: data,
 
     beforeSend: function () {
-      btn.attr("disabled", true);
-      btn.html("<i class='fa fa-spinner fa-pulse fa-fw pe-2'></i> Enviando...");
+      cpc_form_btn_state(btn, "loading", "Enviando...");
     },
     success: function (data) {
       data = jQuery.parseJSON(data);
+      console.log(data);
 
       if(data.error) {
         if(data.error.field) {
@@ -301,18 +316,59 @@ $("form").on("submit", function (event) {
 
             $.each(data.error.field, function (key, value) {
               $('[name="'+value+'"]').addClass("is-invalid");
-              btn.removeAttr("disabled");
             });
           }
-          btn.html("<i class='fa fa-exclamation-triangle pe-2'></i> Por favor inserte todos los datos");
+
+          cpc_form_btn_state(btn, "error", "Por favor inserte todos los datos requeridos");
           return;
         }
-      }
 
-      btn.html("<i class='fa fa-check pe-2'></i> Se ha enviado correctamente");
+        cpc_form_btn_state(btn, "error", "Hubo un error");
+      }else{
+        cpc_form_btn_state(btn, "success", "Se ha enviado correctamente");
+      }
     },
     fail: function (xhr, textStatus, errorThrown) {
       btn.html("<i class='fa fa-exclamation-triangle pe-2'></i> Falló");
     },
   });
 });
+
+function cpc_form_btn_state(btn, status, text = null){
+
+  switch(status) {
+    case "loading":
+      btn.attr("disabled", true);
+      btn.html("<i class='fa fa-spinner fa-pulse fa-fw pe-2'></i> "+ text);
+      break;
+    case "success":
+      btn.html("<i class='fa fa-check pe-2'></i> "+ text);
+      break;
+    case "error":
+      btn.attr("disabled", true);
+      btn.html("<i class='fa fa-exclamation-triangle pe-2'></i> " + text);
+      break;
+  }
+}
+
+function cpc_form_extra_info(input, content){
+  console.log("---------------------");
+  console.log(input);
+  console.log(content);
+
+  var array = new Array();
+
+  if( $(input).hasClass("cpc_extra_info") ){
+    input_name = $(input).attr("name");
+
+    $.each(content, function(key, value){
+      if(key != input_name){
+        array[key] = value;
+      }
+    });
+  }else{
+    array = content;
+  }
+
+  return array;
+}

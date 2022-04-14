@@ -266,9 +266,17 @@ $cpc_menu_user = array(
                                                             <li><a class="dropdown-item <?php cpc_compare_string_and_print($cpc_menu_user['my-account'], home_url($wp->request) . '/', 'active'); ?>" href="<?php echo $cpc_menu_user['my-account']; ?>">Mi cuenta</a></li>
                                                             <li><a class="dropdown-item" href="<?php echo $cpc_menu_user['logout']; ?>">Cerrar Sesión</a></li>
                                                             <li><a class="dropdown-item" href="<?php echo $cpc_menu_user['orders']; ?>">Mis Cursos</a></li>
-                                                        <?php
+                                                            <?php
+                                                            if (current_user_can('administrator')) {
+                                                            ?>
+
+                                                                <hr>
+                                                                <li><a class="dropdown-item" href="<?php echo get_admin_url(); ?>">Admin panel</a></li>
+
+                                                            <?php
+                                                            }
                                                         } else {
-                                                        ?>
+                                                            ?>
                                                             <li><a class="dropdown-item" href="<?php echo $cpc_menu_user['login']; ?>" data-bs-toggle="modal" data-bs-target="#cpc_modal_login">Iniciar Sesión</a></li>
                                                             <li><a class="dropdown-item" href="<?php echo $cpc_menu_user['register']; ?>" data-bs-toggle="modal" data-bs-target="#cpc_modal_login" cpc-target="register">Regístrate</a></li>
                                                         <?php
@@ -285,44 +293,44 @@ $cpc_menu_user = array(
                                                     </button>
                                                     <ul id="cpc_menu_shop_content" class="dropdown-menu">
 
-                                                    <div id="cpc_menu_shop_content_items">
-                                                        <?php
+                                                        <div id="cpc_menu_shop_content_items">
+                                                            <?php
 
-                                                        $cart = WC()->cart;
-                                                        $cart_url = wc_get_cart_url();  // Set Cart URL
+                                                            $cart = WC()->cart;
+                                                            $cart_url = wc_get_cart_url();  // Set Cart URL
 
-                                                        $items = $cart->get_cart();
+                                                            $items = $cart->get_cart();
 
-                                                        if (count($items) == 0) {
-                                                            echo "<li class='cpc_menu_shop_empty text-center p-1 mb-5 mt-5'>No hay productos en el carrito</li>";
-                                                        }
+                                                            if (count($items) == 0) {
+                                                                echo "<li class='cpc_menu_shop_empty text-center p-1 mb-5 mt-5'>No hay productos en el carrito</li>";
+                                                            }
 
-                                                        foreach ($items as $item => $values) {
-                                                            $_product =  wc_get_product($values['data']->get_id());
-                                                            $price = get_post_meta($values['product_id'], '_price', true);
-                                                            $getProductDetail = wc_get_product($values['product_id']);
-                                                            $cart_delete_url = wc_get_cart_remove_url($values['data']->get_id());
+                                                            foreach ($items as $item => $values) {
+                                                                $_product =  wc_get_product($values['data']->get_id());
+                                                                $price = get_post_meta($values['product_id'], '_price', true);
+                                                                $getProductDetail = wc_get_product($values['product_id']);
+                                                                $cart_delete_url = wc_get_cart_remove_url($values['data']->get_id());
 
-                                                        ?>
+                                                            ?>
 
-                                                            <li id="cpc_capacitacion_cart_item_<?php echo $values['data']->get_id(); ?>" class="cpc_menu_shop_content_item">
-                                                                <div class="d-flex">
-                                                                    <div class="img">
-                                                                        <?php echo $getProductDetail->get_image('woocommerce_thumbnail', array('class' => 'img-fluid rounded-start', 'style' => "width: 100%;")); ?>
-                                                                        <button onclick="cpc_remove_capacitacion_to_cart($(this), '<?php echo $cart_delete_url; ?>');" class="btn btn-danger" cpc-data-cpt-id="<?php echo $values['data']->get_id(); ?>"><i class="fa fa-trash-o fa-lg"></i></button>
+                                                                <li id="cpc_capacitacion_cart_item_<?php echo $values['data']->get_id(); ?>" class="cpc_menu_shop_content_item">
+                                                                    <div class="d-flex">
+                                                                        <div class="img">
+                                                                            <?php echo $getProductDetail->get_image('woocommerce_thumbnail', array('class' => 'img-fluid rounded-start', 'style' => "width: 100%;")); ?>
+                                                                            <button onclick="cpc_remove_capacitacion_to_cart($(this), '<?php echo $cart_delete_url; ?>');" class="btn btn-danger" cpc-data-cpt-id="<?php echo $values['data']->get_id(); ?>"><i class="fa fa-trash-o fa-lg"></i></button>
+                                                                        </div>
+                                                                        <div class="body">
+                                                                            <h5 class="title"><?php echo $_product->get_title(); ?></h5>
+                                                                            <p class="quantity text-muted">Cantidad <?php echo $values['quantity']; ?></p>
+                                                                            <p class="price text-end"><?php echo $price; ?></p>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="body">
-                                                                        <h5 class="title"><?php echo $_product->get_title(); ?></h5>
-                                                                        <p class="quantity text-muted">Cantidad <?php echo $values['quantity']; ?></p>
-                                                                        <p class="price text-end"><?php echo $price; ?></p>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
+                                                                </li>
 
 
-                                                        <?php
-                                                        }
-                                                        ?>
+                                                            <?php
+                                                            }
+                                                            ?>
                                                         </div>
                                                         <li>
                                                             <hr class="dropdown-divider">
