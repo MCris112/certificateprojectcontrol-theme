@@ -231,26 +231,13 @@ $("form").on("submit", function (event) {
   selects = form.find("select");
   textareas = form.find("textarea");
 
-  data = {
-    action: "cpc_email_send",
-    content: {},
-  };
-
-  form_data = $(this).serializeArray();
-  
-  $.each(form_data, function (key, value) {
-    console.log("Key: " + key + " Value: " + value);
-    data["content"][value.name] = value.value;
-    console.log(data);
-  });
-
-  console.log(form_data);
+  data = cpc_form_get_values(form);
   console.log(data);
   console.log("before!-----------");
 
   $.each(inputs, function(key, input){
 
-    data['content'] = cpc_form_extra_info(input, data['content']);
+    data['content'] = cpc_form_extra_info(input, data['email']);
 
     if(input.value ===""){
       $(input).addClass("is-invalid");
@@ -261,7 +248,7 @@ $("form").on("submit", function (event) {
   });
 
   $.each(selects, function(key, select){
-    data['content'] = cpc_form_extra_info(select, data['content']);
+    data['content'] = cpc_form_extra_info(select, data['email']);
 
     if(select.value ===""){
       $(select).addClass("is-invalid");
@@ -272,7 +259,7 @@ $("form").on("submit", function (event) {
   });
 
   $.each(textareas, function(key, textarea){
-    data['content'] = cpc_form_extra_info(textarea, data['content']);
+    data['content'] = cpc_form_extra_info(textarea, data['email']);
 
     if(textarea.value ===""){
       $(textarea).addClass("is-invalid");
@@ -357,13 +344,21 @@ function cpc_form_extra_info(input, content){
   console.log(content);
 
   var array = new Array();
+  array['cpc_extra_info'] = content['cpc_extra_info'];
 
   if( $(input).hasClass("cpc_extra_info") ){
+    console.log("tiene class");
     input_name = $(input).attr("name");
+    console.log(input_name);
+    console.log("content");
+    console.log(content);
 
     $.each(content, function(key, value){
+      console.log("key: "+key+" value: "+value);
       if(key != input_name){
         array[key] = value;
+      }else{
+        array['cpc_extra_info'][key] = input.value;
       }
     });
   }else{
@@ -371,4 +366,20 @@ function cpc_form_extra_info(input, content){
   }
 
   return array;
+}
+
+function cpc_form_get_values(form){
+  var data = {
+    action: "cpc_email_send",
+    'email': {}
+  };
+
+  form_data = form.serializeArray();
+  
+  $.each(form_data, function (key, information) {
+    console.log(information);
+    data['email'][information.name] = information.value;
+  });
+
+  return data;
 }
