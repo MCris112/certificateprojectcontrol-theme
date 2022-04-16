@@ -68,7 +68,7 @@ function cpc_email_ajax_send()
 
     if(!isset($_POST['content']['cpc_type'])){
         $response['status'] = 'error';
-        $resonse['error'] = 'No se ha enviado el tipo de email';
+        $response['error'] = 'No se ha enviado el tipo de email';
         $response['code'] = 'no_type';
         $response['message'] = 'No se ha enviado el tipo de email';
         echo json_encode($response);

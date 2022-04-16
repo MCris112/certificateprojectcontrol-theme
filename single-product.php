@@ -227,7 +227,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                                 <hr>
                             </div>
                             <div class="cpc_body">
-                                <form id="cpc_email_form" cpc-data-form-type="email">
+                                <form id="cpc_email_form_single_cpt" cpc-data-form-type="email">
                                     <input type="hidden" name="cpc_type" value="capacitacion-single">
                                     <div class="mb-3">
                                         <label for="cpc_form_input_name" class="form-label">Nombres</label>
@@ -285,7 +285,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                                         </div>
                                     </div>
 
-                                    <button id="cpc_email_form_btn" type="submit" class="btn btn-primary d-block w-100 mb-3">Enviar mensaje</button>
+                                    <button id="cpc_email_form_btn" type="button" class="btn btn-primary d-block w-100 mb-3" onclick="cpc_email_btn_send('cpc_email_form_single_cpt', $(this));">Enviar mensaje</button>
                                     <a href="" class="btn btn-whatsapp d-block w-100" target="_blank">Enviar a whatsapp</a>
                                 </form>
                             </div>

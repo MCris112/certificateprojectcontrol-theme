@@ -22,12 +22,12 @@ get_template_part('template-parts/section', 'title', $args);
     <div class="row">
         <div class="col col-md-8 pe-md-5">
             <h2 class="cpc_title mb-5">¡Solicita tu cotización!</h2>
-            <form id="cpc_email_form" cpc-data-form-type="email" class="row gap-3">
+            <form id="cpc_email_form_inhouse" cpc-data-form-type="email" class="row gap-3" method="post">
                 <input type="hidden" name="cpc_type" value="inhouse">
                 <div class="row">
                     <div class="col">
                         <label for="cpc_form_input_company_name" class="form-label">Nombre de empresa</label>
-                        <input type="text" class="form-control cpc_extra_info" id="cpc_form_input_company_name" placeholder="Su nombre" name="cpc_company_name">
+                        <input type="text" class="form-control cpc_extra_info" id="cpc_form_input_company_name" placeholder="Su nombre" name="cpc_extra_info[cpc_company_name]">
                         <div class="invalid-feedback">
                             Por favor escriba su nombre.
                         </div>
@@ -60,7 +60,7 @@ get_template_part('template-parts/section', 'title', $args);
                 <div class="row">
                     <div class="col">
                         <label for="cpc_company_classmates" class="form-label">N° alumnos</label>
-                        <input type="number" class="form-control cpc_extra_info" id="cpc_company_classmates" placeholder="xxx xxx xxx" name="cpc_company_classmates">
+                        <input type="number" class="form-control cpc_extra_info" id="cpc_company_classmates" placeholder="xxx xxx xxx" name="cpc_extra_info[cpc_company_classmates]">
                         <div class="invalid-feedback">
                             Por favor escriba su número télefonico.
                         </div>
@@ -87,15 +87,27 @@ get_template_part('template-parts/section', 'title', $args);
                 </div>
 
                 <div class="col">
-                    <label for="cpc_form_select_country" class="form-label">Capacitaciones</label>
+                    <label for="cpc_form_select_capacitaciones" class="form-label">Capacitaciones</label>
 
                     <?php
+                    $args = array(
+                        'post_type'      => 'product'
+                    );
+                
+                    $loop = new WP_Query( $args );
+                    $capacitaiones_array = array();
+                
+                    while ( $loop->have_posts() ) : $loop->the_post();
+                        global $product;
+                        $capacitaiones_array[$product->get_id()] = $product->get_name();
+                    endwhile;
+                
 
                     cpc_cpt_html_select(array(
-                        'name' => 'cpc_country_2',
-                        'class' => 'form-select cpc_extra_info',
-                        'id' => 'cpc_form_select_country_2',
-                    ), cpc_var_get_latam_countries());
+                        'name' => 'cpc_extra_info[cpc_capacitaciones]',
+                        'class' => 'form-select',
+                        'id' => 'cpc_form_select_capacitaciones',    
+                    ), $capacitaiones_array);
 
 
                     ?>
@@ -113,7 +125,7 @@ get_template_part('template-parts/section', 'title', $args);
                     </div>
                 </div>
 
-                <button id="cpc_email_form_btn" type="submit" class="btn btn-primary d-block w-100">Solicitar proforma con precios corporativos</button>
+                <button id="cpc_email_form_btn" type="button" class="btn btn-primary d-block w-100" onclick="cpc_email_btn_send('cpc_email_form_inhouse', $(this));">Solicitar proforma con precios corporativos</button>
                 <a href="" class="btn btn-whatsapp d-block w-100" target="_blank">Enviar a whatsapp</a>
             </form>
         </div>

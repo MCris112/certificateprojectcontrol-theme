@@ -287,6 +287,16 @@ class CPC_EMAILS_LIST
         return $result;
     }
 
+    private function get_country($value){
+        $contries = cpc_var_get_latam_countries();
+
+        if(array_key_exists($value,$contries)){
+            return $contries[$value];
+        }
+
+        return "No espesificado";
+    }
+    
     public function show_list()
     {
         $headers = $this->get_headers();
@@ -312,7 +322,10 @@ class CPC_EMAILS_LIST
 
                     echo '<tr>';
                     foreach ($headers as $key => $val) {
-                        if (array_key_exists($key, $value)) {
+                        if($key == "cpc_country"){
+                            $country = $this->get_country($value[$key]);
+                            echo "<td>$country</td>";
+                        }else if (array_key_exists($key, $value)) {
                             echo '<td>' . $value[$key] . '</td>';
                         }else if($key == "actions"){
                             echo '<td>
@@ -333,6 +346,8 @@ class CPC_EMAILS_LIST
             <?php
         }
     }
+
+    
     function cpc_email_func_capacitacion_single()
     {
 

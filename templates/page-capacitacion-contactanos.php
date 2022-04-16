@@ -79,7 +79,8 @@ get_template_part('template-parts/section', 'title', $args);
         <div class="col">
             <h2 class="cpc_subtitle mb-5">REALIZA TU CONSULTA</h2>
 
-            <form id="cpc_email_form" cpc-data-form-type="email">
+            <form id="cpc_email_form_contactanos" cpc-data-form-type="email" method="post">
+                <input type="hidden" name="cpc_type" value="contactanos">
                 <div class="mb-3">
                     <label for="cpc_form_input_name" class="form-label">Nombres</label>
                     <input type="text" class="form-control" id="cpc_form_input_name" placeholder="Su nombre" name="cpc_name">
@@ -136,20 +137,22 @@ get_template_part('template-parts/section', 'title', $args);
                     </div>
                 </div>
 
-                <button id="cpc_email_form_btn" type="submit" class="btn btn-primary d-block w-100 mb-3">Enviar mensaje</button>
+                <button id="cpc_email_form_btn" type="submit" class="btn btn-primary d-block w-100 mb-3" onclick="cpc_email_btn_send('cpc_email_form_contactanos', $(this));">Enviar mensaje</button>
                 <a href="" class="btn btn-whatsapp d-block w-100" target="_blank">Enviar a whatsapp</a>
             </form>
         </div>
         <div class="col col-md-4">
-            <h2 class="cpc_subtitle mb-5">NUESTRO REPRESENTANTE</h2>
+            <!--    
+        <h2 class="cpc_subtitle mb-5">NUESTRO REPRESENTANTE</h2>
 
             <div class="card" style="width: 18rem;">
-                <img src="<?php echo get_template_directory_uri()."/assets/images/ponentes/jose-miguel-reyes.jpg"; ?>" class="card-img-top" alt="...">
+                <img src="<?php echo get_template_directory_uri() . "/assets/images/ponentes/jose-miguel-reyes.jpg"; ?>" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">José Miguel Reyes</h5>
                     <p class="card-text">Representante legal</p>
                 </div>
             </div>
+                -->
         </div>
     </div>
 </div>

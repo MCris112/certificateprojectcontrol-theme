@@ -189,34 +189,152 @@ function cpc_menu_shop_open() {
   }
 }
 
-function cpc_email_btn_send() {
-  form_data = $("#cpc_email_form").serialize();
-  console.log(form_data);
+function cpc_email_btn_send(from_id, btn) {
+  var form = $("#" + from_id);
+  if (!form.attr("cpc-data-form-type")) return;
 
-  /*******************************
-   $.ajax({
+  if (form.attr("cpc-data-form-type") != "email") return;
+
+  event.preventDefault();
+
+  data = cpc_form_get_values(form);
+
+  was_validated = cpc_email_validate_data(form);
+
+  if(was_validated){
+    form.addClass('was-validated');
+  }else{
+    return;
+  }
+
+  base_url = $("#cpc_url_site_url").val();
+  url_ajax = base_url + "/wp-admin/admin-ajax.php";
+
+  console.log(data);
+
+  $.ajax({
     url: url_ajax,
     type: "POST",
-    data: form_data,
+    data: data,
 
     beforeSend: function () {
-      btn.attr("disabled", true);
-      btn.html("<i class='fa fa-spinner fa-pulse fa-fw pe-2'></i> Añadiedo...");
+      cpc_form_btn_state(btn, "loading", "Enviando...");
     },
     success: function (data) {
-      menu = $(data).find("#cpc_menu_shop_content_items");
-      console.log(menu);
+      data = jQuery.parseJSON(data);
+      console.log(data);
 
-      $("#cpc_menu_shop_content_items").html(menu);
+      if(data.error) {
+        if(data.error.field) {
+          //if its not null);
+          if(data.error.field.length > 0) {
+            form.removeClass('was-validated')
 
-      btn.html("<i class='fa fa-check pe-2'></i> Añadido");
+            $.each(data.error.field, function (key, value) {
+              $('[name="'+value+'"]').addClass("is-invalid");
+            });
+          }
+
+          cpc_form_btn_state(btn, "error", "Por favor inserte todos los datos requeridos");
+          return;
+        }
+
+        cpc_form_btn_state(btn, "error", "Hubo un error");
+      }else{
+        cpc_form_btn_state(btn, "success", "Se ha enviado correctamente");
+      }
     },
     fail: function (xhr, textStatus, errorThrown) {
       btn.html("<i class='fa fa-exclamation-triangle pe-2'></i> Falló");
     },
   });
-   */
+
 }
+
+function cpc_email_validate_data(form, data) {
+  inputs = form.find("input");
+  selects = form.find("select");
+  textareas = form.find("textarea");
+  was_validated = true;
+
+  $.each(inputs, function (key, input) {
+    if (input.value === "") {
+      $(input).addClass("is-invalid");
+      was_validated = false;
+    } else {
+      $(input).removeClass("is-invalid");
+    }
+  });
+
+  $.each(selects, function (key, select) {
+    if (select.value === "") {
+      $(select).addClass("is-invalid");
+      was_validated = false;
+    } else {
+      $(select).removeClass("is-invalid");
+    }
+  });
+
+  $.each(textareas, function (key, textarea) {
+    if (textarea.value === "") {
+      $(textarea).addClass("is-invalid");
+      was_validated = false;
+    } else {
+      $(textarea).removeClass("is-invalid");
+    }
+  });
+
+  return was_validated;
+}
+
+function cpc_form_get_values(form) {
+  content = {};
+
+  form_data = form.serializeArray();
+
+  $.each(form_data, function (key, information) {
+    var key_sub_string = information.name.substring(
+      information.name.indexOf("[") + 1,
+      information.name.lastIndexOf("]")
+    );
+
+    if (key_sub_string == "") {
+      content[information.name] = information.value;
+    } else {
+      key_name = information.name.split("[")[0];
+
+      if(content[key_name]){
+        content[key_name][key_sub_string] = information.value;
+      }else{
+        content[key_name] = {};
+        content[key_name][key_sub_string] = information.value;
+      }
+    }
+  });
+
+  return {
+    action: "cpc_email_send",
+    content: content,
+  };
+}
+
+function cpc_form_btn_state(btn, status, text = null){
+
+  switch(status) {
+    case "loading":
+      btn.attr("disabled", true);
+      btn.html("<i class='fa fa-spinner fa-pulse fa-fw pe-2'></i> "+ text);
+      break;
+    case "success":
+      btn.html("<i class='fa fa-check pe-2'></i> "+ text);
+      break;
+    case "error":
+      btn.attr("disabled", true);
+      btn.html("<i class='fa fa-exclamation-triangle pe-2'></i> " + text);
+      break;
+  }
+}
+/*
 
 $("form").on("submit", function (event) {
   if (!$(this).attr("cpc-data-form-type")) return;
@@ -383,3 +501,5 @@ function cpc_form_get_values(form){
 
   return data;
 }
+
+*/
