@@ -159,8 +159,16 @@ function cpc_menu_get_social_links($classes = array(), $args = array('order' => 
 		<ul <?php echo array_key_exists('ul', $classes) ? 'class="'.$classes['ul'].'"' : ''; ?>>
 			<?php foreach ($menuitems as $item) : ?>
 				<li <?php echo array_key_exists('li', $classes) ? 'class="'.$classes['li'].'"' : ''; ?>>
-					<a href="<?php echo $item->url; ?>" target="_blank">
+					<a <?php echo array_key_exists('a', $classes) ? 'class="'.$classes['a'].'"' : ''; ?> href="<?php echo $item->url; ?>" target="_blank">
 						<i class="<?php echo implode(' ', $item->classes); ?>"></i>
+
+						<?php
+						
+						if(array_key_exists('label', $args) && $args['label'])
+						{
+							echo $item->title;
+						}
+						?>
 					</a>
 				</li>
 			<?php endforeach; ?>

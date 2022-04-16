@@ -7,7 +7,7 @@
 
             foreach ($categories as $category){
                 ?>
-                <a href="<?php echo get_category_link($category->term_id)?>"><strong class="d-inline-block mb-2 text-primary"><?php echo $category->name; ?></strong></a>
+                <a href="<?php echo get_category_link($category->term_id)?>"><strong class="d-inline-block mb-2 text-primary me-2"><?php echo $category->name; ?></strong></a>
                 <?php
             }
             
