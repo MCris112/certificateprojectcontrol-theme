@@ -29,8 +29,11 @@ function pcertificate_register_styles()
 
 	if ( is_product() ) {
 		wp_enqueue_style('pcertificate-product-css', get_template_directory_uri() . '/assets/css/product.css', array('pcertificate-style'), '1.0.0', 'all');
-		wp_enqueue_script('pcertificate-product-js', get_template_directory_uri() . '/assets/js/product.js', array(), '1.0.0', true);
 	}
+
+	//function to cart need to be initialized
+	wp_enqueue_script('pcertificate-product-js', get_template_directory_uri() . '/assets/js/product.js', array(), '1.0.0', true);
+
 
 	if ( is_page_template( 'templates/page-about-us.php' ) ) {
 		wp_enqueue_style('pcertificate-about-css', get_template_directory_uri() . '/assets/css/about-us.css', array(), '1.0.0', 'all');
@@ -242,20 +245,6 @@ function cpc_cpt_html_select($data, $args){
 			echo '<option value="'.$key.'" '.$selected.'>'.$value.'</option>';
 		}
 	echo '</select>';
-}
-
-function cpc_print_if_isset($var, $txt = null) {
-    if (isset($var)) {
-        if($txt == null) {
-			echo $var;
-		} else {
-			echo $txt;
-		}
-
-		return;
-    }
-
-	echo $txt;
 }
 
 require __DIR__ . '/functions/register.func.php';

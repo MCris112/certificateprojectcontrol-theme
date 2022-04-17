@@ -1,14 +1,19 @@
 <?php
 global $product;
 
+$is_near = array_key_exists('near', $args) ? $args['near'] : false;
+
+$fechas = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_modalidad_fechas', true);
+$fechas_conditional = !empty($fechas);
+
 $duracion = get_post_meta(get_the_ID(), '_cpc_product_duration', true);
 
 $duracion_txt = empty($duracion) ? '' : $duracion . ' horas';
 
-$fechas = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_modalidad_fechas', true);
 $subtitle = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_sub_title', true);
 $sessiones = 'Sin definir';
 $sessiones_txt = get_post_meta(get_the_ID(), '_cpc_product_sessions', true);
+
 
 if (!isset($args['count'])) $args['count'] = 2;
 
@@ -16,14 +21,14 @@ if (!empty($sessiones_txt)) {
     $sessiones = $sessiones_txt . ' sesiones';
 }
 
-if (!empty($fechas)) $fechas = json_decode($fechas, true);
+$class_content = array_key_exists('content', $args) ? $args['content'] : array();
+$card_class = array_key_exists('class', $class_content) ? $class_content['cpc_card'] : array();
 
-$fechas_conditional = !empty($fechas);
 
 if ($args['count'] == 1) {
 ?>
 
-    <div class="cpc_card cpc_card_one <?php cpc_print_if_isset($args['content']['cpc_card']['class']);?>">
+    <div class="cpc_card cpc_card_one <?php echo array_key_exists('class', $card_class) ?>">
         <a href="<?php echo get_permalink(); ?>" class="head">
             <div class="img">
                 <?php echo woocommerce_get_product_thumbnail(); ?>
@@ -51,7 +56,7 @@ if ($args['count'] == 1) {
                 <span class="info_pill">
                     Inicio de clases:
                     <?php
-                    if ($fechas_conditional) {
+                    if (!$fechas_conditional) {
                         echo ' Sin definir';
                     } else {
                         global $locale;
@@ -84,10 +89,10 @@ if ($args['count'] == 1) {
 <?php
 } else {
 ?>
-    <div class="cpc_card <?php if(isset($args['content']['cpc_card']['class'])) echo $args['content']['cpc_card']['class'];?>">
+    <div class="cpc_card <?php echo array_key_exists('class', $card_class) ?>">
         <?php
 
-        if ($fechas_conditional) {
+        if ($fechas_conditional && $args['modalidad'] == 'sincronico') {
         ?>
 
             <span class="info_pill">

@@ -187,7 +187,7 @@ function cpc_activate_modalidad_days(){
             // Enable date so it can be deselected. Set style to be highlighted
             return [true, "ui-state-highlight"];
         }
-        // Dates not in the array are left enabled, but with no extra style¿
+        // Dates not in the array are left enabled, but with no extra style
         return [true, ""];
     }
 });

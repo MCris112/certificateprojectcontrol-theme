@@ -67,12 +67,12 @@ get_header();
             <div class="cpc_text col">
                 <span class="cpc_subtitle">Bienvenido a</span>
                 <h1 class="cpc_title">Certificate Project Control</h1>
-                <hr>
+                <hr class="cpc_hr">
                 <p class="desc">
                     Estamos firmemente convencidos que las buenas prácticas corporativas deben regular toda actividad en los negocios, y que actuar en todo momento y situación con integridad, transparencia y una cultura ética, representan el impulso necesario para generar confianza y vínculos laborales estratégicos con nuestros clientes, colaboradores, y entornoen general donde realizamos nuestras operaciones.
                 </p>
 
-                <a href="" class="btn btn-primary btn-lg">Saber Más</a>
+                <a href="<?php echo get_permalink( get_theme_mod('cpc_front_page_link_about_us') ); ?>" class="btn btn-primary btn-lg">Saber Más</a>
             </div>
             <div class="col-5 d-flex align-middle">
                 <div class="cpc_presentation">
@@ -89,6 +89,7 @@ get_header();
 $terms = get_terms( 'modalidad' );
 
 foreach ($terms as $term){
+
     $args = array(
         'modalidad' => $term->slug,
     );
@@ -102,5 +103,8 @@ foreach ($terms as $term){
 <?php get_template_part('template-parts/section', 'blog'); ?>
 
 <?php
+
+get_template_part('template-parts/section', 'ponentes');
+
 get_footer();
 ?>

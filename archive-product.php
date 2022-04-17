@@ -11,5 +11,8 @@ if(is_tax()){
 
 
 <?php
+
+get_template_part('template-parts/section', 'ponentes');
+
 get_footer();
 ?>

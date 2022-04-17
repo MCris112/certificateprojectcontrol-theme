@@ -1,8 +1,6 @@
 @use 'vars' as *;
 
 .cpc_features{
-    margin: 3.6rem;
-
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-auto-rows: 1fr;
@@ -25,15 +23,23 @@
 
         .text{
             color: $primary;
+            font-size: $txt-small;
 
             .title{
                 font-weight: bold;
-                font-size: 30px;
+                font-size: $txt-small;
             }
 
             .sub{
-                font-size: 20px;
+                font-size: $txt-small;;
             }
         }
+    }
+}
+
+.cpc_text_mv{
+    .cpc_subtitle{
+        color: $secondary;
+        font-weight: 700;
     }
 }
