@@ -1,0 +1,28 @@
+<div id="cpc_shop_card_item_0" class="cpc_cpt_shop_card_item">
+						<div class="img"><img src="<?php echo get_template_directory_uri() . "/assets/images/product/cart-img-item.jpg" ?>" alt=""></div>
+						<div class="text">
+							<h3 class="title">Power bi for Project Control</h3>
+							<p class="sub">Inicio de clases 18 de abril</p>
+							<div class="controls">
+								<div class="quantity">
+									<div class="quantity_control input-group">
+										<button onclick="cpc_shop_controls_quantity(0, false);" type="button" class="btn border border-3"><i class="fa fa-minus"></i></button>
+										<input id="cpc_shop_card_item_0_quantity" type="number" class="form-control border border-0 text-center" value="1">
+										<button onclick="cpc_shop_controls_quantity(0, true);" type="button" class="btn border border-3"><i class="fa fa-plus"></i></button>
+									</div>
+								</div>
+
+								<div class="price">
+									<span class="price_unit" id="cpc_shop_card_item_0_price_currency">s/.</span>
+									<span class="price_unit" id="cpc_shop_card_item_0_price_unit">245.78</span>
+									<p id="cpc_shop_card_item_0_price_totals" class="price_total">$245.78</p>
+								</div>
+
+								<div class="remove">
+									<button type="button" class="btn" aria-label="Remove this item" onclick="cpc_shop_controls_remove(0);">
+										<i class="fa fa-close"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>

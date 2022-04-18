@@ -164,5 +164,30 @@ function cpc_email_ajax_send()
     wp_die();
 }
 
+
 add_action('wp_ajax_cpc_email_send', 'cpc_email_ajax_send');
 add_action('wp_ajax_nopriv_cpc_email_send', 'cpc_email_ajax_send');
+
+
+function cpc_shop_ajax_set_new_quantity(){
+    $response = array();
+
+    if(!isset($_POST['product_id'])){
+        $response['status'] = 'error';
+        $response['error'] = 'No se ha enviado la id del producto';
+        $response['code'] = 'no_product_id';
+        echo json_encode($response);
+        wp_die();
+    }
+
+    if(!isset($_POST['new_quantity'])){
+        $response['status'] = 'error';
+        $response['error'] = 'No se ha enviado la nueva cantidad';
+        $response['code'] = 'no_new_quantity';
+        echo json_encode($response);
+        wp_die();
+    }
+}
+
+add_action('wp_ajax_cpc_shop_set_new_quantity', 'cpc_shop_ajax_set_new_quantity');
+add_action('wp_ajax_nopriv_cpc_shop_set_new_quantity', 'cpc_shop_ajax_set_new_quantity');
