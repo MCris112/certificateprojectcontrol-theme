@@ -1,0 +1,34 @@
+.cpc_billing_summary{
+    .header{
+        margin-bottom: 1rem;
+    }
+
+    .body{
+        .info{
+            padding: .6rem;
+            &.total{
+                border-top: 1px solid $accent;
+                margin-top: 1rem;
+
+                .desc, .price{
+                    font-size: $txt-h3;
+                    opacity: 1;
+                }
+
+                .price{
+                    font-weight: bold;
+                }
+            }
+            .desc{
+                font-size: $txt-small;
+                opacity: .8;
+            }
+            .price{
+                display:flex;
+                justify-content: flex-end;
+
+                font-size: $txt-body;
+            }
+        }
+    }
+}

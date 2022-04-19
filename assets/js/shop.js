@@ -21,6 +21,7 @@ function cpc_shop_controls_quantity(product_id, do_add) {
 
   cpc_shop_controls_set_value(product_id);
   cpc_shop_controls_update_cart_btn_tate(true);
+  
 }
 
 function cpc_shop_controls_remove(product_id, is_confirmed = false) {
@@ -90,9 +91,12 @@ function cpc_shop_controls_update_cart_btn_tate(is_active) {
   } else {
     btn.attr("disabled", "disabled");
   }
+
+  return btn;
 }
 
 cpc_shop_controls_update_cart_btn_tate(false);
+
 
 products_ids = $("#cpc_shop_controls_all_products");
 
@@ -107,6 +111,9 @@ $.each(cpc_products, function (index, product) {
 });
 
 function cpc_shop_ajax_update_cart() {
+  btn = cpc_shop_controls_update_cart_btn_tate(false);
+  cpc_form_btn_state(btn, 'loading', "Actualizando carrito");
+
   url = $("#cpc_url_site_url").val();
   console.log(url);
 
@@ -125,5 +132,57 @@ function cpc_shop_ajax_update_cart() {
   });
 
   console.log(data);
+  console.log(ajax_url);
+
+  
+  $.ajax({
+    url: ajax_url,
+    type: "POST",
+    data: data,
+
+    success: function (data) {
+      
+      try{
+        data = JSON.parse(data);
+
+        if(!data['error']){
+          cpc_form_btn_state(btn, 'success', "Se ha actualizado el carrito");
+        }else{
+          cpc_form_btn_state(btn, 'error', "Ha ocurrido un error");
+        }
+
+      }catch(e){
+        cpc_form_btn_state(btn, 'error', "Hubo un error con el carrito");
+      }
+      cpc_shop_update_cart_totals();
+    },
+    error: function (response) {
+      console.log(response);
+      cpc_form_btn_state(btn, 'error', "Hubo un error con el carrito");
+    }
+  });
 }
 
+
+function cpc_shop_update_cart_totals(){
+  
+  product_price_currency = "";
+
+  total_price = 0;
+
+  $.each(cpc_products, function (index, product) {
+    product_price_currency = $("#cpc_shop_card_item_" + product + "_price_currency").text();
+
+    input_quantity = $("#cpc_shop_card_item_" + product + "_quantity");
+    product_price_unit = $("#cpc_shop_card_item_" + product + "_price_unit");
+    price_unit = parseFloat(product_price_unit.text());
+    price_quantity = parseFloat(input_quantity.val());
+
+    total_price += (price_quantity * price_unit);
+  });
+
+  base_html = '<span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">'+product_price_currency+'</span>'+total_price+'</bdi></span>';
+  $(".cpc_totals_set").each(function() {
+    $(this).html(base_html);
+  })
+}

@@ -45,3 +45,4 @@ require __DIR__ . '/config.func.php';
 require __DIR__ . '/capacitacion/cpt.func.php';
 
 require __DIR__ . '/emails/email.func.php';
+require __DIR__ . '/shop.func.php';

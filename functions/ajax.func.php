@@ -66,7 +66,7 @@ function cpc_email_ajax_send()
     $response['status'] = 'success';
     $response['message'] = 'Email enviado correctamente';
 
-    if(!isset($_POST['content']['cpc_type'])){
+    if (!isset($_POST['content']['cpc_type'])) {
         $response['status'] = 'error';
         $response['error'] = 'No se ha enviado el tipo de email';
         $response['code'] = 'no_type';
@@ -75,7 +75,7 @@ function cpc_email_ajax_send()
         wp_die();
     }
 
-    if(!isset($_POST['content']['cpc_message'])){
+    if (!isset($_POST['content']['cpc_message'])) {
         $response['status'] = 'error';
         $response['error'] = 'No se ha enviado el mensaje';
         $response['code'] = 'no_message';
@@ -88,25 +88,25 @@ function cpc_email_ajax_send()
 
     $subject = "Nuevo email";
 
-    switch ($_POST['type']){
+    switch ($_POST['type']) {
         case 'capacitacion-single':
             $subject = "Nueva capacitación";
-        break;
+            break;
     }
 
     $content = $_POST['content'];
 
     $message = "mensaje:";
 
-    foreach( $content as $key => $value ){
+    foreach ($content as $key => $value) {
         $message .= $key . ": " . $value . "\n";
     }
 
     $extra_info = $content['extra_info'];
 
-    if( empty($extra_info) || !isset($extra_info) ) $extra_info = array();
+    if (empty($extra_info) || !isset($extra_info)) $extra_info = array();
 
-    if( is_array($extra_info) ) $extra_info = json_encode($extra_info);
+    if (is_array($extra_info)) $extra_info = json_encode($extra_info);
 
     $table_data = array(
         'cpc_email_subject' => $subject,
@@ -117,7 +117,7 @@ function cpc_email_ajax_send()
     );
 
     foreach ($content as $key => $val) {
-        if(empty($val)) {
+        if (empty($val)) {
             $response['error']['field'][] = $key;
             echo json_encode($response);
             wp_die();
@@ -143,7 +143,7 @@ function cpc_email_ajax_send()
 
         $to = get_option('cpc_settings_email_to');
 
-        if(!empty($to)){
+        if (!empty($to)) {
             $headers = array('Content-Type: text/html; charset=UTF-8');
             $result = wp_mail($to, $subject, $message, $headers);
 
@@ -152,7 +152,6 @@ function cpc_email_ajax_send()
                 $response['message'] = 'Error al enviar el email';
             }
         }
-        
     } else {
         $response['wp']['status'] = 'error';
         $response['wp']['message'] = 'Error al salvar el email';
@@ -169,10 +168,11 @@ add_action('wp_ajax_cpc_email_send', 'cpc_email_ajax_send');
 add_action('wp_ajax_nopriv_cpc_email_send', 'cpc_email_ajax_send');
 
 
-function cpc_shop_ajax_set_new_quantity(){
+function cpc_shop_ajax_set_new_quantity()
+{
     $response = array();
 
-    if(!isset($_POST['product_id'])){
+    if (!isset($_POST['products'])) {
         $response['status'] = 'error';
         $response['error'] = 'No se ha enviado la id del producto';
         $response['code'] = 'no_product_id';
@@ -180,13 +180,54 @@ function cpc_shop_ajax_set_new_quantity(){
         wp_die();
     }
 
-    if(!isset($_POST['new_quantity'])){
-        $response['status'] = 'error';
-        $response['error'] = 'No se ha enviado la nueva cantidad';
-        $response['code'] = 'no_new_quantity';
-        echo json_encode($response);
-        wp_die();
+    $products = $_POST['products'];
+    if (!is_array($products)) {
+        $products = json_decode($_POST['products']);
     }
+
+    $response["cart"] = array();
+
+    $cart = WC()->cart;
+
+    foreach ($products as $product => $content) {
+
+        if (!array_key_exists('id', $content)) {
+            $response['status'] = 'error';
+            $response['error'] = 'No se ha enviado la id del producto';
+            $response['code'] = 'no_product_id';
+            echo json_encode($response);
+            wp_die();
+        }
+
+        if (!array_key_exists('quantity', $content)) {
+            $response['status'] = 'error';
+            $response['error'] = 'No se ha enviado la cantidad del producto';
+            $response['code'] = 'no_product_quantity';
+            echo json_encode($response);
+            wp_die();
+        }
+
+        foreach ($cart->get_cart() as $cart_item_key => $cart_item) {
+            $product_id = $cart_item['data']->get_id();
+            $response["cart"]["data"][] = $cart_item;
+            // Check for specific product IDs and change quantity
+            if ($product_id == $content['id'] && $cart_item['quantity'] != $content['quantity']) {
+                $cart->remove_cart_item($cart_item_key); // Change quantity
+                $cart->add_to_cart($content['id'], $content['quantity']);
+                $response["cart"][][$product_id] = $content['quantity'];
+            }
+        }
+    }
+
+    WC()->cart->set_session();
+    $response['code'] = "good";
+    echo json_encode($response);
+    wp_die();
+
+
+
+    echo json_encode($response);
+    wp_die();
 }
 
 add_action('wp_ajax_cpc_shop_set_new_quantity', 'cpc_shop_ajax_set_new_quantity');
