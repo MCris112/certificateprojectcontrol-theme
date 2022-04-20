@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Thankyou page
  *
@@ -15,73 +16,159 @@
  * @version 3.7.0
  */
 
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 ?>
 
-<div class="woocommerce-order">
+<div class="container mt-5 mb-5">
 
 	<?php
-	if ( $order ) :
+	if ($order) :
 
-		do_action( 'woocommerce_before_thankyou', $order->get_id() );
-		?>
+		do_action('woocommerce_before_thankyou', $order->get_id());
+	?>
 
-		<?php if ( $order->has_status( 'failed' ) ) : ?>
+		<?php if ($order->has_status('failed')) : ?>
 
-			<p class="woocommerce-notice woocommerce-notice--error woocommerce-thankyou-order-failed"><?php esc_html_e( 'Unfortunately your order cannot be processed as the originating bank/merchant has declined your transaction. Please attempt your purchase again.', 'woocommerce' ); ?></p>
-
-			<p class="woocommerce-notice woocommerce-notice--error woocommerce-thankyou-order-failed-actions">
-				<a href="<?php echo esc_url( $order->get_checkout_payment_url() ); ?>" class="button pay"><?php esc_html_e( 'Pay', 'woocommerce' ); ?></a>
-				<?php if ( is_user_logged_in() ) : ?>
-					<a href="<?php echo esc_url( wc_get_page_permalink( 'myaccount' ) ); ?>" class="button pay"><?php esc_html_e( 'My account', 'woocommerce' ); ?></a>
-				<?php endif; ?>
-			</p>
+			<div class="alert alert-danger" role="alert">
+				Su pedido tiene problemas en ser procesado, por favor verifique que haya colocado correcto los datos en el checkout o bien puede comunicarse con nostoros al <a href="https://wa.me/51922936632" class="alert-link">+51 922 936 632</a>
+			</div>
 
 		<?php else : ?>
 
-			<p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', esc_html__( 'Thank you. Your order has been received.', 'woocommerce' ), $order ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+			<div class="alert alert-primary" role="alert">
+				Su pedido ha sido procesado correctamente, nos estaremos comunicando con usted.
+			</div>
 
-			<ul class="woocommerce-order-overview woocommerce-thankyou-order-details order_details">
-
-				<li class="woocommerce-order-overview__order order">
-					<?php esc_html_e( 'Order number:', 'woocommerce' ); ?>
-					<strong><?php echo $order->get_order_number(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
-				</li>
-
-				<li class="woocommerce-order-overview__date date">
-					<?php esc_html_e( 'Date:', 'woocommerce' ); ?>
-					<strong><?php echo wc_format_datetime( $order->get_date_created() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
-				</li>
-
-				<?php if ( is_user_logged_in() && $order->get_user_id() === get_current_user_id() && $order->get_billing_email() ) : ?>
-					<li class="woocommerce-order-overview__email email">
-						<?php esc_html_e( 'Email:', 'woocommerce' ); ?>
-						<strong><?php echo $order->get_billing_email(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
-					</li>
-				<?php endif; ?>
-
-				<li class="woocommerce-order-overview__total total">
-					<?php esc_html_e( 'Total:', 'woocommerce' ); ?>
-					<strong><?php echo $order->get_formatted_order_total(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
-				</li>
-
-				<?php if ( $order->get_payment_method_title() ) : ?>
-					<li class="woocommerce-order-overview__payment-method method">
-						<?php esc_html_e( 'Payment method:', 'woocommerce' ); ?>
-						<strong><?php echo wp_kses_post( $order->get_payment_method_title() ); ?></strong>
-					</li>
-				<?php endif; ?>
-
-			</ul>
 
 		<?php endif; ?>
 
-		<?php do_action( 'woocommerce_thankyou_' . $order->get_payment_method(), $order->get_id() ); ?>
-		<?php do_action( 'woocommerce_thankyou', $order->get_id() ); ?>
+		<div class="row">
 
+			<div class="col col-md-6 pe-md-5">
+				<div class="cpc_billing_summary">
+					<div class="header">
+						<h2 class="cpc_subtitle">Detalles de la facturación</h2>
+						<hr class="cpc_hr">
+					</div>
+
+					<div class="body">
+						<div class="info row">
+							<div class="col desc">Nombre:</div>
+							<div class="col price"><?php echo $order->get_billing_first_name(); ?></div>
+						</div>
+
+						<div class="info row">
+							<div class="col desc">Apellido:</div>
+							<div class="col price"><?php echo $order->get_billing_last_name(); ?></div>
+						</div>
+
+						<?php
+
+						if (!empty($order->get_billing_company())) {
+						?>
+							<div class="info row">
+								<div class="col desc">Empresa:</div>
+								<div class="col price"><?php echo $order->get_billing_company(); ?></div>
+							</div>
+
+						<?php
+						}
+						?>
+
+
+
+						<div class="info row">
+							<div class="col desc">Dirrección:</div>
+							<div class="col price"><?php echo $order->get_billing_address_1(); ?></div>
+						</div>
+
+						<div class="info row">
+							<div class="col desc">País:</div>
+							<div class="col price"><?php echo $order->get_billing_country(); ?></div>
+						</div>
+
+						<div class="info row">
+							<div class="col desc">Localidad / Ciudad :</div>
+							<div class="col price"><?php echo $order->get_billing_city(); ?></div>
+						</div>
+
+						<div class="info row">
+							<div class="col desc">Región / Provincia:</div>
+							<div class="col price"><?php echo $order->get_billing_state(); ?></div>
+						</div>
+
+						<div class="info row">
+							<div class="col desc">Email:</div>
+							<div class="col price"><?php echo $order->get_billing_email(); ?></div>
+						</div>
+
+						<div class="info row">
+							<div class="col desc">Télefono:</div>
+							<div class="col price"><?php echo $order->get_billing_phone(); ?></div>
+						</div>
+
+						<hr>
+						<div class="info row">
+							<div class="col desc">Método de pago:</div>
+							<div class="col price"><?php echo $order->get_payment_method_title(); ?></div>
+						</div>
+
+						<div class="info row">
+							<div class="col desc">Número de pedido:</div>
+							<div class="col price"><?php echo $order->get_id(); ?></div>
+						</div>
+
+						<div class="info row">
+							<div class="col desc">Fecha:</div>
+							<div class="col price"><?php echo $order->get_date_paid()->date('d/m/Y'); ?></div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col col-md-6">
+				<div class="cpc_billing_summary">
+					<div class="header">
+						<h2 class="cpc_subtitle">Detalles del pedido</h2>
+						<hr class="cpc_hr">
+					</div>
+
+					<div class="body">
+						<div class="info row">
+							<div class="col desc"></div>
+							<div class="col price"></div>
+						</div>
+
+
+
+						<?php
+
+						$args = array(
+							'is_order' => true,
+							'order' => $order
+						);
+
+						get_template_part('template-parts/cart/content', 'orders', $args); ?>
+
+						<div class="info row">
+							<div class="col desc">Subtotal:</div>
+							<div class="col price"><?php echo get_woocommerce_currency_symbol() . $order->get_subtotal(); ?></div>
+						</div>
+						<div class="info total row">
+							<div class="col desc">Total</div>
+							<div class="col price"><?php echo get_woocommerce_currency_symbol() . $order->get_total(); ?></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
 	<?php else : ?>
 
-		<p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', esc_html__( 'Thank you. Your order has been received.', 'woocommerce' ), null ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+		<p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received"><?php echo apply_filters('woocommerce_thankyou_order_received_text', esc_html__('Thank you. Your order has been received.', 'woocommerce'), null); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+																										?></p>
 
 	<?php endif; ?>
 

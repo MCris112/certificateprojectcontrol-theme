@@ -44,7 +44,7 @@ $args['count'] = $count;
 
 ?>
 
-<section class="cpc_cursos_list">
+<section class="cpc_cursos_list <?php if(isset($args['class']['section'])) echo $args['class']['section']; ?>">
     <div class="container">
         <?php
 

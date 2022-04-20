@@ -27,6 +27,53 @@ function cpc_register_panel($wp_customize){
             )
         )
     );
+
+    $wp_customize->add_section('cpc_section_shop', array(
+        'title' => 'Tienda',
+        'description' => 'Configuración de la tienda',
+        'panel' => 'cpc_panel',
+        'priority' => 1,
+    ));
+
+    $wp_customize->add_section('cpc_section_shop_cuenta', array(
+        'title' => 'Cuenta',
+        'description' => 'Configuración para las cuentas',
+        'panel' => 'cpc_panel',
+        'section' => 'cpc_section_shop',
+        'priority' => 1,
+    ));
+
+    $wp_customize->add_setting('cpc_section_shop_cuenta_link_login');
+
+    $wp_customize->add_control(
+        new WP_Customize_Control(
+            $wp_customize,
+            'cpc_section_shop_cuenta_link_login_control',
+            array(
+                'label' => 'Login Page Link',
+                'section' => 'cpc_section_shop_cuenta',
+                'settings' => 'cpc_section_shop_cuenta_link_login',
+                'type' => 'dropdown-pages',
+            )
+        )
+    );
+
+
+    $wp_customize->add_setting('cpc_section_shop_cuenta_link_register');
+
+    $wp_customize->add_control(
+        new WP_Customize_Control(
+            $wp_customize,
+            'cpc_section_shop_cuenta_link_register_control',
+            array(
+                'label' => 'Register Page Link',
+                'section' => 'cpc_section_shop_cuenta',
+                'settings' => 'cpc_section_shop_cuenta_link_register',
+                'type' => 'dropdown-pages',
+            )
+        )
+    );
+
 }
 
 add_action('customize_register', 'cpc_register_panel');
