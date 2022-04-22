@@ -1364,3 +1364,22 @@ iframe {
 .cpc_teachers_balls {
   margin-bottom: 2rem;
 }
+
+.cpc_ponente_ball {
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+}
+.cpc_ponente_ball .img, .cpc_ponente_ball img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.cpc_ponente_ball .img {
+  border-radius: 50%;
+  border: 3px solid var(--secondary);
+  overflow: hidden;
+}

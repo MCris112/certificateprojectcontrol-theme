@@ -31,6 +31,10 @@ function pcertificate_register_styles()
 		wp_enqueue_style('pcertificate-product-css', get_template_directory_uri() . '/assets/css/product.css', array('pcertificate-style'), '1.0.0', 'all');
 	}
 
+	if( 'ponentes' == get_post_type() ){
+		wp_enqueue_style('pcertificate-ponentes-css', get_template_directory_uri() . '/assets/css/ponentes.css', array(), '1.0.0', 'all');
+	}
+
 	if( is_checkout() || is_cart() || is_account_page()) {
 		wp_enqueue_style('pcertificate-checkout-css', get_template_directory_uri() . '/assets/css/shop.css', array('pcertificate-style'), '1.0.0', 'all');
 		wp_enqueue_script('pcertificate-shop-js', get_template_directory_uri() . '/assets/js/shop.js', array(), '1.0.0', true);
