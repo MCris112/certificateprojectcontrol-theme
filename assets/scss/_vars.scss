@@ -74,5 +74,6 @@ $txt-font-title: var(--text-font-title);
 @media only screen and (max-width: 500px) {
     :root{
         --text-mega-title: 2rem;
+        --text-title: 50px;
     }
 }

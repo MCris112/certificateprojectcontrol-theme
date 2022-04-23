@@ -1,0 +1,18 @@
+@media (max-width: 992px) {
+    .cpc_welcome{
+        text-align: center;
+
+        .cpc_hr, .desc{
+            margin-right: auto;
+            margin-left: auto;
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .cpc_welcome{
+        .cpc_title{
+            
+        }
+    }
+}

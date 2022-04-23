@@ -311,6 +311,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                 <?php
 
                 $ponentes = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_ponentes', true);
+                echo $ponentes;
 
                 if (!empty($ponentes)) {
 

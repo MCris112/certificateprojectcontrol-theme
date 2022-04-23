@@ -34,6 +34,9 @@ Text Domain: certificateprojectcontroltheme
   width: 100%;
 }
 
+.cpc_hide_last_item{
+    display: none !important;
+}
 
 .cpc_btn{
     margin: auto;
@@ -475,7 +478,7 @@ Text Domain: certificateprojectcontroltheme
 
         text-align: center;
 
-        font-size: 20px;
+        font-size: $txt-small;
         margin-bottom: 1rem;
 
         span{
@@ -490,8 +493,6 @@ Text Domain: certificateprojectcontroltheme
 }
 
 .cpc_blog{
-    margin: 8rem;
-
     .cpc_title{
         color: $secondary;
         text-align: center;
@@ -506,7 +507,7 @@ Text Domain: certificateprojectcontroltheme
     .cpc_blog_c{
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
+        gap: 3rem;
         .cpc_blog_i{
             width: 100%;
 
@@ -657,13 +658,9 @@ Text Domain: certificateprojectcontroltheme
     margin-bottom: 2rem;
 
     .cpc_mewsletter_text{
-        .title{
-            font-size: 3rem;
-            font-weight: bold;
-        }
 
         .sub{
-            font-size: 2rem;
+            font-size: $txt-h3;
             color: white;
             opacity: 0.8;
             margin-bottom: 1rem;
@@ -727,6 +724,7 @@ footer{
     }
 
     .cpc_footer_i{
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -736,6 +734,8 @@ footer{
 
         img{
             width: 50%;
+            height: 100%;
+            object-fit: contain;
         }
 
         a{
@@ -771,3 +771,6 @@ iframe {
 }
 
 @import 'assets/scss/components';
+
+
+@import 'assets/scss/media-query/style';

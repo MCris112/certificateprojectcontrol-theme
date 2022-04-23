@@ -11,7 +11,7 @@ if (array_key_exists('modalidad', $args)) {
 
     $args_query = array(
         'post_type'      => 'product',
-        'posts_per_page' => 10,
+        'posts_per_page' => 4,
         'meta_key'       => '_cpc_capacitacion_field_modalidad',
         'meta_value'     => $args['modalidad'],
     );
@@ -53,14 +53,14 @@ $args['count'] = $count;
 
             if ($show_title) {
         ?>
-                <div class="row cpc_title">
-                    <div class="col">
+                <div class="row cpc_cursos_header">
+                    <div class="col col-lg-6">
                         <p class="cpc_title sm">Capacitaciones</p>
                         <p class="cpc_title"><?php echo $modalidad_txt; ?></p>
-                        <hr class="cpc_hr">
+                        <hr class="cpc_hr mx-auto mx-lg-none">
                     </div>
-                    <div class="col d-flex align-items-center justify-content-end">
-                        <p class="text text-end">
+                    <div class="col col-lg-6 d-flex align-items-center justify-content-end">
+                        <p class="text text-center text-lg-end mx-auto mx-lg-none">
                             Estudia donde sea y cuando quieras, con nuestras clases en modalidad asincronica. Directo desde nuestra plataforma.
                         </p>
                     </div>
@@ -77,9 +77,12 @@ $args['count'] = $count;
             <?php
 
             $post_in_id = array();
-
+            $position_post = 0;
             if ($loop->have_posts()) {
                 while ($loop->have_posts()) : $loop->the_post();
+                    $position_post += 1;
+                    $args['position_post'] = $position_post;
+
                     if (array_key_exists('near', $args) && $args['near']) {
 
                         $fechas = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_modalidad_fechas', true);
@@ -168,3 +171,5 @@ $args['count'] = $count;
 
     </div>
 </section>
+
+<?php wp_reset_query();  ?>

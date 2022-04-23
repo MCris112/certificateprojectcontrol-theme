@@ -8,22 +8,28 @@
         <div class="cpc_blog_c">
             <?php
 
-            $args = array(
+            $args_query = array(
                 'post_type' => 'post',
-                'posts_per_page' => 3,
+                'posts_per_page' => 4,
+                'ignore_sticky_posts' => 1,
             );
 
-            $post_query = new WP_Query($args);
-
+            $post_query = new WP_Query($args_query);
+            $count = $post_query->post_count;
+            $post_postion = 0;
+            
             if ($post_query->have_posts()) {
                 while ($post_query->have_posts()) {
                     $post_query->the_post();
+                    $post_postion = $post_postion + 1;
             ?>
                     <?php
 
                     ?>
 
-                    <div class="cpc_blog_i">
+                    <div class="cpc_blog_i <?php if($post_postion == $count){ if ($count > 3) {
+                                                                                            echo " cpc_hide_last_item";
+                                                                                        }}?>">
 
                         <a href="<?php echo the_permalink(); ?>" class="cpc_blog_head">
                             <div class="img">

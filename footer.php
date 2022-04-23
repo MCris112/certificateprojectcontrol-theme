@@ -1,14 +1,14 @@
 <div class="container">
     <div class="cpc_mewsletter">
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-12 col-lg-7 mb-4 mb-lg-0">
                 <div class="cpc_mewsletter_text">
-                    <h3 class="title">Envianos tu correo y optén promociones increibles</h3>
+                    <h3 class="cpc_title">Envianos tu email para acceder a nuestras promociones</h3>
                     <p class="sub">Recibe nuestras promociones y noticias</p>
                     <span class="info">Al enviar su correo está aceptando <a href="">nuestros términos y cóndiciones</a></span>
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-12 col-lg-5">
                 <div class="cpc_mewsletter_form">
                     <form action="">
                         <input type="email" class="cpc_input" id="exampleInputEmail1" placeholder="Ingrese su correo ejemplo@correo.com">
@@ -23,7 +23,7 @@
 
 <footer>
     <div class="container">
-        <div class="cpc_footer_i">
+        <div class="cpc_footer_i img">
             <img src="<?php echo get_site_icon_url() ?>" alt="">
         </div>
         <div class="cpc_footer_i">

@@ -44,8 +44,30 @@
 @media only screen and (max-width: 500px) {
   :root {
     --text-mega-title: 2rem;
+    --text-title: 50px;
   }
 }
+.cpc_ponentes_section {
+  margin: 6rem;
+}
+.cpc_ponentes_section .cpc_ponentes_container {
+  width: 800px;
+  max-width: 100%;
+  margin: 0 auto;
+}
 .cpc_ponentes_section .cpc_hr {
+  margin-bottom: 2rem;
+}
+.cpc_ponentes_section .certificados {
+  color: var(--secondary);
+  font-size: var(--text-small);
+  margin-bottom: 1rem;
+}
+.cpc_ponentes_section .certificados svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.cpc_ponentes_section .subtitle_txt {
+  font-weight: bold;
   margin-bottom: 1rem;
 }

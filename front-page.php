@@ -63,8 +63,8 @@ get_header();
 
 <section>
     <div class="container">
-        <div class="cpc_welcome row">
-            <div class="cpc_text col">
+        <div class="cpc_welcome row gap-4 gap-lg-0">
+            <div class="cpc_text col col-lg-6 mb-5 mb-lg-0">
                 <span class="cpc_subtitle">Bienvenido a</span>
                 <h1 class="cpc_title">Certificate Project Control</h1>
                 <hr class="cpc_hr">
@@ -74,7 +74,7 @@ get_header();
 
                 <a href="<?php echo get_permalink( get_theme_mod('cpc_front_page_link_about_us') ); ?>" class="btn btn-primary btn-lg">Saber Más</a>
             </div>
-            <div class="col-5 d-flex align-middle">
+            <div class="col col-lg-6 d-flex align-middle">
                 <div class="cpc_presentation">
                     <div class="square_back"></div>
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/9Vpe-dqscyM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

@@ -24,6 +24,7 @@ if (!empty($sessiones_txt)) {
 $class_content = array_key_exists('content', $args) ? $args['content'] : array();
 $card_class = array_key_exists('class', $class_content) ? $class_content['cpc_card'] : array();
 
+$modalidad_post = array_key_exists('modalidad', $args) ? $args['modalidad'] : get_post_meta(get_the_ID(), '_cpc_capacitacion_field_modalidad', true);
 
 if ($args['count'] == 1) {
 ?>
@@ -50,7 +51,8 @@ if ($args['count'] == 1) {
         <div class="content">
             <?php
 
-            if ($args['modalidad'] == 'sincronico') {
+
+            if ($modalidad_post == 'sincronico') {
 
             ?>
                 <span class="info_pill">
@@ -89,10 +91,17 @@ if ($args['count'] == 1) {
 <?php
 } else {
 ?>
-    <div class="cpc_card <?php echo array_key_exists('class', $card_class) ?>">
+    <div class="cpc_card <?php echo array_key_exists('class', $card_class) ?> <?php if (array_key_exists('modalidad', $args) && $args['position_post'] == $args['count'] - 1) {
+                                                                                    if (array_key_exists('all', $args) && $args['all']) {
+                                                                                    } else {
+                                                                                        if ($args['count'] > 3) {
+                                                                                            echo " cpc_hide_last_item";
+                                                                                        }
+                                                                                    }
+                                                                                } ?>">
         <?php
 
-        if ($fechas_conditional && $args['modalidad'] == 'sincronico') {
+        if ($fechas_conditional && $modalidad_post == 'sincronico') {
         ?>
 
             <span class="info_pill">

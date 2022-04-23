@@ -1,7 +1,32 @@
 @use 'vars' as *;
 
 .cpc_ponentes_section{
+    margin: 6rem;
+    .cpc_ponentes_container{
+        width: 800px;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
     .cpc_hr{
+        margin-bottom: 2rem;
+    }
+
+    .certificados{
+        color: $secondary;
+        font-size: $txt-small;
+
+        margin-bottom: 1rem;
+
+        svg{
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+    }
+
+    .subtitle_txt{
+
+        font-weight: bold;
         margin-bottom: 1rem;
     }
 }
