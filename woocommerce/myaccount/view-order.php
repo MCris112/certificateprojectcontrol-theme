@@ -18,9 +18,9 @@ $notes = $order->get_customer_order_notes();
 		?>
 	</div>
 
-	<div class="row">
+	<div class="row gap-4 gap-lg-0">
 
-		<div class="col col-md-6 pe-md-5">
+		<div class="col-12 col-lg-6 pe-md-5">
 			<div class="cpc_billing_summary">
 				<div class="header">
 					<h2 class="cpc_subtitle">Detalles de la facturación</h2>
@@ -104,7 +104,7 @@ $notes = $order->get_customer_order_notes();
 			</div>
 		</div>
 
-		<div class="col col-md-6">
+		<div class="col-12 col-lg-6">
 			<div class="cpc_billing_summary">
 				<div class="header">
 					<h2 class="cpc_subtitle">Detalles del pedido</h2>

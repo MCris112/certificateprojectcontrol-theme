@@ -4,6 +4,14 @@ Hover EFFECT ON NAVBAR ITEM
 */
 
 .navbar{
+    .dropdown-toggle{
+        position: relative;
+    }
+    .dropdown-menu{
+        position: absolute;
+        top: 130%;
+        left: 0;
+    }
     .nav-link{
         position: relative;
 
@@ -92,7 +100,7 @@ Hover EFFECT ON NAVBAR ITEM
 
 .container{
     width: 1140px !important;
-    max-width: 85vw !important;
+    max-width: 90% !important;
 }
 
 
@@ -104,3 +112,5 @@ Hover EFFECT ON NAVBAR ITEM
         background: #2ecc71;
     }
 }
+
+@import 'media-query/bootstrap';

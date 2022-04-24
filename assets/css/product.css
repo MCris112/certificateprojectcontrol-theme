@@ -176,3 +176,12 @@
   width: 100% !important;
   height: 25vh !important;
 }
+
+@media (max-width: 768px) {
+  .cpc_product_section {
+    margin: 0;
+  }
+  .cpc_product_section .cpc_title {
+    font-size: var(--text-title);
+  }
+}

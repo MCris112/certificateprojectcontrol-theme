@@ -34,7 +34,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 	<form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
 
 		<div class="row">
-			<div class="col col-md-7 pe-md-5">
+			<div class="col-12 col-lg-7 pe-md-5">
 
 				<?php if ($checkout->get_checkout_fields()) : ?>
 
@@ -53,7 +53,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 
 				<?php endif; ?>
 			</div>
-			<div class="col col-md-5">
+			<div class="col-12 col-lg-5">
 
 				<?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
 

@@ -44,12 +44,14 @@ function cpc_menu_function_display_menu_items(
 function onToggleNavbar(tablet_screen, phone_screen_down) {
   if ($(window).scrollTop() > cpc_trigger_menu.offset().top) {
     $(".cpc_navbar").addClass("cpc_navbar_sticky");
+    $(".cpc_logo_sticky").toggleClass("col-3");
     cpc_menu_function_display_menu_items(
       tablet_screen,
       phone_screen_down,
       true
     );
   } else {
+    $(".cpc_logo_sticky").toggleClass("col-3");
     $(".cpc_navbar").removeClass("cpc_navbar_sticky");
     cpc_menu_function_display_menu_items(tablet_screen, phone_screen_down);
   }

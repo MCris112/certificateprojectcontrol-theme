@@ -40,10 +40,10 @@ get_header();
 
                 <div class="text">
                     <div class="container content">
-                        <h1 class="cpc_title cpc_hero_title">Nuestros Proximos Inicios</h1>
+                        <h1 class="cpc_title cpc_hero_title">Nuestros Próximos Inicios</h1>
                         <span class="cpc_subtitle cpc_hero_subtitle">¿Listos para comenzar?</span>
 
-                        <a href="" class="cpc_btn icon_side cpc_hero_btn">
+                        <a href="<?php echo get_permalink( get_theme_mod('cpc_front_page_link_proximos_inicios') ); ?>" class="cpc_btn icon_side cpc_hero_btn">
                             <div class="icon">
                                 <i class="fa fa-book"></i>
                             </div>

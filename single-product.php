@@ -31,13 +31,20 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/backgrounds/bg_product.jpg" alt="">
         <div class="cover"></div>
     </div>
-    <div class="container pt-5">
+    <div class="container-fluid container-lg pt-5">
         <div class="row">
-            <div class="col-8">
+            <div class="col-12 col-lg-8 text-center text-lg-start">
                 <h1 class="cpc_title"><?php the_title(); ?></h1>
                 <p class="cpc_subtitle"><?php echo cpc_get_meta_field('_cpc_capacitacion_field_sub_title'); ?></p>
-                <hr class="cpc_hr">
-                <p class="short_desc"><?php echo $product->get_short_description(); ?></p>
+                <hr class="cpc_hr mx-auto mx-lg-0">
+                <p class="short_desc mx-auto mx-lg-0"><?php echo $product->get_short_description(); ?></p>
+                <div class="d-lg-none w-100 cpc_product_price_c align-items-center">
+                    <p class="cpc_product_price">$<?php echo $product->get_price(); ?></p>
+                    <div class="d-flex gap-4 cpc_product_price_btn">
+                        <div class="btn btn-outline-primary">Contáctanos</div>
+                        <button onclick="cpc_add_capacitacion_to_cart($(this), '<?php echo esc_url($product->add_to_cart_url()); ?>')" rel="nofollow" data-product_id="<?php echo esc_attr($product->get_id()); ?>" data-product_sku="<?php echo esc_attr($product->get_sku()); ?>" class="btn btn-primary">Comprar Ahora</button>
+                    </div>
+                </div>
                 <div class="cpc_capacitacion_widget_info_3">
                     <div class="container content">
                         <div class="cpc_capacitacion_widget_info_3_item">
@@ -110,7 +117,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                     </div>
                 </div>
             </div>
-            <div class="col-4 cpc_product_price_c">
+            <div class="d-none d-lg-flex col-4 cpc_product_price_c">
                 <p class="cpc_product_price">$<?php echo $product->get_price(); ?></p>
                 <div class="d-flex gap-4 cpc_product_price_btn">
                     <div class="btn btn-outline-primary">Contáctanos</div>
@@ -122,11 +129,11 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
 </section>
 
 <section class="cpc_section body" style="margin-top: 4rem;">
-    <div class="container">
+    <div class="container-fluid container-lg">
         <div class="row">
-            <div class="col-8">
+            <div class="col-12 col-lg-8">
                 <div class="cpc_section_content">
-                    <div class="container">
+                    <div class="container-fluid container-lg">
                         <?php
 
                         $brochure_link = get_post_meta(get_the_ID(), '_cpc_product_brochure_link', true);
@@ -293,7 +300,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-12 col-lg-4">
 
                 <?php
 
@@ -311,7 +318,6 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                 <?php
 
                 $ponentes = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_ponentes', true);
-                echo $ponentes;
 
                 if (!empty($ponentes)) {
 
