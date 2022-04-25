@@ -7,8 +7,8 @@
 
 	<form class="woocommerce-EditAccountForm edit-account" action="" method="post" <?php do_action('woocommerce_edit_account_form_tag'); ?>>
 
-		<div class="row">
-			<div class="col-12 col-md-6 pe-md-5">
+		<div class="row gap-4 gap-lg-4">
+			<div class="col-12 col-lg-6 pe-lg-5">
 				<?php do_action('woocommerce_edit_account_form_start'); ?>
 
 				<p class="woocommerce-form-row woocommerce-form-row--first form-row form-row-first">
@@ -36,7 +36,7 @@
 
 			</div>
 
-			<div class="col-12 col-md-6 ps-md-5">
+			<div class="col-12 col-lg-6 ps-lg-5">
 				<fieldset>
 					<legend><?php esc_html_e('Password change', 'woocommerce'); ?></legend>
 

@@ -6,12 +6,49 @@ function cpc_register_panel($wp_customize){
         'priority' => 1,
     ));
 
+    $wp_customize->add_section('cpc_section_cpt', array(
+        'title' => 'Componentes',
+        'description' => 'Configuración del front page',
+        'panel' => 'cpc_panel',
+        'priority' => 1,
+    ));
+
+    $wp_customize->add_setting('cpc_cpt_newsletter_link_conditions_and_terms');
+
+    $wp_customize->add_control(
+        new WP_Customize_Control(
+            $wp_customize,
+            'cpc_cpt_control_newsletter_link_conditions_and_terms',
+            array(
+                'label' => 'Link Términos y condiciones',
+                'section' => 'cpc_section_cpt',
+                'settings' => 'cpc_cpt_newsletter_link_conditions_and_terms',
+                'type' => 'dropdown-pages',
+            )
+        )
+    );
+
     $wp_customize->add_section('cpc_section_front_page', array(
         'title' => 'Front Page',
         'description' => 'Configuración del front page',
         'panel' => 'cpc_panel',
         'priority' => 1,
     ));
+
+    $wp_customize->add_setting('cpc_front_page_link_proximos_inicios');
+
+    $wp_customize->add_control(
+        new WP_Customize_Control(
+            $wp_customize,
+            'cpc_front_page_contrrol_proximos_inicios',
+            array(
+                'label' => 'Link Próximos Inicios',
+                'section' => 'cpc_section_front_page',
+                'settings' => 'cpc_front_page_link_proximos_inicios',
+                'type' => 'dropdown-pages',
+            )
+        )
+    );
 
     $wp_customize->add_setting('cpc_front_page_link_about_us');
 

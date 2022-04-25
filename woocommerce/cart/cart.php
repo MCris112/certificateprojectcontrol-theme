@@ -22,7 +22,7 @@ do_action('woocommerce_before_cart'); ?>
 
 <div class="container mt-5 mb-5">
 	<div class="row">
-		<div class="col-8 pe-md-5">
+		<div class="col-12 col-lg-8 pe-md-5 mb-5 mb-lg-0">
 			<form class="woocommerce-cart-form" action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
 				<?php do_action('woocommerce_before_cart_table'); ?>
 
@@ -48,7 +48,7 @@ do_action('woocommerce_before_cart'); ?>
 
 			</form>
 		</div>
-		<div class="col-4">
+		<div class="col-12 col-lg-4">
 			<?php do_action('woocommerce_before_cart_collaterals'); ?>
 
 			<?php

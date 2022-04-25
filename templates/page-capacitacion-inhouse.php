@@ -20,7 +20,7 @@ get_template_part('template-parts/section', 'title', $args);
 
 <div class="container mt-5 mb-5">
     <div class="row">
-        <div class="col col-md-8 pe-md-5">
+        <div class="col-12 col-lg-8 pe-md-5 mb-5 mb-lg-0">
             <h2 class="cpc_title mb-5">¡Solicita tu cotización!</h2>
             <form id="cpc_email_form_inhouse" cpc-data-form-type="email" class="row gap-3" method="post">
                 <input type="hidden" name="cpc_type" value="inhouse">
@@ -129,7 +129,7 @@ get_template_part('template-parts/section', 'title', $args);
                 <a href="" class="btn btn-whatsapp d-block w-100" target="_blank">Enviar a whatsapp</a>
             </form>
         </div>
-        <div class="col col-md-4">
+        <div class="col-12 col-lg-4">
             <div class="cpc_box_desc mb-3">
                 <div class="cpc_head">
                     <h2 class="small">CURSOS Y TALLERES EN MODALIDAD INHOUSE</h2>

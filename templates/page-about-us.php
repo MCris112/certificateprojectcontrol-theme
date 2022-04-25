@@ -21,8 +21,8 @@ get_template_part('template-parts/section', 'title', $args);
 
 <section>
     <div class="container">
-        <div class="cpc_welcome row mb-5">
-            <div class="cpc_text col">
+        <div class="cpc_welcome row gap-4 gap-lg-0 mb-5 mb-lg-0">
+            <div class="cpc_text col col-lg-6 mb-5 mb-lg-0">
                 <span class="cpc_subtitle">Bienvenido a</span>
                 <h1 class="cpc_title">Certificate Project Control</h1>
                 <hr class="cpc_hr">
@@ -32,7 +32,7 @@ get_template_part('template-parts/section', 'title', $args);
 
                 <p class="desc">Estos valores definen las políticas y regulan los principios organizacionales con los que cada miembro de CPC se desempeña. </p>
             </div>
-            <div class="col-5 d-flex align-middle">
+            <div class="col col-lg-6 d-flex align-middle">
                 <div class="cpc_presentation">
                     <div class="square_back"></div>
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/9Vpe-dqscyM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -41,10 +41,10 @@ get_template_part('template-parts/section', 'title', $args);
         </div>
 
         <div class="row mb-5">
-            <div class="col">
-                <div class="cpc_text_mv">
+            <div class="col-12 col-lg-6 mb-5 mb-lg-0">
+                <div class="cpc_text_mv text-center text-lg-start">
                     <h2 class="cpc_subtitle">Misión</h2>
-                    <hr class="cpc_hr">
+                    <hr class="cpc_hr mx-auto mx-lg-0">
                     <p class="desc">
                         La misión de sostenibilidad de Certificate Project
                         Control está enfocada en contribuir con nuestros
@@ -60,10 +60,10 @@ get_template_part('template-parts/section', 'title', $args);
                     </p>
                 </div>
             </div>
-            <div class="col">
-                <div class="cpc_text_mv">
+            <div class="col-12 col-lg-6 mb-5 mb-lg-0">
+                <div class="cpc_text_mv text-center text-lg-start">
                     <h2 class="cpc_subtitle">Visión</h2>
-                    <hr class="cpc_hr">
+                    <hr class="cpc_hr mx-auto mx-lg-0">
                     <p class="desc">
                         La visión de Certificate Project Control es ser una
                         consultora con presencia en Perú y

@@ -20,7 +20,7 @@ get_template_part('template-parts/section', 'title', $args);
 
 <div class="container mt-5 mb-5">
     <div class="row gap-4 pb-5">
-        <div class="col">
+        <div class="col-12 col-md-6">
             <h2 class="cpc_subtitle mb-5">INFORMACIÓN DEL CONTACTO:</h2>
 
             <hr>
@@ -34,7 +34,7 @@ get_template_part('template-parts/section', 'title', $args);
             </div>
 
             <hr>
-            <div class="row">
+            <div class="row mb-2">
                 <div class="col cpc_contactanos_icon_text">
                     <i class="fa fa-phone" aria-hidden="true"></i>
                     <div class="txt">
@@ -52,7 +52,7 @@ get_template_part('template-parts/section', 'title', $args);
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row gap-3">
                 <div class="col cpc_contactanos_icon_text">
                     <i class="fa fa-envelope-o" aria-hidden="true"></i>
                     <div class="txt">
@@ -70,13 +70,13 @@ get_template_part('template-parts/section', 'title', $args);
                 </div>
             </div>
         </div>
-        <div class="col">
+        <div class="col-12 col-md-5">
             <h2 class="cpc_subtitle mb-5">Ubicanos</h2>
             <iframe class="cpc_contactanos_iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1950.7175553846969!2d-77.094234!3d-12.082337!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x888fa27ecb5b89f7!2zMTLCsDA0JzU2LjQiUyA3N8KwMDUnMzkuMiJX!5e0!3m2!1sen!2sus!4v1649862654719!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
     <div class="row gap-4 pt-5">
-        <div class="col">
+        <div class="col-12 col-lg-8">
             <h2 class="cpc_subtitle mb-5">REALIZA TU CONSULTA</h2>
 
             <form id="cpc_email_form_contactanos" cpc-data-form-type="email" method="post">
@@ -140,19 +140,6 @@ get_template_part('template-parts/section', 'title', $args);
                 <button id="cpc_email_form_btn" type="submit" class="btn btn-primary d-block w-100 mb-3" onclick="cpc_email_btn_send('cpc_email_form_contactanos', $(this));">Enviar mensaje</button>
                 <a href="" class="btn btn-whatsapp d-block w-100" target="_blank">Enviar a whatsapp</a>
             </form>
-        </div>
-        <div class="col col-md-4">
-            <!--    
-        <h2 class="cpc_subtitle mb-5">NUESTRO REPRESENTANTE</h2>
-
-            <div class="card" style="width: 18rem;">
-                <img src="<?php echo get_template_directory_uri() . "/assets/images/ponentes/jose-miguel-reyes.jpg"; ?>" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">José Miguel Reyes</h5>
-                    <p class="card-text">Representante legal</p>
-                </div>
-            </div>
-                -->
         </div>
     </div>
 </div>

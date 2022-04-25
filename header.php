@@ -1,5 +1,4 @@
 <?php
-
 global $wp;
 
 $cpc_menu_user = array(
@@ -187,7 +186,7 @@ $cpc_menu_user = array(
             <div class="cpc_trigger_menu"></div>
 
             <div class="cpc_navbar">
-                <div class="container">
+                <div class="container-fluid container-lg">
                     <div class="row">
                         <div class="col-3 cpc_logo_sticky">
                             <img src="<?php echo get_theme_mod('cpc_logo_white') ?>" alt="">
@@ -232,7 +231,7 @@ $cpc_menu_user = array(
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col">
+                                        <div class="col-9 col-md-auto">
                                             <ul class="navbar-nav flex-row me-auto mb-2 mb-lg-0 justify-content-around justify-content-lg-end gap-5 gap-lg-1">
                                                 <div class="cpc_navbar_hide_on_sticky">
                                                     <li class="nav-item d-flex align-items-center gap-2">
@@ -351,7 +350,7 @@ $cpc_menu_user = array(
                                             </ul>
                                         </div>
 
-                                        <div class="col-auto">
+                                        <div class="col-3 pe-1 col-md-auto d-flex justify-content-end">
                                             <button class="navbar-toggler" type="button" onClick="cpc_manu_open_close();">
                                                 <span class="navbar-toggler-icon"></span>
                                             </button>

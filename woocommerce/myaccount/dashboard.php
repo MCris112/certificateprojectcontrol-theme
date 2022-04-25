@@ -19,10 +19,10 @@ $allowed_html = array(
 <hr>
 </p>
 
-<div class="d-grid" style="grid-template-columns: repeat(3, minmax(300px, 1fr)); gap: 1rem;">
-	<a href="<?php echo wc_get_endpoint_url('orders'); ?>" class="btn btn-lg border border-3 d-flex justify-content-center align-items-center gap-2"><i class="fa fa-download" aria-hidden="true"></i> Ver tus pedidos Recientes</a>
-	<a href="<?php echo wc_get_endpoint_url('edit-address'); ?>" class="btn btn-lg border border-3 d-flex justify-content-center align-items-center gap-2"><i class="fa fa-address-book" aria-hidden="true"></i> Gestionar tus direcciones de facturación</a>
-	<a href="<?php echo wc_get_endpoint_url('edit-account'); ?>" class="btn btn-lg border border-3 d-flex justify-content-center align-items-center gap-2"><i class="fa fa-user" aria-hidden="true"></i> Editar tu cuenta</a>
+<div class="w-100" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+	<a href="<?php echo wc_get_endpoint_url('orders'); ?>" class="w-100 btn btn-lg border border-3 d-flex justify-content-center align-items-center gap-2"><i class="fa fa-download" aria-hidden="true"></i> Ver tus pedidos Recientes</a>
+	<a href="<?php echo wc_get_endpoint_url('edit-address'); ?>" class="w-100 btn btn-lg border border-3 d-flex justify-content-center align-items-center gap-2"><i class="fa fa-address-book" aria-hidden="true"></i> Gestionar tus direcciones de facturación</a>
+	<a href="<?php echo wc_get_endpoint_url('edit-account'); ?>" class="w-100 btn btn-lg border border-3 d-flex justify-content-center align-items-center gap-2"><i class="fa fa-user" aria-hidden="true"></i> Editar tu cuenta</a>
 </div>
 
 <div class="cpc_title mt-5">

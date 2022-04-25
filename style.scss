@@ -505,6 +505,7 @@ Text Domain: certificateprojectcontroltheme
     }
 
     .cpc_blog_c{
+        width: 100%;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 3rem;
@@ -650,12 +651,17 @@ Text Domain: certificateprojectcontroltheme
 
 .cpc_mewsletter{
     background: $bg;
+    background-size: 300% 300%;
+    animation: cpc_bg_gradient_animation 5s ease infinite;
     color: white;
-    border-radius: 10px;
 
     padding: 4rem 4rem;
 
     margin-bottom: 2rem;
+
+    .container{
+        max-width:100% !important;
+    }
 
     .cpc_mewsletter_text{
 

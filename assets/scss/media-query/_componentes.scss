@@ -10,9 +10,17 @@
 }
 
 @media (max-width: 576px) {
-    .cpc_welcome{
-        .cpc_title{
-            
+
+    .cpc_ponente_container{
+        .cpc_ponente_item{
+            grid-template-columns: 1fr;
+            grid-auto-rows: 1fr;
+            justify-content: center;
+            justify-items: center;
+            text-align: center;
         }
     }
+    
+    
 }
+

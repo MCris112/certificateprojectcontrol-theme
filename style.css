@@ -146,10 +146,41 @@ body {
   margin-top: 1rem;
 }
 
+@-webkit-keyframes cpc_bg_gradient_animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes cpc_bg_gradient_animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 /*
 
 Hover EFFECT ON NAVBAR ITEM
 */
+.navbar .dropdown-toggle {
+  position: relative;
+}
+.navbar .dropdown-menu {
+  position: absolute;
+  top: 130%;
+  left: 0;
+}
 .navbar .nav-link {
   position: relative;
   -webkit-transition: all 0.3s;
@@ -225,7 +256,7 @@ Hover EFFECT ON NAVBAR ITEM
 */
 .container {
   width: 1140px !important;
-  max-width: 85vw !important;
+  max-width: 90% !important;
 }
 
 .btn-whatsapp {
@@ -236,6 +267,15 @@ Hover EFFECT ON NAVBAR ITEM
   background: #2ecc71;
 }
 
+@media (max-width: 576px) {
+  .dropdown-menu {
+    -webkit-transform: translateX(-60%) !important;
+            transform: translateX(-60%) !important;
+    top: 100%;
+    left: 0;
+    width: 90vw !important;
+  }
+}
 .cpc_header {
   width: 100%;
   position: absolute;
@@ -884,6 +924,7 @@ Hover EFFECT ON NAVBAR ITEM
   margin-bottom: 2rem;
 }
 .cpc_blog .cpc_blog_c {
+  width: 100%;
   display: -ms-grid;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1052,10 +1093,15 @@ Hover EFFECT ON NAVBAR ITEM
 ********************************/
 .cpc_mewsletter {
   background: var(--bg);
+  background-size: 300% 300%;
+  -webkit-animation: cpc_bg_gradient_animation 5s ease infinite;
+          animation: cpc_bg_gradient_animation 5s ease infinite;
   color: white;
-  border-radius: 10px;
   padding: 4rem 4rem;
   margin-bottom: 2rem;
+}
+.cpc_mewsletter .container {
+  max-width: 100% !important;
 }
 .cpc_mewsletter .cpc_mewsletter_text .sub {
   font-size: var(--text-h3);
@@ -1296,9 +1342,10 @@ iframe {
 }
 
 .cpc_ponente_container {
+  width: 100%;
   display: -ms-grid;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   grid-auto-rows: 1fr;
   gap: 4rem;
   -webkit-box-pack: center;
@@ -1392,6 +1439,18 @@ iframe {
     margin-left: auto;
   }
 }
+@media (max-width: 576px) {
+  .cpc_ponente_container .cpc_ponente_item {
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 1fr;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    justify-items: center;
+    text-align: center;
+  }
+}
 @media (max-width: 1199px) {
   .cpc_hide_last_item {
     display: -ms-grid !important;
@@ -1433,6 +1492,14 @@ iframe {
   }
 }
 @media (max-width: 576px) {
+  .cpc_mewsletter {
+    padding: 4rem 1rem;
+  }
+
+  .header_icons i {
+    font-size: 23px !important;
+  }
+
   footer {
     padding: 8rem 0;
   }
