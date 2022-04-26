@@ -8,7 +8,7 @@ $fechas_conditional = !empty($fechas);
 
 $duracion = get_post_meta(get_the_ID(), '_cpc_product_duration', true);
 
-$duracion_txt = empty($duracion) ? '' : $duracion . ' horas';
+$duracion_txt = empty($duracion) ? 'Sin definir' : $duracion . ' horas';
 
 $subtitle = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_sub_title', true);
 $sessiones = 'Sin definir';

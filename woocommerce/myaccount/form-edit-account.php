@@ -7,7 +7,7 @@
 
 	<form class="woocommerce-EditAccountForm edit-account" action="" method="post" <?php do_action('woocommerce_edit_account_form_tag'); ?>>
 
-		<div class="row gap-4 gap-lg-4">
+		<div class="row gap-4 gap-lg-0">
 			<div class="col-12 col-lg-6 pe-lg-5">
 				<?php do_action('woocommerce_edit_account_form_start'); ?>
 

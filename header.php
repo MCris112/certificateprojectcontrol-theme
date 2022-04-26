@@ -64,116 +64,23 @@ $cpc_menu_user = array(
     <input type="hidden" value="<?php echo site_url(); ?>" id="cpc_url_site_url">
 
     <?php
-    /*
-                                        foreach ($items as $item) {
-                                            var_dump($item);
-                                            $class_menu = $item->classes;
-                                            $item_classes = "";
-
-                                            for ($i = 0; $i < count($class_menu); $i++) {
-                                                $item_classes = $class_menu[$i];
-                                            }
-                                            echo '<li class="nav-item">
-                                                    <a class="nav-link ' . $item_classes . '" aria-current="page" href="' . $item->url . '">' . $item->title . '</a>
-                                                </li>';
-                                        }
-                                        */
-
 
     $menu_name = 'cpc_primary';
     $locations = get_nav_menu_locations();
     $menu = wp_get_nav_menu_object($locations[$menu_name]);
     $menuitems = wp_get_nav_menu_items($menu->term_id, array('order' => 'DESC'));
 
-    function combineHierarchy($groups, $categories)
-    {
+    $hierarchy = cpc_combineHierarchy($menuitems, $menuitems);
 
-        if (empty($groups) || count($groups) == 0 || $groups == null) return array();
 
-        $hierarchy = array();
-        $menuitems = array();
-
-        foreach ($groups as $group) {
-            if ($group->menu_item_parent == 0) {
-                $menuitems[] = $group;
-            }
-        }
-
-        foreach ($menuitems as $menuitem) {
-            $menuitem->cpc_sunmenu = array();
-
-            foreach ($categories as $category) {
-                if ($category->menu_item_parent == $menuitem->ID) {
-                    $menuitem->cpc_sunmenu[] = $category;
-                }
-            }
-
-            $hierarchy[] = $menuitem;
-        }
-
-        return $hierarchy;
-    }
-
-    function cpc_compare_string_and_print($string, $compare, $print)
-    {
-        if ($string == $compare) {
-            echo $print;
-        }
-    }
-
-    $hierarchy = combineHierarchy($menuitems, $menuitems);
-
-    function show_menu_items($menuitem, $level = 0)
-    {
-        if (empty($menuitem)) return;
-        if (!isset($menuitem)) return;
-
-        if (isset($menuitem->cpc_sunmenu) && !empty(count($menuitem->cpc_sunmenu))) {
-    ?>
-            <li class="<?php if ($level >= 1) {
-                            echo 'dropdown-item';
-                        } ?> nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <?php echo $menuitem->title; ?>
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <?php
-                    foreach ($menuitem->cpc_sunmenu as $item) {
-                        show_menu_items($item, $level .= 1);
-                    }
-
-                    ?>
-                </ul>
-            </li>
-        <?php
-
-            return;
-        }
-
-        ?>
-        <li class="nav-item">
-            <a class="<?php if ($level >= 1) {
-                            echo 'dropdown-item ';
-                        } else {
-                            echo 'nav-link ';
-                        }
-                        global $wp;
-                        cpc_compare_string_and_print($menuitem->url, home_url($wp->request) . '/', 'active'); ?>" aria-current="page" href="<?php echo $menuitem->url; ?>"><?php echo $menuitem->title; ?></a>
-        </li>
-
-    <?php
-    }
     ?>
 
     <header class="cpc_header">
         <div class="container-fluid cpc_menu_container">
             <div class="cpc_head_logo row">
-                <div class="col cpc_logo d-flex justify-content-start">
-                    <?php
-                    $logo_white = get_theme_mod('cpc_logo_white');
-                    ?>
-                    <img src="<?php echo $logo_white ?>" alt="">
-                </div>
+                <a href="<?php echo site_url(); ?>" class="col cpc_logo d-flex justify-content-start">
+                    <img src="<?php echo cpc_theme_get_white_logo(); ?>" alt="">
+                </a>
 
                 <?php cpc_menu_get_social_links(
                     array(
@@ -189,7 +96,7 @@ $cpc_menu_user = array(
                 <div class="container-fluid container-lg">
                     <div class="row">
                         <div class="col-3 cpc_logo_sticky">
-                            <img src="<?php echo get_theme_mod('cpc_logo_white') ?>" alt="">
+                            <img src="<?php echo cpc_theme_get_white_logo(); ?>" alt="">
                         </div>
 
                         <div class="col cpc_navbar_col">
@@ -202,11 +109,11 @@ $cpc_menu_user = array(
                                             <div class="collapse navbar-collapse " id="navbarSupportedContent">
                                                 <div class="cpc_menu_phone_content">
                                                     <div class="cpc_menu_phone_div cpc_menu_phone_logo">
-                                                        <img src="<?php echo get_theme_mod('cpc_logo_white') ?>" alt="">
+                                                        <img src="<?php echo cpc_theme_get_white_logo(); ?>" alt="">
                                                         <div class="cpc_menu_phone_btn">
                                                             <button class="navbar-toggler" type="button" onClick="cpc_manu_open_close();">
                                                                 <span class="fa fa-close"></span>
-                                                            </button>
+                                                                x </button>
                                                         </div>
                                                     </div>
 
@@ -214,7 +121,7 @@ $cpc_menu_user = array(
                                                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 justify-content-around ">
                                                             <?php
                                                             foreach ($hierarchy as $menuitem) {
-                                                                show_menu_items($menuitem);
+                                                                cpc_menu_show_items($menuitem);
                                                             }
                                                             ?>
                                                         </ul>
@@ -231,137 +138,138 @@ $cpc_menu_user = array(
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-9 col-md-auto">
-                                            <ul class="navbar-nav flex-row me-auto mb-2 mb-lg-0 justify-content-around justify-content-lg-end gap-5 gap-lg-1">
-                                                <div class="cpc_navbar_hide_on_sticky">
-                                                    <li class="nav-item d-flex align-items-center gap-2">
-                                                        <?php
+                                    </div>
+                                    <div class="col-9 col-md-auto">
+                                        <ul class="navbar-nav flex-row me-auto mb-2 mb-lg-0 justify-content-around justify-content-lg-end gap-5 gap-lg-1">
+                                            <div class="cpc_navbar_hide_on_sticky">
+                                                <li class="nav-item d-flex align-items-center gap-2">
+                                                    <?php
 
-                                                        if (is_user_logged_in()) {
-                                                        ?>
-                                                            <a class="nav-link <?php cpc_compare_string_and_print($cpc_menu_user['my-account'], home_url($wp->request) . '/', 'active'); ?>" aria-current="page" href="<?php echo $cpc_menu_user['my-account']; ?>">Mi cuenta</a>
-                                                            <span class="text-white"> / </span>
-                                                            <a class="nav-link <?php cpc_compare_string_and_print($cpc_menu_user['logout'], home_url($wp->request) . '/', 'active'); ?>" aria-current="page" href="<?php echo $cpc_menu_user['logout']; ?>"><i class="fa fa-sign-out"></i> Cerrar Sesión</a>
-                                                        <?php
-                                                        } else {
-                                                        ?>
-                                                            <a class="nav-link" aria-current="page" href="<?php echo $cpc_menu_user['login']; ?>" data-bs-toggle="modal" data-bs-target="#cpc_modal_login">Iniciar Sesión</a>
-                                                            <span class="text-white"> / </span>
-                                                            <a class="nav-link" aria-current="page" href="<?php echo $cpc_menu_user['register']; ?>" data-bs-toggle="modal" data-bs-target="#cpc_modal_login" cpc-target="register">Regístrate</a>
-                                                        <?php
-                                                        }
+                                                    if (is_user_logged_in()) {
+                                                    ?>
+                                                        <a class="nav-link <?php cpc_compare_string_and_print($cpc_menu_user['my-account'], home_url($wp->request) . '/', 'active'); ?>" aria-current="page" href="<?php echo $cpc_menu_user['my-account']; ?>">Mi cuenta</a>
+                                                        <span class="text-white"> / </span>
+                                                        <a class="nav-link <?php cpc_compare_string_and_print($cpc_menu_user['logout'], home_url($wp->request) . '/', 'active'); ?>" aria-current="page" href="<?php echo $cpc_menu_user['logout']; ?>"><i class="fa fa-sign-out"></i> Cerrar Sesión</a>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <a class="nav-link" aria-current="page" href="<?php echo $cpc_menu_user['login']; ?>" data-bs-toggle="modal" data-bs-target="#cpc_modal_login">Iniciar Sesión</a>
+                                                        <span class="text-white"> / </span>
+                                                        <a class="nav-link" aria-current="page" href="<?php echo $cpc_menu_user['register']; ?>" data-bs-toggle="modal" data-bs-target="#cpc_modal_login" cpc-target="register">Regístrate</a>
+                                                    <?php
+                                                    }
 
-                                                        ?>
-                                                    </li>
-                                                </div>
-                                                <li class="cpc_navbar_show_on_sticky nav-item dropdown">
-                                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="fa fa-user-circle-o"></i>
-                                                    </a>
-                                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                        <?php
-                                                        if (is_user_logged_in()) {
-                                                        ?>
-                                                            <li><a class="dropdown-item <?php cpc_compare_string_and_print($cpc_menu_user['my-account'], home_url($wp->request) . '/', 'active'); ?>" href="<?php echo $cpc_menu_user['my-account']; ?>">Mi cuenta</a></li>
-                                                            <li><a class="dropdown-item" href="<?php echo $cpc_menu_user['logout']; ?>">Cerrar Sesión</a></li>
-                                                            <li><a class="dropdown-item" href="<?php echo $cpc_menu_user['orders']; ?>">Mis Cursos</a></li>
-                                                            <?php
-                                                            if (current_user_can('administrator')) {
-                                                            ?>
-
-                                                                <hr>
-                                                                <li><a class="dropdown-item" href="<?php echo get_admin_url(); ?>">Admin panel</a></li>
-
-                                                            <?php
-                                                            }
-                                                        } else {
-                                                            ?>
-                                                            <li><a class="dropdown-item" href="<?php echo $cpc_menu_user['login']; ?>" data-bs-toggle="modal" data-bs-target="#cpc_modal_login">Iniciar Sesión</a></li>
-                                                            <li><a class="dropdown-item" href="<?php echo $cpc_menu_user['register']; ?>" data-bs-toggle="modal" data-bs-target="#cpc_modal_login" cpc-target="register">Regístrate</a></li>
-                                                        <?php
-                                                        }
-
-                                                        ?>
-
-                                                    </ul>
+                                                    ?>
                                                 </li>
+                                            </div>
+                                            <li class="cpc_navbar_show_on_sticky nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fa fa-user-circle-o"></i>
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                    <?php
+                                                    if (is_user_logged_in()) {
+                                                    ?>
+                                                        <li><a class="dropdown-item <?php cpc_compare_string_and_print($cpc_menu_user['my-account'], home_url($wp->request) . '/', 'active'); ?>" href="<?php echo $cpc_menu_user['my-account']; ?>">Mi cuenta</a></li>
+                                                        <li><a class="dropdown-item" href="<?php echo $cpc_menu_user['logout']; ?>">Cerrar Sesión</a></li>
+                                                        <li><a class="dropdown-item" href="<?php echo $cpc_menu_user['orders']; ?>">Mis Cursos</a></li>
+                                                        <?php
+                                                        if (current_user_can('administrator')) {
+                                                        ?>
 
-                                                <li class="nav-item dropdown">
-                                                    <button id="cpc_menu_shop_btn" class="nav-link dropdown-toggle btn" onclick="cpc_menu_shop_open();" cpc-data-menu-state="close">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                    </button>
-                                                    <ul id="cpc_menu_shop_content" class="dropdown-menu">
+                                                            <hr>
+                                                            <li><a class="dropdown-item" href="<?php echo get_admin_url(); ?>">Admin panel</a></li>
 
-                                                        <div id="cpc_menu_shop_content_items">
-                                                            <?php
+                                                        <?php
+                                                        }
+                                                    } else {
+                                                        ?>
+                                                        <li><a class="dropdown-item" href="<?php echo $cpc_menu_user['login']; ?>" data-bs-toggle="modal" data-bs-target="#cpc_modal_login">Iniciar Sesión</a></li>
+                                                        <li><a class="dropdown-item" href="<?php echo $cpc_menu_user['register']; ?>" data-bs-toggle="modal" data-bs-target="#cpc_modal_login" cpc-target="register">Regístrate</a></li>
+                                                    <?php
+                                                    }
 
-                                                            $cart = WC()->cart;
-                                                            $cart_url = wc_get_cart_url();  // Set Cart URL
+                                                    ?>
 
-                                                            $items = $cart->get_cart();
+                                                </ul>
+                                            </li>
 
-                                                            if (count($items) == 0) {
-                                                                echo "<li class='cpc_menu_shop_empty text-center p-1 mb-5 mt-5'>No hay productos en el carrito</li>";
-                                                            }
+                                            <li class="nav-item dropdown">
+                                                <button id="cpc_menu_shop_btn" class="nav-link dropdown-toggle btn" onclick="cpc_menu_shop_open();" cpc-data-menu-state="close">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                </button>
+                                                <ul id="cpc_menu_shop_content" class="dropdown-menu">
 
-                                                            foreach ($items as $item => $values) {
-                                                                $_product =  wc_get_product($values['data']->get_id());
-                                                                $price = get_post_meta($values['product_id'], '_price', true);
-                                                                $getProductDetail = wc_get_product($values['product_id']);
-                                                                $cart_delete_url = wc_get_cart_remove_url($values['data']->get_id());
+                                                    <div id="cpc_menu_shop_content_items">
+                                                        <?php
 
-                                                            ?>
+                                                        $cart = WC()->cart;
+                                                        $cart_url = wc_get_cart_url();  // Set Cart URL
 
-                                                                <li id="cpc_capacitacion_cart_item_<?php echo $values['data']->get_id(); ?>" class="cpc_menu_shop_content_item">
-                                                                    <div class="d-flex">
-                                                                        <div class="img">
-                                                                            <?php echo $getProductDetail->get_image('woocommerce_thumbnail', array('class' => 'img-fluid rounded-start', 'style' => "width: 100%;")); ?>
-                                                                            <button onclick="cpc_remove_capacitacion_to_cart($(this), '<?php echo $cart_delete_url; ?>');" class="btn btn-danger" cpc-data-cpt-id="<?php echo $values['data']->get_id(); ?>"><i class="fa fa-trash-o fa-lg"></i></button>
-                                                                        </div>
-                                                                        <div class="body">
-                                                                            <h5 class="title"><?php echo $_product->get_title(); ?></h5>
-                                                                            <p class="quantity text-muted">Cantidad <?php echo $values['quantity']; ?></p>
-                                                                            <p class="price text-end"><?php echo $price; ?></p>
-                                                                        </div>
+                                                        $items = $cart->get_cart();
+
+                                                        if (count($items) == 0) {
+                                                            echo "<li class='cpc_menu_shop_empty text-center p-1 mb-5 mt-5'>No hay productos en el carrito</li>";
+                                                        }
+
+                                                        foreach ($items as $item => $values) {
+                                                            $_product =  wc_get_product($values['data']->get_id());
+                                                            $price = get_post_meta($values['product_id'], '_price', true);
+                                                            $getProductDetail = wc_get_product($values['product_id']);
+                                                            $cart_delete_url = wc_get_cart_remove_url($values['data']->get_id());
+
+                                                        ?>
+
+                                                            <li id="cpc_capacitacion_cart_item_<?php echo $values['data']->get_id(); ?>" class="cpc_menu_shop_content_item">
+                                                                <div class="d-flex">
+                                                                    <div class="img">
+                                                                        <?php echo $getProductDetail->get_image('woocommerce_thumbnail', array('class' => 'img-fluid rounded-start', 'style' => "width: 100%;")); ?>
+                                                                        <button onclick="cpc_remove_capacitacion_to_cart($(this), '<?php echo $cart_delete_url; ?>');" class="btn btn-danger" cpc-data-cpt-id="<?php echo $values['data']->get_id(); ?>"><i class="fa fa-trash-o fa-lg"></i></button>
                                                                     </div>
-                                                                </li>
+                                                                    <div class="body">
+                                                                        <h5 class="title"><?php echo $_product->get_title(); ?></h5>
+                                                                        <p class="quantity text-muted">Cantidad <?php echo $values['quantity']; ?></p>
+                                                                        <p class="price text-end"><?php echo $price; ?></p>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
 
 
-                                                            <?php
-                                                            }
-                                                            ?>
-                                                        </div>
-                                                        <li>
-                                                            <hr class="dropdown-divider">
-                                                        </li>
-                                                        <div class="p-3 cpc_menu_shop_content_subtotal">
-                                                            <div class="row mb-3">
-                                                                <div class="col-6">
-                                                                    Subtotal
-                                                                </div>
-                                                                <div class="col-6 subtotal text-end">
-                                                                    <?php echo $cart->get_cart_subtotal(); ?>
-                                                                </div>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                    <li>
+                                                        <hr class="dropdown-divider">
+                                                    </li>
+                                                    <div class="p-3 cpc_menu_shop_content_subtotal">
+                                                        <div class="row mb-3">
+                                                            <div class="col-6">
+                                                                Subtotal
                                                             </div>
-                                                            <li class="d-flex justify-content-end"><a class="btn btn-primary" href="<?php echo $cart_url; ?>">Ver el carrito</a></li>
+                                                            <div class="col-6 subtotal text-end">
+                                                                <?php echo $cart->get_cart_subtotal(); ?>
+                                                            </div>
                                                         </div>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                                        <li class="d-flex justify-content-end"><a class="btn btn-primary" href="<?php echo $cart_url; ?>">Ver el carrito</a></li>
+                                                    </div>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
 
-                                        <div class="col-3 pe-1 col-md-auto d-flex justify-content-end">
-                                            <button class="navbar-toggler" type="button" onClick="cpc_manu_open_close();">
-                                                <span class="navbar-toggler-icon"></span>
-                                            </button>
-                                        </div>
+                                    <div class="col-3 pe-1 col-md-auto d-flex justify-content-end">
+                                        <button class="navbar-toggler" type="button" onClick="cpc_manu_open_close();">
+                                            <span class="navbar-toggler-icon"></span>
+                                        </button>
                                     </div>
                                 </div>
-                            </nav>
                         </div>
-
+                        </nav>
                     </div>
+
                 </div>
             </div>
+        </div>
         </div>
     </header>

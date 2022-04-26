@@ -3,9 +3,9 @@
         <div class="row">
             <div class="col-12 col-lg-7 mb-4 mb-lg-0">
                 <div class="cpc_mewsletter_text">
-                    <h3 class="cpc_title">Envianos tu email para acceder a nuestras promociones</h3>
+                    <h3 class="cpc_title">Envianós tu email para acceder a nuestras promociones</h3>
                     <p class="sub">Recibe nuestras promociones y noticias</p>
-                    <span class="info">Al enviar su correo está aceptando <a href="<?php echo get_permalink( get_theme_mod('cpc_cpt_newsletter_link_conditions_and_terms') ); ?>">nuestros términos y cóndiciones</a></span>
+                    <span class="info">Al enviar su correo está aceptando <a href="<?php echo get_permalink(get_theme_mod('cpc_cpt_newsletter_link_conditions_and_terms')); ?>">nuestros términos y cóndiciones</a></span>
                 </div>
             </div>
             <div class="col-12 col-lg-5">
@@ -39,16 +39,38 @@
 <footer>
     <div class="container">
         <div class="cpc_footer_i img">
-            <img src="<?php echo get_site_icon_url() ?>" alt="">
+            <img src="<?php echo cpc_get_site_icon_url() ?>" alt="">
         </div>
-        <div class="cpc_footer_i">
-            <a href="">Cursos en vivo <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-            <a href="">Cursos asincronicos <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-        </div>
-        <div class="cpc_footer_i">
-            <a href="">Eventos <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-            <a href="">Campus Virtual <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-        </div>
+
+        <?php
+
+        $menu_name = 'cpc_footer';
+        $locations = get_nav_menu_locations();
+        $menu = wp_get_nav_menu_object($locations[$menu_name]);
+        $menuitems = wp_get_nav_menu_items($menu->term_id, array('order' => 'DESC'));
+
+        $hierarchy = cpc_combineHierarchy($menuitems, $menuitems);
+
+        foreach ($hierarchy as $menuitem) {
+            if (isset($menuitem->cpc_sunmenu) && !empty(count($menuitem->cpc_sunmenu))) {
+                ?>
+
+                <div class="cpc_footer_i">
+                    <?php
+                    
+                    foreach ($menuitem->cpc_sunmenu as $item) {
+                        ?>
+                        <a href="<?php echo $item->url; ?>"><?php echo $item->title; ?> <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                        <?php
+                    }
+                    
+                    ?>
+                </div>
+    
+            <?php
+            }
+        }
+        ?>
     </div>
 </footer>
 

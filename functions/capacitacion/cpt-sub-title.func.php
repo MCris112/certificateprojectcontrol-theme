@@ -22,7 +22,7 @@ function cpc_capacitacion_meta_box_sub_title_callback($post)
     <label for="basic-url" class="form-label">Escriba su subtitulo o definición del mismo</label>
     <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon3">Subtitulo/Explicación</span>
-        <input name="cpc_capacitacion_field_sub_title" id="cpc_capacitacion_field_sub_title" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="<?php echo $value; ?>">
+        <input name="cpc_capacitacion_field_sub_title" id="cpc_capacitacion_field_sub_title" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value='<?php echo htmlspecialchars_decode($value); ?>'>
     </div>
 
 <?php
@@ -56,7 +56,7 @@ function cpc_capacitacion_save_meta_box_data_sub_title($post_id)
         return;
     }
 
-    update_post_meta($post_id, '_cpc_capacitacion_field_sub_title', $_POST['cpc_capacitacion_field_sub_title']);
+    update_post_meta($post_id, '_cpc_capacitacion_field_sub_title', htmlspecialchars($_POST['cpc_capacitacion_field_sub_title']));
 }
 
 add_action('save_post', 'cpc_capacitacion_save_meta_box_data_sub_title');

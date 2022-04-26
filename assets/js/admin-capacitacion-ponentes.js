@@ -33,21 +33,20 @@ class CPC_PONENTES{
 
     remove(remove_key){
         var values = this.get_values();
-        var new_values = new Array();
+        
+        var index = values.indexOf(remove_key);
+        if(index > -1){
+            values.splice(index, 1);
+        }
 
-        jQuery.each(values, function(key, val){
-            console.log("key:" + key + " value:" + val);
-            if(key != remove_key){
-                new_values[key] = val;
-            }
-        });
-
-        this.update(new_values);
+        this.update(values);
     }
-    add(key, value){
+    add(value){
         var values = this.get_values();
 
-        values[key] = value;
+        if(values.includes(value)) return;
+
+        values.push(value);
     
         var string_values = JSON.stringify(values);
 
@@ -86,7 +85,7 @@ jQuery(document).ready(function(){
             var value = JSON.parse(data_ponente);
 
 
-            cpc_ponentes.add(ponente_id, value[ponente_id]);
+            cpc_ponentes.add(ponente_id);
 
         }catch(e){
             alert("Error parsing EL PONENTE!, POR FAVOR REVISE O REHAGA LA DESCRIPCIÓN");

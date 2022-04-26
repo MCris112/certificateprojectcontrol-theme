@@ -44,7 +44,7 @@ $args['count'] = $count;
 
 ?>
 
-<section class="cpc_cursos_list <?php if(isset($args['class']['section'])) echo $args['class']['section']; ?>">
+<section class="cpc_cursos_list <?php if (isset($args['class']['section'])) echo $args['class']['section']; ?>">
     <div class="container">
         <?php
 
@@ -61,7 +61,18 @@ $args['count'] = $count;
                     </div>
                     <div class="col col-lg-6 d-flex align-items-center justify-content-end">
                         <p class="text text-center text-lg-end mx-auto mx-lg-none">
-                            Estudia donde sea y cuando quieras, con nuestras clases en modalidad asincronica. Directo desde nuestra plataforma.
+                            <?php
+
+
+                            if (array_key_exists('modalidad', $args)) {
+                                if ($args['modalidad'] == 'asincronico') {
+                                    echo 'Estudia donde sea y cuando quieras, con nuestras clases en modalidad asincronica. Directo desde nuestra plataforma.';
+                                }else{
+                                    echo 'Estudia donde sea y cuando quieras, con nuestras clases en modalidad online en vivo. Directo desde nuestra plataforma.';
+                                }
+                            }
+
+                            ?>
                         </p>
                     </div>
                 </div>

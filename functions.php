@@ -14,7 +14,7 @@ function pcertificate_register_styles()
 	wp_enqueue_script('pcertificate-gsap_scroll_tigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/ScrollTrigger.min.js', array(), '1.0.0', true);
 	wp_enqueue_script('pcertificate-jquery', 'https://code.jquery.com/jquery-3.6.0.min.js', array(), '1.0.0', true);
 
-	
+
 
 	wp_enqueue_style('pcertificate-style', get_template_directory_uri() . '/style.css', array(), '1.0.0', 'all');
 	wp_enqueue_script('pcertificate-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true);
@@ -22,20 +22,20 @@ function pcertificate_register_styles()
 	if (is_front_page()) {
 		wp_enqueue_style('pcertificate-swiper-css', 'https://unpkg.com/swiper@8/swiper-bundle.min.css', array(), '1.0.0', 'all');
 		wp_enqueue_script('pcertificate-swiper-js', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', array(), '1.0.0', true);
-		
+
 		wp_enqueue_style('pcertificate-front-page-css', get_template_directory_uri() . '/assets/css/front-page.css', array(), '1.0.0', 'all');
 		wp_enqueue_script('pcertificate-front-page-js', get_template_directory_uri() . '/assets/js/front-page.js', array(), '1.0.0', true);
 	}
 
-	if ( is_product() ) {
+	if (is_product()) {
 		wp_enqueue_style('pcertificate-product-css', get_template_directory_uri() . '/assets/css/product.css', array('pcertificate-style'), '1.0.0', 'all');
 	}
 
-	if( 'ponentes' == get_post_type() ){
+	if ('ponentes' == get_post_type()) {
 		wp_enqueue_style('pcertificate-ponentes-css', get_template_directory_uri() . '/assets/css/ponentes.css', array(), '1.0.0', 'all');
 	}
 
-	if( is_checkout() || is_cart() || is_account_page()) {
+	if (is_checkout() || is_cart() || is_account_page()) {
 		wp_enqueue_style('pcertificate-checkout-css', get_template_directory_uri() . '/assets/css/shop.css', array('pcertificate-style'), '1.0.0', 'all');
 		wp_enqueue_script('pcertificate-shop-js', get_template_directory_uri() . '/assets/js/shop.js', array(), '1.0.0', true);
 	}
@@ -44,25 +44,26 @@ function pcertificate_register_styles()
 	wp_enqueue_script('pcertificate-product-js', get_template_directory_uri() . '/assets/js/product.js', array(), '1.0.0', true);
 
 
-	if ( is_page_template( 'templates/page-about-us.php' ) ) {
+	if (is_page_template('templates/page-about-us.php')) {
 		wp_enqueue_style('pcertificate-about-css', get_template_directory_uri() . '/assets/css/about-us.css', array(), '1.0.0', 'all');
 	}
 }
 
 add_action('wp_enqueue_scripts', 'pcertificate_register_styles');
 
-function twentytwenty_menus()
+function cpc_theme_menus()
 {
 
 	$locations = array(
 		'cpc_primary'  => "Menu Principal",
 		'cpc_social_media' => "Redes Sociales",
+		'cpc_footer' => "Footer"
 	);
 
 	register_nav_menus($locations);
 }
 
-add_action('init', 'twentytwenty_menus');
+add_action('init', 'cpc_theme_menus');
 
 function cpc_customize_logo_white($wp_customize)
 {
@@ -156,29 +157,31 @@ add_action('init', 'cpc_capacitaciones_change_post_object_label');
 
 
 
-function cpc_menu_get_social_links($classes = array(), $args = array('order' => 'ASC') )
+function cpc_menu_get_social_links($classes = array(), $args = array('order' => 'ASC'))
 {
 
 	$menu_name = 'cpc_social_media';
 	$locations = get_nav_menu_locations();
-	$menu = wp_get_nav_menu_object(array_key_exists( $menu_name, $locations ) ? $locations[$menu_name] : false);
-	
-	if( empty($menu) ) return;
+	$menu = wp_get_nav_menu_object(array_key_exists($menu_name, $locations) ? $locations[$menu_name] : false);
 
-	$menuitems = wp_get_nav_menu_items($menu->term_id, array('order' => array_key_exists('order', $args) ? $args['order'] : 'ASC' ));
+	if (empty($menu)) {
+		echo array_key_exists('div', $classes) ? '<div class="' . $classes['div'] . '">' : '';
+		return;
+	};
+
+	$menuitems = wp_get_nav_menu_items($menu->term_id, array('order' => array_key_exists('order', $args) ? $args['order'] : 'ASC'));
 
 ?>
-	<div <?php echo array_key_exists('div', $classes) ? 'class="'.$classes['div'].'"' : ''; ?>>
-		<ul <?php echo array_key_exists('ul', $classes) ? 'class="'.$classes['ul'].'"' : ''; ?>>
+	<div <?php echo array_key_exists('div', $classes) ? 'class="' . $classes['div'] . '"' : ''; ?>>
+		<ul <?php echo array_key_exists('ul', $classes) ? 'class="' . $classes['ul'] . '"' : ''; ?>>
 			<?php foreach ($menuitems as $item) : ?>
-				<li <?php echo array_key_exists('li', $classes) ? 'class="'.$classes['li'].'"' : ''; ?>>
-					<a <?php echo array_key_exists('a', $classes) ? 'class="'.$classes['a'].'"' : ''; ?> href="<?php echo $item->url; ?>" target="_blank">
+				<li <?php echo array_key_exists('li', $classes) ? 'class="' . $classes['li'] . '"' : ''; ?>>
+					<a <?php echo array_key_exists('a', $classes) ? 'class="' . $classes['a'] . '"' : ''; ?> href="<?php echo $item->url; ?>" target="_blank">
 						<i class="<?php echo implode(' ', $item->classes); ?>"></i>
 
 						<?php
-						
-						if(array_key_exists('label', $args) && $args['label'])
-						{
+
+						if (array_key_exists('label', $args) && $args['label']) {
 							echo $item->title;
 						}
 						?>
@@ -188,7 +191,7 @@ function cpc_menu_get_social_links($classes = array(), $args = array('order' => 
 		</ul>
 	</div>
 
-<?php
+	<?php
 }
 
 
@@ -197,16 +200,18 @@ function cpc_menu_get_social_links($classes = array(), $args = array('order' => 
  * WHEN LOGIN/REGISTER ON WOOCOMMERCE
  */
 
-function cpc_woo_wp_login_php(){
-	if( is_user_logged_in() ){
-		wp_redirect( home_url() );
+function cpc_woo_wp_login_php()
+{
+	if (is_user_logged_in()) {
+		wp_redirect(home_url());
 		return;
 	}
 }
 
-add_action( 'login_init', 'cpc_woo_wp_login_php' );
+add_action('login_init', 'cpc_woo_wp_login_php');
 
-function cpc_var_get_latam_countries(){
+function cpc_var_get_latam_countries()
+{
 	return array(
 		'AR' => 'Argentina',
 		'BO' => 'Bolivia',
@@ -235,26 +240,144 @@ function cpc_var_get_latam_countries(){
 	);
 }
 
-function cpc_cpt_html_select($data, $args){
-	$name = isset($data['name']) ? 'name="'.$data['name'].'"' : '';
-	$id = isset($data['id']) ? 'id="'.$data['id'].'"' : '';
-	$class = isset($data['class']) ? 'class="'.$data['class'].'"' : '';
+function cpc_cpt_html_select($data, $args)
+{
+	$name = isset($data['name']) ? 'name="' . $data['name'] . '"' : '';
+	$id = isset($data['id']) ? 'id="' . $data['id'] . '"' : '';
+	$class = isset($data['class']) ? 'class="' . $data['class'] . '"' : '';
 	$select = isset($data['select']) ? $data['select'] : '';
 
 	$selected_default = empty($value) ? 'selected' : '';
 
-	echo '<select ' . $name . ' ' .$id.' '.$class.'>';
-		echo '<option value="" '.$selected_default.'>Seleccione una opción</option>';
-		foreach ($args as $key => $value) {
-			$selected = "";
+	echo '<select ' . $name . ' ' . $id . ' ' . $class . '>';
+	echo '<option value="" ' . $selected_default . '>Seleccione una opción</option>';
+	foreach ($args as $key => $value) {
+		$selected = "";
 
-			if( $value == $select ){
-				$selected = "selected";
-			}
-
-			echo '<option value="'.$key.'" '.$selected.'>'.$value.'</option>';
+		if ($value == $select) {
+			$selected = "selected";
 		}
+
+		echo '<option value="' . $key . '" ' . $selected . '>' . $value . '</option>';
+	}
 	echo '</select>';
 }
 
+/********************
+ * FUNCTIONS TO USE ON HEADER
+ */
+
+/*
+foreach ($items as $item) {
+	var_dump($item);
+	$class_menu = $item->classes;
+	$item_classes = "";
+
+	for ($i = 0; $i < count($class_menu); $i++) {
+		$item_classes = $class_menu[$i];
+	}
+	echo '<li class="nav-item">
+			<a class="nav-link ' . $item_classes . '" aria-current="page" href="' . $item->url . '">' . $item->title . '</a>
+		</li>';
+}
+*/
+
+function cpc_theme_get_white_logo()
+{
+	$logo_white = get_theme_mod('cpc_logo_white');
+
+	if (empty($logo_white)) {
+		$logo_white = get_template_directory_uri() . '/assets/images/temp_logo.png';
+	}
+	return $logo_white;
+}
+
+function cpc_get_site_icon_url(){
+	$site_icon_url = get_site_icon_url();
+
+	if (empty($site_icon_url)) {
+		$site_icon_url = get_template_directory_uri() . '/assets/images/temp_logo.png';
+	}
+
+	return $site_icon_url;
+}
+
+function cpc_compare_string_and_print($string, $compare, $print)
+{
+	if ($string == $compare) {
+		echo $print;
+	}
+}
+
+
+function cpc_menu_show_items($menuitem, $level = 0)
+{
+	if (empty($menuitem)) return;
+	if (!isset($menuitem)) return;
+
+	if (isset($menuitem->cpc_sunmenu) && !empty(count($menuitem->cpc_sunmenu))) {
+	?>
+		<li class="<?php if ($level >= 1) {
+						echo 'dropdown-item';
+					} ?> nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				<?php echo $menuitem->title; ?>
+			</a>
+			<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<?php
+				foreach ($menuitem->cpc_sunmenu as $item) {
+					cpc_menu_show_items($item, $level .= 1);
+				}
+
+				?>
+			</ul>
+		</li>
+	<?php
+
+		return;
+	}
+
+	?>
+	<li class="nav-item">
+		<a class="<?php if ($level >= 1) {
+						echo 'dropdown-item ';
+					} else {
+						echo 'nav-link ';
+					}
+					global $wp;
+					cpc_compare_string_and_print($menuitem->url, home_url($wp->request) . '/', 'active'); ?>" aria-current="page" href="<?php echo $menuitem->url; ?>"><?php echo $menuitem->title; ?>
+		</a>
+	</li>
+
+<?php
+}
+
+function cpc_combineHierarchy($groups, $categories)
+{
+
+	if (empty($groups) || count($groups) == 0 || $groups == null) return array();
+
+	$hierarchy = array();
+	$menuitems = array();
+
+	foreach ($groups as $group) {
+		if ($group->menu_item_parent == 0) {
+			$menuitems[] = $group;
+		}
+	}
+
+	foreach ($menuitems as $menuitem) {
+		$menuitem->cpc_sunmenu = array();
+
+		foreach ($categories as $category) {
+			if ($category->menu_item_parent == $menuitem->ID) {
+				$menuitem->cpc_sunmenu[] = $category;
+			}
+		}
+
+		$hierarchy[] = $menuitem;
+	}
+
+	return $hierarchy;
+}
 require __DIR__ . '/functions/register.func.php';
