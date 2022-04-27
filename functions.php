@@ -385,7 +385,7 @@ function cpc_get_video_link_about_us(){
 	$video_link = get_theme_mod('cpc_video_link_about_us');
 
 	if (empty($video_link)) {
-		$video_link = 'https://www.youtube.com/embed/9Vpe-dqscyM';
+		$video_link = 'https://www.youtube.com/embed/w9dI-WG3dFU';
 	}
 
 	return $video_link;
