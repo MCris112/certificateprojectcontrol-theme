@@ -334,16 +334,37 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
 
                             <div class="cpc_body">
                                 <?php
-                                foreach ($ponentes as $poenente => $value) {
+                                $ponentes_query_args = array(
+                                    'post_type' => 'ponentes',
+                                    'post__in' => $ponentes,
+                                    'posts_per_page' => -1,
+                                    'orderby' => 'post__in',
+                                );
+
+                                $ponentes_query = new WP_Query($ponentes_query_args);
+
+                                if ($ponentes_query->have_posts()) {
+                                    while ($ponentes_query->have_posts()) {
+                                        $ponentes_query->the_post();
+                                        $subtitle =get_post_meta(get_the_ID(), '_cpc_ponentes_meta_box_subtitle_key', true);
                                 ?>
-                                    <div class="mb-2">
-                                        <strong class="desc"><?php echo $value['name'] ?></strong>
-                                        <p class="desc">CERTIFICADOS: <?php echo $value['certificados'] ?></p>
-                                        <p class="desc"><?php echo $value['subtitle'] ?></p>
-                                        <p class="desc"><?php echo $value['desc'] ?></p>
-                                    </div>
+                                        <div class="mb-2">
+                                            <strong class="desc"><?php echo the_title(); ?></strong>
+                                            <p class="desc">CERTIFICADOS: <?php echo get_post_meta(get_the_ID(), '_cpc_ponentes_meta_box_certificados_key', true); ?></p>
+                                            <?php
+                                            if(!empty($subtitle)){
+                                                echo '<p>{$subtitle}</p>';
+                                            }
+                                            
+                                            ?>
+                                            <p class="desc"><?php echo htmlspecialchars_decode(get_post_meta(get_the_ID(),'_cpc_ponentes_meta_box_desc_key', true)); ?></p>
+                                        </div>
                                 <?php
+                                    }
                                 }
+
+                                wp_reset_query();
+
                                 ?>
                             </div>
 

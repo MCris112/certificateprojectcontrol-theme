@@ -232,3 +232,40 @@ function cpc_shop_ajax_set_new_quantity()
 
 add_action('wp_ajax_cpc_shop_set_new_quantity', 'cpc_shop_ajax_set_new_quantity');
 add_action('wp_ajax_nopriv_cpc_shop_set_new_quantity', 'cpc_shop_ajax_set_new_quantity');
+
+function cpc_shop_ajax_delete_item()
+{
+    $response = array();
+
+    if (!isset($_POST['product_id'])) {
+        $response['status'] = 'error';
+        $response['error'] = 'No se ha enviado la id del producto';
+        $response['code'] = 'no_product_id';
+        echo json_encode($response);
+        wp_die();
+    }
+
+    $product_id_delete = $_POST['product_id'];
+
+    $response["cart"] = array();
+
+    $cart = WC()->cart;
+
+
+    foreach ($cart->get_cart() as $cart_item_key => $cart_item) {
+        $product_id = $cart_item['data']->get_id();
+
+        if ($product_id == $product_id_delete) {
+            $cart->remove_cart_item($cart_item_key); // REMOVE
+        }
+    }
+
+    WC()->cart->set_session();
+    $response['code'] = "good";
+    echo json_encode($response);
+    wp_die();
+
+}
+
+add_action('wp_ajax_cpc_shop_delete_item', 'cpc_shop_ajax_delete_item');
+add_action('wp_ajax_nopriv_cpc_shop_delete_item', 'cpc_shop_ajax_delete_item');

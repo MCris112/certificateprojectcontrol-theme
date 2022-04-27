@@ -35,7 +35,7 @@ get_template_part('template-parts/section', 'title', $args);
             <div class="col col-lg-6 d-flex align-middle">
                 <div class="cpc_presentation">
                     <div class="square_back"></div>
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/9Vpe-dqscyM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src="<?php echo cpc_get_video_link_about_us(); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </div>

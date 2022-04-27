@@ -65,6 +65,21 @@ function cpc_register_panel($wp_customize){
         )
     );
 
+    $wp_customize->add_setting('cpc_video_link_about_us');
+
+    $wp_customize->add_control(
+        new WP_Customize_Control(
+            $wp_customize,
+            'cpc_video_control_link_about_us',
+            array(
+                'label' => 'Link Video Sobre Nosotros',
+                'section' => 'cpc_section_front_page',
+                'settings' => 'cpc_video_link_about_us',
+                'type' => 'text',
+            )
+        )
+    );
+
     $wp_customize->add_section('cpc_section_shop', array(
         'title' => 'Tienda',
         'description' => 'Configuración de la tienda',
