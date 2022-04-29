@@ -200,19 +200,22 @@ function cpc_email_btn_send(from_id, btn) {
   event.preventDefault();
 
   data = cpc_form_get_values(form);
+  capacitaicon_name = data.content.cpc_extra_info.cpc_cpt_name;
 
   was_validated = cpc_email_validate_data(form);
 
-  if(was_validated){
-    form.addClass('was-validated');
-  }else{
+  if (was_validated) {
+    form.addClass("was-validated");
+  } else {
     return;
   }
 
   base_url = $("#cpc_url_site_url").val();
   url_ajax = base_url + "/wp-admin/admin-ajax.php";
 
-  console.log(data);
+
+  console.log("data");
+  console.log();
 
   $.ajax({
     url: url_ajax,
@@ -226,23 +229,27 @@ function cpc_email_btn_send(from_id, btn) {
       data = jQuery.parseJSON(data);
       console.log(data);
 
-      if(data.error) {
-        if(data.error.field) {
+      if (data.error) {
+        if (data.error.field) {
           //if its not null);
-          if(data.error.field.length > 0) {
-            form.removeClass('was-validated')
+          if (data.error.field.length > 0) {
+            form.removeClass("was-validated");
 
             $.each(data.error.field, function (key, value) {
-              $('[name="'+value+'"]').addClass("is-invalid");
+              $('[name="' + value + '"]').addClass("is-invalid");
             });
           }
 
-          cpc_form_btn_state(btn, "error", "Por favor inserte todos los datos requeridos");
+          cpc_form_btn_state(
+            btn,
+            "error",
+            "Por favor inserte todos los datos requeridos"
+          );
           return;
         }
 
         cpc_form_btn_state(btn, "error", "Hubo un error");
-      }else{
+      } else {
         cpc_form_btn_state(btn, "success", "Se ha enviado correctamente");
       }
     },
@@ -251,6 +258,29 @@ function cpc_email_btn_send(from_id, btn) {
     },
   });
 
+  text_content = data.content;
+  $.each(text_content, function (key, value) {
+    //value is array
+    text_content[key] = encodeURIComponent(value);
+
+  });
+
+  console.log(text_content);
+  whatsapp_text =
+    "Nombre%3A%20" +
+    text_content.cpc_name +
+    "%0AApellido%3A%20" +
+    text_content.cpc_last_name +
+    "%20%0AEmial%3A%20" +
+    text_content.cpc_email +
+    "%20%0AN%C3%BAmber%3A%20972621508%0AP%C3%A1is%3A%20" +
+    text_content.cpc_country +
+    "%0ACapacitacion%3A%20" +
+    encodeURIComponent(capacitaicon_name) +
+    "%0A----------%0A%3A%20Mensaje:%0A%0A" +
+    text_content.cpc_message;
+
+  window.open('https://wa.me/51922936632/?text='+whatsapp_text, '_blank');
 }
 
 function cpc_email_validate_data(form, data) {
@@ -305,9 +335,9 @@ function cpc_form_get_values(form) {
     } else {
       key_name = information.name.split("[")[0];
 
-      if(content[key_name]){
+      if (content[key_name]) {
         content[key_name][key_sub_string] = information.value;
-      }else{
+      } else {
         content[key_name] = {};
         content[key_name][key_sub_string] = information.value;
       }
@@ -320,15 +350,14 @@ function cpc_form_get_values(form) {
   };
 }
 
-function cpc_form_btn_state(btn, status, text = null){
-
-  switch(status) {
+function cpc_form_btn_state(btn, status, text = null) {
+  switch (status) {
     case "loading":
       btn.attr("disabled", true);
-      btn.html("<i class='fa fa-spinner fa-pulse fa-fw pe-2'></i> "+ text);
+      btn.html("<i class='fa fa-spinner fa-pulse fa-fw pe-2'></i> " + text);
       break;
     case "success":
-      btn.html("<i class='fa fa-check pe-2'></i> "+ text);
+      btn.html("<i class='fa fa-check pe-2'></i> " + text);
       break;
     case "error":
       btn.attr("disabled", true);

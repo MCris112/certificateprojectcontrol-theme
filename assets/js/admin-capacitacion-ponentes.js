@@ -66,7 +66,6 @@ const cpc_ponentes = new CPC_PONENTES(cpc_field_ponentes_data);
 
 jQuery(document).ready(function(){
     jQuery(".cpc_cpt_btn_add_ponente").click(function(){
-        data_ponente = jQuery(this).attr("data-ponente");
         ponente_id = jQuery(this).attr("data-ponente-id");
 
         jQuery(this).html("Añadido");
@@ -81,14 +80,6 @@ jQuery(document).ready(function(){
             jQuery("#cpc_ponente_btn_add_"+ponente_id).removeAttr("disabled");
         });
 
-        try{
-            var value = JSON.parse(data_ponente);
-
-
-            cpc_ponentes.add(ponente_id);
-
-        }catch(e){
-            alert("Error parsing EL PONENTE!, POR FAVOR REVISE O REHAGA LA DESCRIPCIÓN");
-        }
+        cpc_ponentes.add(ponente_id);
     });
 });

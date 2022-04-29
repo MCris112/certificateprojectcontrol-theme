@@ -6,6 +6,10 @@ $is_near = array_key_exists('near', $args) ? $args['near'] : false;
 $fechas = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_modalidad_fechas', true);
 $fechas_conditional = !empty($fechas);
 
+if($fechas_conditional && !is_array($fechas)){
+    $fechas = json_decode($fechas, true);
+}
+
 $duracion = get_post_meta(get_the_ID(), '_cpc_product_duration', true);
 
 $duracion_txt = empty($duracion) ? 'Sin definir' : $duracion . ' horas';
@@ -62,7 +66,8 @@ if ($args['count'] == 1) {
                         echo ' Sin definir';
                     } else {
                         global $locale;
-                        $date = date_i18n('d \d\e F', strtotime($fechas[0]));
+                        $date = wp_date('d \d\e F', strtotime($fechas[0]));
+                        //$date = date_i18n('d \d\e F', strtotime($fechas[0]));
                         echo $date;
                     }
 

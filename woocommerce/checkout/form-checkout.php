@@ -30,8 +30,19 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 
 ?>
 
+
 <div class="container mt-5 mb-5">
 	<form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
+	<style>
+	.button.alt{
+		background-color: var(--accent) !important;
+	}
+
+	.button.alt:hover{
+		background-color: var(--primary) !important;
+	}
+
+</style>
 
 		<div class="row">
 			<div class="col-12 col-lg-7 pe-md-5">

@@ -195,19 +195,25 @@ $cpc_menu_user = array(
                                             </li>
 
                                             <li class="nav-item dropdown">
-                                                <button id="cpc_menu_shop_btn" class="nav-link dropdown-toggle btn" onclick="cpc_menu_shop_open();" cpc-data-menu-state="close">
+                                            <?php
+
+$cart = WC()->cart;
+$cart_url = wc_get_cart_url();  // Set Cart URL
+
+$items = $cart->get_cart();
+?>
+                                                <button id="cpc_menu_shop_btn" class="nav-link dropdown-toggle btn position-relative" onclick="cpc_menu_shop_open();" cpc-data-menu-state="close">
                                                     <i class="fa fa-shopping-cart"></i>
+                                                    <span id="cpc_menu_shop_btn_badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                        <span class="text"><?php echo count($items);?></span>
+                                                        <span class="visually-hidden">Productos en el carrito</span>
+                                                    </span>
                                                 </button>
                                                 <ul id="cpc_menu_shop_content" class="dropdown-menu">
 
                                                     <div id="cpc_menu_shop_content_items">
-                                                        <?php
-
-                                                        $cart = WC()->cart;
-                                                        $cart_url = wc_get_cart_url();  // Set Cart URL
-
-                                                        $items = $cart->get_cart();
-
+                                                        
+<?php
                                                         if (count($items) == 0) {
                                                             echo "<li class='cpc_menu_shop_empty text-center p-1 mb-5 mt-5'>No hay productos en el carrito</li>";
                                                         }

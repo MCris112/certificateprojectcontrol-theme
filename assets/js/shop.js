@@ -211,6 +211,7 @@ function cpc_shop_ajax_update_cart() {
         cpc_form_btn_state(btn, "error", "Hubo un error con el carrito");
       }
       cpc_shop_update_cart_totals();
+      cpc_shop_cart_update_badge();
     },
     error: function (response) {
       console.log(response);

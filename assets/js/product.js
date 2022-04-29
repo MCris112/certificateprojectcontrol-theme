@@ -16,6 +16,7 @@ function cpc_add_capacitacion_to_cart(btn, add_to_cart_url) {
       $("#cpc_menu_shop_content_items").html(menu);
 
       btn.html("<i class='fa fa-check pe-2'></i> Añadido");
+      cpc_shop_cart_update_badge();
     },
     fail: function (xhr, textStatus, errorThrown) {
       btn.html("<i class='fa fa-exclamation-triangle pe-2'></i> Falló");
@@ -49,7 +50,7 @@ function cpc_remove_capacitacion_to_cart(btn) {
         item = $("#cpc_capacitacion_cart_item_"+cpc_id);
             btn.html("<i class='fa fa-check pe-2'></i>");
             item = $("#cpc_capacitacion_cart_item_"+cpc_id);
-            gsap.to(item, {opacity: 0, duration: .4, ease: "power2.out", onComplete: function(){item.remove();}});
+            gsap.to(item, {opacity: 0, duration: .4, ease: "power2.out", onComplete: function(){item.remove(); cpc_shop_cart_update_badge(); }});
       }
 
       if (data['status'] == "not_found") {
@@ -68,3 +69,24 @@ function cpc_remove_capacitacion_to_cart(btn) {
     },
   });
 }
+
+function cpc_shop_cart_update_badge(){
+    badge = $("#cpc_menu_shop_btn_badge");
+
+    menu = $("#cpc_menu_shop_content_items");
+
+    menu_items = menu.find(".cpc_menu_shop_content_item");
+
+    product_totals = menu_items.length;
+
+    if(product_totals == 0){
+      badge.hide();
+      return;
+    }
+
+    badge.show();
+    badge.find(".text").html(product_totals);
+
+}
+
+cpc_shop_cart_update_badge();

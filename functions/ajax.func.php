@@ -99,7 +99,11 @@ function cpc_email_ajax_send()
     $message = "mensaje:";
 
     foreach ($content as $key => $value) {
-        $message .= $key . ": " . $value . "\n";
+        if(is_array($value)){
+            $message .= $key . ": " . implode(', ', $value) . " | \n";
+        }else{
+            $message .= $key . ": " . $value . "\n";
+        }
     }
 
     $extra_info = $content['extra_info'];
@@ -113,7 +117,7 @@ function cpc_email_ajax_send()
         'cpc_date' => date("Y-m-d"),
         'cpc_time' => date("H:i:s"),
         'cpc_status' => 'pending',
-        'cpc_extra_info' => $extra_info,
+        'cpc_extra_info' => json_encode($extra_info),
     );
 
     foreach ($content as $key => $val) {

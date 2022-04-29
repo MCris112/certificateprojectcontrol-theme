@@ -236,6 +236,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                             <div class="cpc_body">
                                 <form id="cpc_email_form_single_cpt" cpc-data-form-type="email">
                                     <input type="hidden" name="cpc_type" value="capacitacion-single">
+                                    <input type="hidden" name="cpc_extra_info[cpc_cpt_name]" value="<?php echo htmlspecialchars( get_the_title() ); ?>">
                                     <div class="mb-3">
                                         <label for="cpc_form_input_name" class="form-label">Nombres</label>
                                         <input type="text" class="form-control" id="cpc_form_input_name" placeholder="Su nombre" name="cpc_name">
@@ -292,8 +293,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                                         </div>
                                     </div>
 
-                                    <button id="cpc_email_form_btn" type="button" class="btn btn-primary d-block w-100 mb-3" onclick="cpc_email_btn_send('cpc_email_form_single_cpt', $(this));">Enviar mensaje</button>
-                                    <a href="" class="btn btn-whatsapp d-block w-100" target="_blank">Enviar a whatsapp</a>
+                                    <button id="cpc_email_form_btn" type="button" class="btn btn-whatsapp d-block w-100" onclick="cpc_email_btn_send('cpc_email_form_single_cpt', $(this));">Enviar a Whatsapp</button>
                                 </form>
                             </div>
                         </div>
@@ -348,12 +348,12 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                                         $ponentes_query->the_post();
                                         $subtitle =get_post_meta(get_the_ID(), '_cpc_ponentes_meta_box_subtitle_key', true);
                                 ?>
-                                        <div class="mb-2">
-                                            <strong class="desc"><?php echo the_title(); ?></strong>
+                                        <div class="mb-3">
+                                            <strong class="desc mb-1"><?php echo the_title(); ?></strong>
                                             <p class="desc">CERTIFICADOS: <?php echo get_post_meta(get_the_ID(), '_cpc_ponentes_meta_box_certificados_key', true); ?></p>
                                             <?php
                                             if(!empty($subtitle)){
-                                                echo '<p>{$subtitle}</p>';
+                                                echo '<p class="mb-2">'.$subtitle.'</p>';
                                             }
                                             
                                             ?>

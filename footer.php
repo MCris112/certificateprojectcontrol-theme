@@ -15,14 +15,14 @@
                         <input type="hidden" name="cpc_message" value="acceder a nuestras promociones">
                         <div class="mb-3 w-100">
                             <label for="cpc_form_input_name" class="form-label">Nombres</label>
-                            <input type="text" class="form-control" id="cpc_form_input_name" placeholder="Ingrese su nombre" name="cpc_name">
+                            <input type="text" class="form-control" id="cpc_form_footer_input_name" placeholder="Ingrese su nombre" name="cpc_name">
                             <div class="invalid-feedback">
                                 Por favor escriba su nombre.
                             </div>
                         </div>
                         <div class="mb-3 w-100">
                             <label for="cpc_form_input_email" class="form-label">Correo</label>
-                            <input type="email" class="form-control" id="cpc_form_input_email" placeholder="Ingrese su correo ejemplo@correo.com" name="cpc_email">
+                            <input type="email" class="form-control" id="cpc_form_footer_input_email" placeholder="Ingrese su correo ejemplo@correo.com" name="cpc_email">
                             <div class="invalid-feedback">
                                 Por favor escriba su correo.
                             </div>

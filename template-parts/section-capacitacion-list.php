@@ -57,7 +57,7 @@ $args['count'] = $count;
                     <div class="col col-lg-6">
                         <p class="cpc_title sm">Capacitaciones</p>
                         <p class="cpc_title"><?php echo $modalidad_txt; ?></p>
-                        <hr class="cpc_hr mx-auto mx-lg-none">
+                        <hr class="cpc_hr mx-auto ms-lg-1">
                     </div>
                     <div class="col col-lg-6 d-flex align-items-center justify-content-end">
                         <p class="text text-center text-lg-end mx-auto mx-lg-none">

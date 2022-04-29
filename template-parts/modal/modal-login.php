@@ -18,7 +18,7 @@
 
 	<div class="checkbox mb-3">
 		<label  class="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__rememberme">
-			<input  class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox"  id="rememberme" value="forever"> Recuerdame
+			<input  class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox"  id="rememberme" value="forever"> Recuérdame
 		</label>
 	</div>
 	<?php wp_nonce_field('woocommerce-login', 'woocommerce-login-nonce'); ?>

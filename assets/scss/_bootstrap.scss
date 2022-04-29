@@ -113,4 +113,9 @@ Hover EFFECT ON NAVBAR ITEM
     }
 }
 
+.badge{
+    font-size: $txt-small !important; 
+    font-family: $txt-font-body;
+}
+
 @import 'media-query/bootstrap';

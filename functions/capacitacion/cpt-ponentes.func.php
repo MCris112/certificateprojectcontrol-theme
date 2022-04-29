@@ -42,7 +42,7 @@ function cpc_capacitacion_product_ponentes_meta_box_callback()
             $desc = sanitize_text_field(htmlspecialchars_decode(get_post_meta(get_the_ID(), '_cpc_ponentes_meta_box_desc_key', true)));
             $subtitle = get_post_meta(get_the_ID(), '_cpc_ponentes_meta_box_subtitle_key', true);
             $id = get_the_ID();
-            $data_ponente = '{"' . get_the_ID() . '": { "name": "' . get_the_title() . '", "desc": "' . $desc . '", "certificados": "' . $certificados . '", "subtitle": "' . $subtitle . '", "permalink": "' . get_the_permalink() . '"}}';
+            //$data_ponente = '{"' . get_the_ID() . '": { "name": "' . get_the_title() . '", "desc": "' . $desc . '", "certificados": "' . $certificados . '", "subtitle": "' . $subtitle . '", "permalink": "' . get_the_permalink() . '"}}';
     ?>
 
             <div class="card" style="width: 18rem;">
@@ -59,7 +59,7 @@ function cpc_capacitacion_product_ponentes_meta_box_callback()
                 <div class="card-body">
                     <h5 class="card-title"><?php the_title(); ?></h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <button id="cpc_ponente_btn_add_<?php echo $id; ?>" type="button" data-ponente-id="<?php echo $id; ?>" data-ponente='<?php echo $data_ponente; ?>' class="btn btn-primary cpc_cpt_btn_add_ponente">Añadir</button>
+                    <button id="cpc_ponente_btn_add_<?php echo $id; ?>" type="button" data-ponente-id="<?php echo $id; ?>" class="btn btn-primary cpc_cpt_btn_add_ponente">Añadir</button>
                     <button id="cpc_ponente_btn_delete_<?php echo $id; ?>" type="button" class="btn btn-danger" style="display: none;">
                         <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
                     </button>

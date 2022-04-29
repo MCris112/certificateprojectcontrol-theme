@@ -1,12 +1,14 @@
-
-    <?php
+<?php
 
 get_header();
 
-the_content();
-?>
-<H1>404</H1>
+$args = array(
+    'title' => "404",
+    'subtitle' => "Lo sentimos, no encontramos lo que estás buscando.",
+);
+get_template_part('template-parts/section', 'title', $args);
 
-<?php
+the_content();
+
 get_footer();
 ?>
