@@ -120,7 +120,15 @@ defined('ABSPATH') || exit;
 
 						<div class="info row">
 							<div class="col desc">Fecha:</div>
-							<div class="col price"><?php echo $order->get_date_paid()->date('d/m/Y'); ?></div>
+							<?php
+							
+							$date_modified = $order->get_date_modified();
+							$date_paid = $order->get_date_paid();
+
+							$date =  empty( $date_paid ) ? $date_modified : $date_paid->date('d/m/Y');
+							
+							?>
+							<div class="col price"><?php echo $date; ?></div>
 
 						</div>
 

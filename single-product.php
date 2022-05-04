@@ -39,7 +39,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                 <hr class="cpc_hr mx-auto mx-lg-0">
                 <p class="short_desc mx-auto mx-lg-0"><?php echo $product->get_short_description(); ?></p>
                 <div class="d-lg-none w-100 cpc_product_price_c align-items-center">
-                    <p class="cpc_product_price">$<?php echo $product->get_price(); ?></p>
+                    <p class="cpc_product_price"><?php echo get_woocommerce_currency_symbol().$product->get_price(); ?></p>
                     <div class="d-flex gap-4 cpc_product_price_btn">
                         <div class="btn btn-outline-primary">Contáctanos</div>
                         <button onclick="cpc_add_capacitacion_to_cart($(this), '<?php echo esc_url($product->add_to_cart_url()); ?>')" rel="nofollow" data-product_id="<?php echo esc_attr($product->get_id()); ?>" data-product_sku="<?php echo esc_attr($product->get_sku()); ?>" class="btn btn-primary">Comprar Ahora</button>
@@ -162,6 +162,27 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
 
                         if (!empty($beneficios_content) && $has_beneficios == true) {
                             cpc_capacitacion_cpt_box_desc('Beneficios del curso', $beneficios_content);
+                        }
+
+                        $has_objetivos = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_objetivos_select', true);
+                        $objetivos_content =  htmlspecialchars_decode(get_post_meta(get_the_ID(), '_cpc_capacitacion_field_objetivos', true));
+
+                        if (!empty($objetivos_content) && $has_objetivos == true) {
+                            cpc_capacitacion_cpt_box_desc('Objetivos del curso', $objetivos_content);
+                        }
+
+                        $has_publicoObjetivo = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_publico_objetivo_select', true);
+                        $publicoObjetivo_content =  htmlspecialchars_decode(get_post_meta(get_the_ID(), '_cpc_capacitacion_field_publico_objetivo', true));
+
+                        if (!empty($publicoObjetivo_content) && $has_publicoObjetivo == true) {
+                            cpc_capacitacion_cpt_box_desc('Público objetivo del curso', $publicoObjetivo_content);
+                        }
+
+                        $has_requisitos = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_prerrequisitos_select', true);
+                        $requisitos_content =  htmlspecialchars_decode(get_post_meta(get_the_ID(), '_cpc_capacitacion_field_prerrequisitos', true));
+
+                        if (!empty($requisitos_content) && $has_requisitos == true) {
+                            cpc_capacitacion_cpt_box_desc('Requisitos del curso', $requisitos_content);
                         }
 
 

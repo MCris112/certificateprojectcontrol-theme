@@ -24,6 +24,9 @@ function cpc_capacitacion_product_information_meta_box_callback()
             <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Logro</button>
             <button class="nav-link" id="v-pills-metodologia-tab" data-bs-toggle="pill" data-bs-target="#v-pills-metodologia" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Metodología</button>
             <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Beneficios</button>
+            <button class="nav-link" id="v-pills-objetivos-tab" data-bs-toggle="pill" data-bs-target="#v-pills-objetivos" type="button" role="tab" aria-controls="v-pills-objetivos" aria-selected="false">Objetivos</button>
+            <button class="nav-link" id="v-pills-publicoObjetivo-tab" data-bs-toggle="pill" data-bs-target="#v-pills-publicoObjetivo" type="button" role="tab" aria-controls="v-pills-publicoObjetivo" aria-selected="false">Público Objetivo</button>
+            <button class="nav-link" id="v-pills-prerrequisitos-tab" data-bs-toggle="pill" data-bs-target="#v-pills-prerrequisitos" type="button" role="tab" aria-controls="v-pills-prerrequisitos" aria-selected="false">Prerrequisitos</button>
             <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</button>
         </div>
         <div class="tab-content w-100 p-3" id="v-pills-tabContent">
@@ -65,6 +68,44 @@ function cpc_capacitacion_product_information_meta_box_callback()
                     <?php wp_editor( htmlspecialchars_decode( get_post_meta(get_the_ID(), '_cpc_capacitacion_field_beneficios', true) ), '_cpc_capacitacion_field_beneficios', array('textarea_name' => '_cpc_capacitacion_field_beneficios', "media_buttons" => false)); ?>
                 </div>
             </div>
+
+
+            <div class="tab-pane fade w-100 p-3" id="v-pills-objetivos" role="tabpanel" aria-labelledby="v-pills-objetivos-tab">
+                <select id="_cpc_capacitacion_field_objetivos_select" name="_cpc_capacitacion_field_objetivos_select" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option value="true" >Mostrar valor por defecto</option>
+                    <option value="false" selected>Valor Personalizado</option>
+                </select>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Objetivos</label>
+                    <?php wp_editor( htmlspecialchars_decode( get_post_meta(get_the_ID(), '_cpc_capacitacion_field_objetivos', true) ), '_cpc_capacitacion_field_objetivos', array('textarea_name' => '_cpc_capacitacion_field_objetivos', "media_buttons" => false)); ?>
+                </div>
+            </div>
+
+            <div class="tab-pane fade w-100 p-3" id="v-pills-publicoObjetivo" role="tabpanel" aria-labelledby="v-pills-publicoObjetivo-tab">
+                <select id="_cpc_capacitacion_field_publicoObjetivo_select" name="_cpc_capacitacion_field_publicoObjetivo_select" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option value="true" >Mostrar valor por defecto</option>
+                    <option value="false" selected>Valor Personalizado</option>
+                </select>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Público Objetivo</label>
+                    <?php wp_editor( htmlspecialchars_decode( get_post_meta(get_the_ID(), '_cpc_capacitacion_field_publicoObjetivo', true) ), '_cpc_capacitacion_field_publicoObjetivo', array('textarea_name' => '_cpc_capacitacion_field_publicoObjetivo', "media_buttons" => false)); ?>
+                </div>
+            </div>
+
+            <div class="tab-pane fade w-100 p-3" id="v-pills-prerrequisitos" role="tabpanel" aria-labelledby="v-pills-prerrequisitos-tab">
+                <select id="_cpc_capacitacion_field_prerrequisitos_select" name="_cpc_capacitacion_field_prerrequisitos_select" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option value="true" >Mostrar valor por defecto</option>
+                    <option value="false" selected>Valor Personalizado</option>
+                </select>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Prerrequisitos</label>
+                    <?php wp_editor( htmlspecialchars_decode( get_post_meta(get_the_ID(), '_cpc_capacitacion_field_prerrequisitos', true) ), '_cpc_capacitacion_field_prerrequisitos', array('textarea_name' => '_cpc_capacitacion_field_prerrequisitos', "media_buttons" => false)); ?>
+                </div>
+            </div>
+
             <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
         </div>
     </div>
@@ -97,6 +138,15 @@ function cpc_capacitacion_product_information_save_meta_box($post_id)
 
     update_post_meta($post_id, '_cpc_capacitacion_field_beneficios_select', $_POST['_cpc_capacitacion_field_beneficios_select']);
     update_post_meta($post_id, '_cpc_capacitacion_field_beneficios', htmlspecialchars( $_POST['_cpc_capacitacion_field_beneficios'] ) );
+
+    update_post_meta($post_id, '_cpc_capacitacion_field_objetivos_select', $_POST['_cpc_capacitacion_field_objetivos_select']);
+    update_post_meta($post_id, '_cpc_capacitacion_field_objetivos', htmlspecialchars( $_POST['_cpc_capacitacion_field_objetivos'] ) );
+
+    update_post_meta($post_id, '_cpc_capacitacion_field_publico_objetivo_select', $_POST['_cpc_capacitacion_field_publicoObjetivo_select']);
+    update_post_meta($post_id, '_cpc_capacitacion_field_publico_objetivo', htmlspecialchars( $_POST['_cpc_capacitacion_field_publicoObjetivo'] ) );
+
+    update_post_meta($post_id, '_cpc_capacitacion_field_prerrequisitos_select', $_POST['_cpc_capacitacion_field_prerrequisitos_select']);
+    update_post_meta($post_id, '_cpc_capacitacion_field_prerrequisitos', htmlspecialchars( $_POST['_cpc_capacitacion_field_prerrequisitos'] ) );
 }
 
 add_action('save_post', 'cpc_capacitacion_product_information_save_meta_box');

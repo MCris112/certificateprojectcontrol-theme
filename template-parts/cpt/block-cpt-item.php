@@ -86,7 +86,7 @@ if ($args['count'] == 1) {
                     ?>
                 </span>
                 <span class="sessions"><i class="fa fa-archive"></i><?php echo $sessiones; ?></span>
-                <span class="price">$<?php echo $product->get_price(); ?></span>
+                <span class="price"><?php echo get_woocommerce_currency_symbol().$product->get_price(); ?></span>
             </div>
 
             <a href="<?php echo get_permalink(); ?>" class="btn btn-primary d-block">Ver Curso</a>
@@ -134,7 +134,7 @@ if ($args['count'] == 1) {
             <div class="info">
                 <span class="time"><i class="fa fa-clock-o"></i><?php echo $duracion_txt; ?></span>
                 <span class="sessions"><i class="fa fa-archive"></i><?php echo $sessiones; ?></span>
-                <span class="price">$<?php echo $product->get_price(); ?></span>
+                <span class="price"><?php echo get_woocommerce_currency_symbol().$product->get_price(); ?></span>
             </div>
 
             <a href="<?php echo get_permalink(); ?>" class="btn btn-primary d-block">Ver Curso</a>

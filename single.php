@@ -34,8 +34,45 @@ the_post_navigation(array(
         '<span class="post-title">%title</span>',
 ));
 
+
 */
-        ?>
+
+$ponentes = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_ponentes', true);
+if (!empty($ponentes)) {
+
+    ?>
+
+        <div class="cpc_blog_info_i">
+            <i class="fa fa-user"></i>
+
+            <?php
+            $ponentes = json_decode($ponentes, true);
+
+            $ponentes_args_query = array(
+                'post_type' => 'ponentes',
+                'post__in' => $ponentes,
+                'posts_per_page' => -1,
+                'orderby' => 'post__in',
+            );
+
+            $ponentes_query = new WP_Query($ponentes_args_query);
+
+            if ($ponentes_query->have_posts()) {
+                while ($ponentes_query->have_posts()) {
+                    $ponentes_query->the_post();
+            ?>
+                    <span class="text">Por: <a href="<?php the_permalink(); ?>"><?php echo the_title(); ?></a></span>
+            <?php
+                }
+
+                wp_reset_postdata();
+            }
+            ?>
+        </div>
+    <?php
+    }
+
+    ?>
 
     </article>
 </div>
