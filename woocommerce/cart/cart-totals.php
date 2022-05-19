@@ -37,12 +37,12 @@ defined('ABSPATH') || exit;
 			<div class="col price"></div>
 		</!--div-->
 
-		<?php foreach (WC()->cart->get_coupons() as $code => $coupon) : ?>
+		<?php /* foreach (WC()->cart->get_coupons() as $code => $coupon) : ?>
 			<div class="info row coupon-<?php echo esc_attr(sanitize_title($code)); ?>">
 				<div class="col desc"><?php wc_cart_totals_coupon_label($coupon); ?></div>
 				<div class="col price"><?php wc_cart_totals_coupon_html($coupon); ?></div>
 			</div>
-		<?php endforeach; ?>
+		<?php endforeach; */?>
 
 		<?php if (WC()->cart->needs_shipping() && WC()->cart->show_shipping()) : ?>
 
@@ -106,7 +106,7 @@ defined('ABSPATH') || exit;
 
 		<?php do_action('woocommerce_cart_totals_after_order_total'); ?>
 
-		<?php if (wc_coupons_enabled()) { ?>
+		<?php /* if (wc_coupons_enabled()) { ?>
 			<div class="input-group margin-bottom-sm" style="display: grid; grid-template-columns: 1fr auto;">
 				<div class="form-floating">
 					<input type="text" class="form-control" id="cpcInputCupon" placeholder="Código de cupón" name="coupon_code" name="coupon_code" id="coupon_code" value="">
@@ -116,7 +116,7 @@ defined('ABSPATH') || exit;
 				<button class="btn btn-primary"><i class="fa fa-check"></i></button>
 				<?php do_action('woocommerce_cart_coupon'); ?>
 			</div>
-		<?php } ?>
+		<?php } */?>
 
 		<div class="info total row">
 			<div class="col desc"><?php esc_html_e('Total', 'woocommerce'); ?></div>
