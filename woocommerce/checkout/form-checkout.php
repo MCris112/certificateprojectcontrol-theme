@@ -33,16 +33,15 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 
 <div class="container mt-5 mb-5">
 	<form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
-	<style>
-	.button.alt{
-		background-color: var(--accent) !important;
-	}
+		<style>
+			.button.alt {
+				background-color: var(--accent) !important;
+			}
 
-	.button.alt:hover{
-		background-color: var(--primary) !important;
-	}
-
-</style>
+			.button.alt:hover {
+				background-color: var(--primary) !important;
+			}
+		</style>
 
 		<div class="row">
 			<div class="col-12 col-lg-7 pe-md-5">
@@ -74,6 +73,10 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 
 				<div id="order_review" class="woocommerce-checkout-review-order">
 					<?php get_template_part('template-parts/cart/content', 'orders') ?>
+
+					<div class="d-flex justify-content-end mb-5">
+						<a href="<?php echo wc_get_cart_url(); ?>" class="btn btn-primary">Editar pedido</a>
+					</div>
 
 					<?php do_action('woocommerce_checkout_order_review'); ?>
 				</div>

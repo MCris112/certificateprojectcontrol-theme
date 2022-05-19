@@ -1,7 +1,15 @@
 <section class="cpc_blog">
     <div class="container">
         <div class="cpc_title">
-            Nuestras Publicaciones
+            <?php
+            
+            if(array_key_exists('title', $args)){
+                echo $args['title'];
+            }else{
+                echo "Nuestras Publicaciones";
+            }
+            
+            ?>
             <hr class="cpc_hr">
         </div>
 
@@ -13,6 +21,15 @@
                 'posts_per_page' => 4,
                 'ignore_sticky_posts' => 1,
             );
+
+            if (array_key_exists('add', $args)) {
+                $addons = $args['add'];
+
+                foreach ($addons as $add => $value) {
+                    $args_query[$add] = $value;
+                }
+            }
+
 
             $post_query = new WP_Query($args_query);
             $count = $post_query->post_count;
@@ -66,36 +83,41 @@
 
                                 if (!empty($ponentes)) {
 
+
+                                    $ponentes = json_decode($ponentes, true);
+
+                                    if (count($ponentes) > 0) {
                                 ?>
 
-                                    <div class="cpc_blog_info_i">
-                                        <i class="fa fa-user"></i>
+                                        <div class="cpc_blog_info_i">
+                                            <i class="fa fa-user"></i>
 
-                                        <?php
-                                        $ponentes = json_decode($ponentes, true);
+                                            <?php
+                                            $ponentes_args_query = array(
+                                                'post_type' => 'ponentes',
+                                                'post__in' => $ponentes,
+                                                'posts_per_page' => -1,
+                                                'orderby' => 'post__in',
+                                            );
 
-                                        $ponentes_args_query = array(
-                                            'post_type' => 'ponentes',
-                                            'post__in' => $ponentes,
-                                            'posts_per_page' => -1,
-                                            'orderby' => 'post__in',
-                                        );
+                                            $ponentes_query = new WP_Query($ponentes_args_query);
 
-                                        $ponentes_query = new WP_Query($ponentes_args_query);
+                                            if ($ponentes_query->have_posts()) {
+                                                while ($ponentes_query->have_posts()) {
+                                                    $ponentes_query->the_post();
+                                            ?>
+                                                    <span class="text"><a href="<?php the_permalink(); ?>"><?php echo the_title(); ?></a></span>
+                                            <?php
+                                                }
 
-                                        if ($ponentes_query->have_posts()) {
-                                            while ($ponentes_query->have_posts()) {
-                                                $ponentes_query->the_post();
-                                        ?>
-                                                <span class="text"><a href="<?php the_permalink(); ?>"><?php echo the_title(); ?></a></span>
-                                        <?php
+                                                wp_reset_postdata();
                                             }
 
-                                            wp_reset_postdata();
-                                        }
-                                        ?>
-                                    </div>
+
+                                            ?>
+                                        </div>
                                 <?php
+                                    }
                                 }
 
                                 ?>
@@ -108,7 +130,7 @@
             <?php
                 }
             } else {
-                echo 'No hay entradas';
+                get_template_part('template-parts/block', 'empty-search', ['no_found_text' => 'No se han encontrado eventos relacionados']);
             }
 
             ?>

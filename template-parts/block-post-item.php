@@ -1,3 +1,18 @@
+<?php
+
+if( get_post_type() == 'product' ){
+    ?>
+    <div class="mb-3" style="height:auto;">
+        <?php
+        $args['count'] = 1;
+        get_template_part('template-parts/cpt/block', 'cpt-item', $args);
+        ?>
+    </div>
+    <?php
+}else{
+    ?>
+
+
 <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
     <div class="col p-4 d-flex flex-column position-static">
         <div class="d-flex">
@@ -45,3 +60,8 @@
 
     </div>
 </div>
+
+    <?php
+}
+
+?>

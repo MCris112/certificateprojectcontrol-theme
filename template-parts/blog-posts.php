@@ -9,6 +9,8 @@
                 $wp_query->the_post();
                 get_template_part('template-parts/block', 'post-item');
             }
+        }else{
+            get_template_part('template-parts/block', 'empty-search');
         }
     }else {
         $query = new WP_Query($args);
@@ -18,6 +20,8 @@
                 $query->the_post();
                 get_template_part('template-parts/block', 'post-item');
             }
+        }else{
+            get_template_part('template-parts/block', 'empty-search');
         }
     }
 

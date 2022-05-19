@@ -6,46 +6,47 @@ add_theme_support('woocommerce');
 
 function pcertificate_register_styles()
 {
-	wp_enqueue_style('pcertificate-bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css', array(), '1.0.0', 'all');
-	wp_enqueue_style('pcertificate-fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', array(), '1.0.0', 'all');
-	wp_enqueue_script('pcertificate-gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js', array(), '1.0.0');
-	wp_enqueue_script('bootstrap_popper', 'https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js', array(), '1.0.0', true);
-	wp_enqueue_script('bootstrap_jsr', 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js', array(), '1.0.0', true);
-	wp_enqueue_script('pcertificate-gsap_scroll_tigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/ScrollTrigger.min.js', array(), '1.0.0', true);
-	wp_enqueue_script('pcertificate-jquery', 'https://code.jquery.com/jquery-3.6.0.min.js', array(), '1.0.0', true);
+	wp_enqueue_style('pcertificate-bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css', array(), '1.4.0', 'all');
+	wp_enqueue_style('pcertificate-fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', array(), '1.4.0', 'all');
+	wp_enqueue_script('pcertificate-gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js', array(), '1.4.0');
+	wp_enqueue_script('bootstrap_popper', 'https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js', array(), '1.4.0', true);
+	wp_enqueue_script('bootstrap_jsr', 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js', array(), '1.4.0', true);
+	wp_enqueue_script('pcertificate-gsap_scroll_tigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/ScrollTrigger.min.js', array(), '1.4.0', true);
+	wp_enqueue_script('pcertificate-jquery', 'https://code.jquery.com/jquery-3.6.0.min.js', array(), '1.4.0', true);
 
 
 
-	wp_enqueue_style('pcertificate-style', get_template_directory_uri() . '/style.css', array(), '1.0.0', 'all');
-	wp_enqueue_script('pcertificate-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true);
+	wp_enqueue_style('pcertificate-style', get_template_directory_uri() . '/style.css', array(), '1.4.0', 'all');
+	wp_enqueue_script('pcertificate-js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.4.0', true);
+
+	wp_enqueue_style('pcertificate-swiper-css', 'https://unpkg.com/swiper@8/swiper-bundle.min.css', array(), '1.4.0', 'all');
+	wp_enqueue_script('pcertificate-swiper-js', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', array(), '1.4.0', true);
+
 
 	if (is_front_page()) {
-		wp_enqueue_style('pcertificate-swiper-css', 'https://unpkg.com/swiper@8/swiper-bundle.min.css', array(), '1.0.0', 'all');
-		wp_enqueue_script('pcertificate-swiper-js', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', array(), '1.0.0', true);
-
-		wp_enqueue_style('pcertificate-front-page-css', get_template_directory_uri() . '/assets/css/front-page.css', array(), '1.0.0', 'all');
-		wp_enqueue_script('pcertificate-front-page-js', get_template_directory_uri() . '/assets/js/front-page.js', array(), '1.0.0', true);
+		wp_enqueue_style('pcertificate-front-page-css', get_template_directory_uri() . '/assets/css/front-page.css', array(), '1.4.0', 'all');
+		wp_enqueue_script('pcertificate-front-page-js', get_template_directory_uri() . '/assets/js/front-page.js', array(), '1.4.0', true);
 	}
 
 	if (is_product()) {
-		wp_enqueue_style('pcertificate-product-css', get_template_directory_uri() . '/assets/css/product.css', array('pcertificate-style'), '1.0.0', 'all');
+		wp_enqueue_style('pcertificate-product-css', get_template_directory_uri() . '/assets/css/product.css', array('pcertificate-style'), '1.4.0', 'all');
 	}
 
 	if ('ponentes' == get_post_type()) {
-		wp_enqueue_style('pcertificate-ponentes-css', get_template_directory_uri() . '/assets/css/ponentes.css', array(), '1.0.0', 'all');
+		wp_enqueue_style('pcertificate-ponentes-css', get_template_directory_uri() . '/assets/css/ponentes.css', array(), '1.4.0', 'all');
 	}
 
 	if (is_checkout() || is_cart() || is_account_page()) {
-		wp_enqueue_style('pcertificate-checkout-css', get_template_directory_uri() . '/assets/css/shop.css', array('pcertificate-style'), '1.0.0', 'all');
-		wp_enqueue_script('pcertificate-shop-js', get_template_directory_uri() . '/assets/js/shop.js', array(), '1.0.0', true);
+		wp_enqueue_style('pcertificate-checkout-css', get_template_directory_uri() . '/assets/css/shop.css', array('pcertificate-style'), '1.4.0', 'all');
+		wp_enqueue_script('pcertificate-shop-js', get_template_directory_uri() . '/assets/js/shop.js', array(), '1.4.0', true);
 	}
 
 	//function to cart need to be initialized
-	wp_enqueue_script('pcertificate-product-js', get_template_directory_uri() . '/assets/js/product.js', array(), '1.0.0', true);
+	wp_enqueue_script('pcertificate-product-js', get_template_directory_uri() . '/assets/js/product.js', array(), '1.4.0', true);
 
 
 	if (is_page_template('templates/page-about-us.php')) {
-		wp_enqueue_style('pcertificate-about-css', get_template_directory_uri() . '/assets/css/about-us.css', array(), '1.0.0', 'all');
+		wp_enqueue_style('pcertificate-about-css', get_template_directory_uri() . '/assets/css/about-us.css', array(), '1.4.0', 'all');
 	}
 }
 
@@ -56,6 +57,7 @@ function cpc_theme_menus()
 
 	$locations = array(
 		'cpc_primary'  => "Menu Principal",
+		'cpc_social_media_header' => "Redes Sociales Header",
 		'cpc_social_media' => "Redes Sociales",
 		'cpc_footer' => "Footer"
 	);
@@ -157,10 +159,14 @@ add_action('init', 'cpc_capacitaciones_change_post_object_label');
 
 
 
-function cpc_menu_get_social_links($classes = array(), $args = array('order' => 'ASC'))
+function cpc_menu_get_social_links($classes = array(), $args = array('order' => 'ASC'), $is_header = false)
 {
 
 	$menu_name = 'cpc_social_media';
+
+	if($is_header){
+		$menu_name = 'cpc_social_media_header';
+	}
 	$locations = get_nav_menu_locations();
 	$menu = wp_get_nav_menu_object(array_key_exists($menu_name, $locations) ? $locations[$menu_name] : false);
 
@@ -316,12 +322,19 @@ function cpc_menu_show_items($menuitem, $level = 0)
 	if (!isset($menuitem)) return;
 
 	if (isset($menuitem->cpc_sunmenu) && !empty(count($menuitem->cpc_sunmenu))) {
+		$classes = $menuitem->classes;
 	?>
 		<li class="<?php if ($level >= 1) {
 						echo 'dropdown-item';
 					} ?> nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-				<?php echo $menuitem->title; ?>
+				<?php
+				if(count($classes) > 1 && $classes[0] == 'cri_icon'){
+					echo '<i class="' . implode(' ', $classes) . '"></i>';
+				}else{
+					echo $menuitem->title; 
+				}
+				 ?>
 			</a>
 			<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 				<?php
@@ -389,5 +402,28 @@ function cpc_get_video_link_about_us(){
 	}
 
 	return $video_link;
+}
+
+
+/************************************************************************************************
+ * 
+ * PRODUCTS
+ */
+
+function cpc_show_block_item_price($product)
+{
+	echo '<span class="price position-relative">';
+    echo get_woocommerce_currency_symbol() . $product->get_price();
+
+    if ($product->is_on_sale()) {
+?>
+        <span class="badge bg-danger cpc-text-small" style="transform: scale(.6);">
+            ON SALE
+            <span class="visually-hidden">Producto ON SALE</span>
+        </span>
+    <?php
+    }
+
+	echo '</span>';
 }
 require __DIR__ . '/functions/register.func.php';

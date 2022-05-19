@@ -6,13 +6,13 @@ $is_near = array_key_exists('near', $args) ? $args['near'] : false;
 $fechas = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_modalidad_fechas', true);
 $fechas_conditional = !empty($fechas);
 
-if($fechas_conditional && !is_array($fechas)){
+if ($fechas_conditional && !is_array($fechas)) {
     $fechas = json_decode($fechas, true);
 }
 
 $duracion = get_post_meta(get_the_ID(), '_cpc_product_duration', true);
 
-$duracion_txt = empty($duracion) ? 'Sin definir' : $duracion . ' horas';
+$duracion_txt = empty($duracion) ? 'Sin definir' : $duracion . ' horas Acad.';
 
 $subtitle = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_sub_title', true);
 $sessiones = 'Sin definir';
@@ -86,7 +86,10 @@ if ($args['count'] == 1) {
                     ?>
                 </span>
                 <span class="sessions"><i class="fa fa-archive"></i><?php echo $sessiones; ?></span>
-                <span class="price"><?php echo get_woocommerce_currency_symbol().$product->get_price(); ?></span>
+
+                <?php
+                cpc_show_block_item_price($product);
+                ?>
             </div>
 
             <a href="<?php echo get_permalink(); ?>" class="btn btn-primary d-block">Ver Curso</a>
@@ -134,7 +137,9 @@ if ($args['count'] == 1) {
             <div class="info">
                 <span class="time"><i class="fa fa-clock-o"></i><?php echo $duracion_txt; ?></span>
                 <span class="sessions"><i class="fa fa-archive"></i><?php echo $sessiones; ?></span>
-                <span class="price"><?php echo get_woocommerce_currency_symbol().$product->get_price(); ?></span>
+                <?php
+                cpc_show_block_item_price($product);
+                ?>
             </div>
 
             <a href="<?php echo get_permalink(); ?>" class="btn btn-primary d-block">Ver Curso</a>

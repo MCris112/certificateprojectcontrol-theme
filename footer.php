@@ -3,8 +3,7 @@
         <div class="row">
             <div class="col-12 col-lg-7 mb-4 mb-lg-0">
                 <div class="cpc_mewsletter_text">
-                    <h3 class="cpc_title">Envianós tu email para acceder a nuestras promociones</h3>
-                    <p class="sub">Recibe nuestras promociones y noticias</p>
+                    <h3 class="cpc_title mb-4">Envianós tu email para acceder a nuestras promociones</h3>
                     <span class="info">Al enviar su correo está aceptando <a href="<?php echo get_permalink(get_theme_mod('cpc_cpt_newsletter_link_conditions_and_terms')); ?>">nuestros términos y cóndiciones</a></span>
                 </div>
             </div>
@@ -35,11 +34,51 @@
     </div>
 </div>
 
+<section id="clientes" style="margin: 6rem 0;">
+    <div class="container">
+
+        <div class="cpc_title text-center mb-5">
+            Nuestros clientes nos respaldan
+            <hr class="cpc_hr mx-auto">
+        </div>
+
+        <div class="my-4" style="padding-bottom: 1rem;"></div>
+        <!-- Slider main container -->
+        <div class="swiper mySwiper mt-5">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide"><img src="<?php echo get_template_directory_uri() . "/assets/images/clients/ohla-peru.jpg" ?>" class="w-100" alt="" style="object-fit: contain; height: 15vh;"></div>
+                <div class="swiper-slide"><img src="<?php echo get_template_directory_uri() . "/assets/images/clients/monta-egil.jpg" ?>" class="w-100" alt="" style="object-fit: contain; height: 15vh;"></div>
+                <div class="swiper-slide"><img src="<?php echo get_template_directory_uri() . "/assets/images/clients/sacyr.jpg" ?>" class="w-100" alt="" style="object-fit: contain; height: 15vh;"></div>
+                <div class="swiper-slide"><img src="<?php echo get_template_directory_uri() . "/assets/images/clients/Inti-punku.jpg" ?>" class="w-100" alt="" style="object-fit: contain; height: 15vh;"></div>
+                <div class="swiper-slide"><img src="<?php echo get_template_directory_uri() . "/assets/images/clients/anglo-american.jpg" ?>" class="w-100" alt="" style="object-fit: contain; height: 15vh;"></div>
+                <div class="swiper-slide"><img src="<?php echo get_template_directory_uri() . "/assets/images/clients/cumbra.jpg" ?>" class="w-100" alt="" style="object-fit: contain; height: 15vh;"></div>
+            </div>
+
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+
+    </div>
+</section>
+
 
 <footer>
     <div class="container">
         <div class="cpc_footer_i img">
-            <img src="<?php echo cpc_get_site_icon_url() ?>" alt="">
+            <a href="<?php echo site_url(); ?>" class="col cpc_logo d-flex justify-content-start mb-3">
+                <img src="<?php echo cpc_theme_get_white_logo(); ?>" alt="">
+            </a>
+
+            <p class="desc text-white">
+                Consultoría especializada en:
+                Bussiness intelligence (Power BI)
+                Forensic Schedule Analylis
+                Preparación certificaciones AACE
+                Preparación certificaciones PMI
+                Gestión de proyectos.</p>
         </div>
 
         <?php
@@ -53,24 +92,50 @@
 
         foreach ($hierarchy as $menuitem) {
             if (isset($menuitem->cpc_sunmenu) && !empty(count($menuitem->cpc_sunmenu))) {
-                ?>
+                $class_main = $menuitem->classes;
+        ?>
 
-                <div class="cpc_footer_i">
+                <div class="cpc_footer_i down">
+                    <span class="text-muted mb-3 fw"> <?php echo $menuitem->title; ?></span>
                     <?php
-                    
+
                     foreach ($menuitem->cpc_sunmenu as $item) {
-                        ?>
-                        <a href="<?php echo $item->url; ?>"><?php echo $item->title; ?> <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                        <?php
+                        $classes = $item->classes;
+                    ?>
+                        <span>
+                            <?php
+
+                            if (count($classes) > 0) {
+                                $classes = implode(" ", $classes);
+                                echo '<i class="' . $classes . '"></i>';
+                            }
+                            ?>
+                            <a class="ms-2" href="<?php echo $item->url; ?>"><?php echo $item->title; ?></a>
+                        </span>
+                    <?php
                     }
-                    
+
+                    if (in_array('display_menu_social', $class_main)) {
+                        cpc_menu_get_social_links(
+                            array(
+                                'div' => 'w-100 mt-4',
+                                'ul' => 'header_icons justify-content-start w-100 align-items-start',
+                                'a' => 'd-flex align-items-center gap-1 text-decoration-none rounded p-2 bg-secondary',
+                            ),
+                        );
+                    }
+
                     ?>
                 </div>
-    
-            <?php
+
+        <?php
             }
         }
         ?>
+    </div>
+
+    <div class="container copy">
+        <span class="text-muted">&copy;2022 Certificate Project Control</s>
     </div>
 </footer>
 
@@ -84,10 +149,23 @@ wp_footer();
 
 ?>
 
+
 <script>
-
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        slidesPerGroup: 3,
+        loop: true,
+        autoplay: {
+            delay: 5000,
+        },
+        loopFillGroupWithBlank: true,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
 </script>
-
 
 </body>
 

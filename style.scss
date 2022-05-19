@@ -7,7 +7,7 @@ Description: Built on a solidly designed foundation, Twenty Twenty-Two embraces 
 Requires at least: 5.9
 Tested up to: 5.9
 Requires PHP: 5.6
-Version: 1.3
+Version: 1.6.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: certificateprojectcontroltheme
@@ -18,6 +18,10 @@ Text Domain: certificateprojectcontroltheme
 @import 'assets/scss/root';
 @import 'assets/scss/bootstrap';
 @import 'assets/scss/header';
+
+#clientes{
+    color: $secondary;
+}
 
 .swiper {
   width: 100%;
@@ -139,10 +143,28 @@ Text Domain: certificateprojectcontroltheme
         .navbar{
             background: none !important;
         }
+
+        .menu_card_item{
+            i{
+                color: white;
+                font-size: $txt-body;
+            }
+        }
+
+        .menu_user_item{
+            color: white;
+        }
     }
 
     .navbar{
         transition: all .3s;
+    }
+
+    .menu_card_item{
+        i{
+            color: white;
+            font-size: $txt-body;
+        }
     }
 }
 
@@ -382,7 +404,7 @@ Text Domain: certificateprojectcontroltheme
         left: 50%;
         transform: translate(-50%);
 
-        font-size: 20px;
+        font-size: $txt-small;
 
         padding: .6rem 1.5rem;
         border-radius: 10px;
@@ -450,6 +472,7 @@ Text Domain: certificateprojectcontroltheme
     .card_title{
         font-weight: 500;
         font-size: $txt-subtitle;
+        font-family: $txt-font-title;
         color: white;
 
         margin-top: 2rem;
@@ -718,48 +741,60 @@ Text Domain: certificateprojectcontroltheme
 }
 
 footer{
-    padding: 8rem 0;
+    padding: 2rem 0;
+    background: $primary;
+    color: white;
 
     .container{
         display: grid;
-        grid-template-columns: 300px 1fr 1fr;
+        grid-template-columns: 2fr 1fr 1fr 1.5fr;
+        grid-auto-rows: 1fr;
         justify-content: center;
         align-items: center;
         justify-items: center;
         gap: 3rem;
+
+        &.copy{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 1rem 0;
+            font-size: $txt-small;
+        }
     }
 
     .cpc_footer_i{
         width: 100%;
+        height: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: flex-start;
 
-        font-size: 1.5rem;
+        font-size: $txt-small !important;
 
+        &.down{
+            padding-top: 3rem;
+        }
+        
         img{
-            width: 50%;
-            height: 100%;
+            width: 100%;
+            height: auto;
             object-fit: contain;
+        }
+
+        i{
+        font-size: $txt-small !important;
+        }
+        .desc{
+            font-size: $txt-small;
         }
 
         a{
             transition: all 0.3s;
             text-decoration: none;
-
-            i{
-                font-size: 20px;
-                transition: all 0.4s;
-                margin-left: .5rem;
-            }
-
-            &:hover{
-
-                i{
-                    transform: translateX(10px);
-                }
-            }
+            color: white;
         }
     }
 }

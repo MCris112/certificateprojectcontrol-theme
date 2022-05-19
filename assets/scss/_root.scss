@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 
 body, p, .desc{
     font-size: $txt-body;
@@ -70,19 +70,13 @@ body {
   height: 100%;
 }
 
-.navbar{
-    a, li{
-        font-family: $txt-font-title !important;
-    }
-}
-
 
 .cpc_hr{
     width: 100px;
     max-width: 40%;
     height: 0px;
 
-    border: 3px solid $primary;
+    border: 2px solid $primary;
     background: $primary;
     opacity: 1;
     margin-top: 1rem;

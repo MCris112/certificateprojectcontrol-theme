@@ -36,10 +36,10 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
             <div class="col-12 col-lg-8 text-center text-lg-start">
                 <h1 class="cpc_title"><?php the_title(); ?></h1>
                 <p class="cpc_subtitle"><?php echo cpc_get_meta_field('_cpc_capacitacion_field_sub_title'); ?></p>
-                <hr class="cpc_hr mx-auto mx-lg-0">
+                <hr class="cpc_hr mx-auto mx-lg-0 mb-4">
                 <p class="short_desc mx-auto mx-lg-0"><?php echo $product->get_short_description(); ?></p>
                 <div class="d-lg-none w-100 cpc_product_price_c align-items-center">
-                    <p class="cpc_product_price"><?php echo get_woocommerce_currency_symbol().$product->get_price(); ?></p>
+                    <p class="cpc_product_price"><?php echo get_woocommerce_currency_symbol() . $product->get_price(); ?></p>
                     <div class="d-flex gap-4 cpc_product_price_btn">
                         <div class="btn btn-outline-primary">Contáctanos</div>
                         <button onclick="cpc_add_capacitacion_to_cart($(this), '<?php echo esc_url($product->add_to_cart_url()); ?>')" rel="nofollow" data-product_id="<?php echo esc_attr($product->get_id()); ?>" data-product_sku="<?php echo esc_attr($product->get_sku()); ?>" class="btn btn-primary">Comprar Ahora</button>
@@ -58,7 +58,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                                         echo "Sin definir";
                                     } else {
                                         if ($modalidad == 'sincronico') {
-                                            echo 'Sincrónica';
+                                            echo 'Online en vivo';
                                         } else {
                                             echo 'Asincrónica';
                                         }
@@ -108,7 +108,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                                     if (empty($duracion)) {
                                         echo 'Sin definir';
                                     } else {
-                                        echo $duracion . ' horas';
+                                        echo $duracion . ' horas Acad.';
                                     }
                                     ?>
                                 </div>
@@ -118,7 +118,21 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                 </div>
             </div>
             <div class="d-none d-lg-flex col-4 cpc_product_price_c">
-                <p class="cpc_product_price">$<?php echo $product->get_price(); ?></p>
+                <p class="cpc_product_price">
+                    <?php
+
+                    if ($product->is_on_sale()) {
+                        ?>
+                        <span class="text-decoration-line-through d-block fs-2 text-end text-muted"><?php echo get_woocommerce_currency_symbol() .$product->get_regular_price(); ?></span>
+                        <?php
+                        echo get_woocommerce_currency_symbol() .$product->get_sale_price();
+                    }else{
+                        echo get_woocommerce_currency_symbol() .$product->get_price();
+                    }
+
+                    ?>
+                </p>
+
                 <div class="d-flex gap-4 cpc_product_price_btn">
                     <div class="btn btn-outline-primary">Contáctanos</div>
                     <button onclick="cpc_add_capacitacion_to_cart($(this), '<?php echo esc_url($product->add_to_cart_url()); ?>')" rel="nofollow" data-product_id="<?php echo esc_attr($product->get_id()); ?>" data-product_sku="<?php echo esc_attr($product->get_sku()); ?>" class="btn btn-primary">Comprar Ahora</button>
@@ -257,7 +271,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                             <div class="cpc_body">
                                 <form id="cpc_email_form_single_cpt" cpc-data-form-type="email">
                                     <input type="hidden" name="cpc_type" value="capacitacion-single">
-                                    <input type="hidden" name="cpc_extra_info[cpc_cpt_name]" value="<?php echo htmlspecialchars( get_the_title() ); ?>">
+                                    <input type="hidden" name="cpc_extra_info[cpc_cpt_name]" value="<?php echo htmlspecialchars(get_the_title()); ?>">
                                     <div class="mb-3">
                                         <label for="cpc_form_input_name" class="form-label">Nombres</label>
                                         <input type="text" class="form-control" id="cpc_form_input_name" placeholder="Su nombre" name="cpc_name">
@@ -367,18 +381,18 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                                 if ($ponentes_query->have_posts()) {
                                     while ($ponentes_query->have_posts()) {
                                         $ponentes_query->the_post();
-                                        $subtitle =get_post_meta(get_the_ID(), '_cpc_ponentes_meta_box_subtitle_key', true);
+                                        $subtitle = get_post_meta(get_the_ID(), '_cpc_ponentes_meta_box_subtitle_key', true);
                                 ?>
                                         <div class="mb-3">
                                             <strong class="desc mb-1"><?php echo the_title(); ?></strong>
                                             <p class="desc">CERTIFICADOS: <?php echo get_post_meta(get_the_ID(), '_cpc_ponentes_meta_box_certificados_key', true); ?></p>
                                             <?php
-                                            if(!empty($subtitle)){
-                                                echo '<p class="mb-2">'.$subtitle.'</p>';
+                                            if (!empty($subtitle)) {
+                                                echo '<p class="mb-2">' . $subtitle . '</p>';
                                             }
-                                            
+
                                             ?>
-                                            <p class="desc"><?php echo htmlspecialchars_decode(get_post_meta(get_the_ID(),'_cpc_ponentes_meta_box_desc_key', true)); ?></p>
+                                            <p class="desc"><?php echo htmlspecialchars_decode(get_post_meta(get_the_ID(), '_cpc_ponentes_meta_box_desc_key', true)); ?></p>
                                         </div>
                                 <?php
                                     }
@@ -451,7 +465,11 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
     </div>
 </section>
 
+<?php
+get_template_part('template-parts/section', 'payment-methods');
 
+get_template_part('template-parts/section', 'blog');
+?>
 <?php
 
 get_footer();

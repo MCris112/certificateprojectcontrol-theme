@@ -23,13 +23,22 @@ $bg: var(--bg);
     }
 }
 
+.bg-accent{
+    background: $accent !important;
+}
+
+.bg-gradient{
+    background: $bg !important;
+    animation: cpc_bg_gradient_animation 5s ease infinite;
+}
+
 $card_img_h: var(--card_img_h);
 $card_img_h_one: var(--card_img_h_one);
 
 $title_size: var(--title-size);
 
 :root{
-    --text-body: 18px;
+    --text-body: 23px;
     --text-mega-title: 76px;
     --text-title: 58px;
     --text-subtitle: 36px;
@@ -40,7 +49,7 @@ $title_size: var(--title-size);
     --text-small: 16px;
 
 
-    --text-font-title: 'Cormorant Garamond', serif;
+    --text-font-title: 'Lato', sans-serif;
     --text-font-body: 'Open Sans', sans-serif; 
 }
 
@@ -56,6 +65,12 @@ $txt-small: var(--text-small);
 
 $txt-font-title: var(--text-font-title);
 $txt-font-body: var(--text-font-body);
+
+
+.cpc-text-small {
+    font-size: $txt-small !important;
+}
+
 
 @media only screen and (max-width: 992px) {
     :root{

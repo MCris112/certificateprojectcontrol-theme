@@ -72,5 +72,23 @@ $args = array(
 );
 get_template_part('template-parts/section', 'capacitacion-list', $args);
 
+$blogs_query_args = array(
+    'title' => 'Eventos referidos',
+    'add' => array(
+        'posts_per_page' => -1,
+        'meta_key'        => '_cpc_capacitacion_field_ponentes',
+        'meta_query' => array(
+            'relation' => 'AND',
+            array(
+                'key' => '_cpc_capacitacion_field_ponentes',
+                'value' => '"' . get_the_ID() . '"',
+                'compare' => 'LIKE'
+            )
+        )
+    )
+);
+
+get_template_part('template-parts/section', 'blog', $blogs_query_args);
+
 get_footer();
 ?>

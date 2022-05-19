@@ -16,6 +16,8 @@ Hover EFFECT ON NAVBAR ITEM
         position: relative;
 
         transition: all .3s;
+        font-family: $txt-font-body !important;
+        font-size: $txt-body !important;
 
         &:after{
             content: '';
@@ -99,7 +101,7 @@ Hover EFFECT ON NAVBAR ITEM
 */
 
 .container{
-    width: 1140px !important;
+    width: 1240px !important;
     max-width: 90% !important;
 }
 

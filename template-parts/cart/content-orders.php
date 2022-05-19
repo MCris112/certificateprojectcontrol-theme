@@ -146,6 +146,14 @@ $order_conditional = isset($args) && array_key_exists('is_order', $args) && $arg
                                     </div>
                                 </div>
                             <?php
+                            }else{
+                                ?>
+                                <div class="quantity">
+                                    <div class="quantity_control input-group">
+                                        <input id="cpc_shop_card_item_<?php echo $product_id; ?>_quantity" type="number" class="form-control border border-0 text-center" value="<?php echo $cart_item['quantity']; ?>" disabled>
+                                    </div>
+                                </div>
+                                <?php
                             }
                             ?>
 
