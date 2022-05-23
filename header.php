@@ -13,7 +13,14 @@ $cpc_menu_user = array(
     'lost-password' => wc_get_account_endpoint_url('lost-password'),
 );
 
-$can_register = 'yes' === get_option('woocommerce_enable_myaccount_registration');
+$opt_register = get_option('woocommerce_enable_myaccount_registration');
+
+$can_register = false;
+
+if($opt_register == 'yes'){
+    $can_register = true;
+}
+
 
 ?>
 
@@ -237,7 +244,6 @@ $can_register = 'yes' === get_option('woocommerce_enable_myaccount_registration'
                                                             <a class="nav-link bg-accent rounded" aria-current="page" href="<?php echo $cpc_menu_user['register']; ?>" data-bs-toggle="modal" data-bs-target="#cpc_modal_login" cpc-target="register">Crear cuenta</a>
                                                         <?php
                                                         }
-
                                                         ?>
                                                     <?php
                                                     }

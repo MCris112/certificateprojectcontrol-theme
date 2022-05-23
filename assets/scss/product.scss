@@ -68,7 +68,9 @@
         width: 100%;
 
         display:grid;
-        grid-template-columns: repeat(3, auto);
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: .6rem;
+
         padding: 0;
         grid-auto-rows: 1fr;
         justify-content: space-around;
@@ -77,7 +79,9 @@
     }
 
     .cpc_capacitacion_widget_info_3_item{
+        width: 100%;
         display: flex;
+        justify-content: center;
         align-items: center;
         gap: .6rem;
 
