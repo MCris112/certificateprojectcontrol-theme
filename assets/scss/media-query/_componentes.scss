@@ -7,6 +7,21 @@
             margin-left: auto;
         }
     }
+
+    .navbar{
+    
+        #cpc_menu_shop_content{
+            left: 0;
+            right: auto;
+            transform: translateX(0);
+        }
+
+        .dropdown-menu{
+            transform: translateX(0%) !important;
+            top: 100%;
+            left: 0;
+        }
+    }
 }
 
 @media (max-width: 576px) {
@@ -21,6 +36,14 @@
         }
     }
     
+    .navbar{
+    
+        #cpc_menu_shop_content{
+            left: 30vw;
+            right: auto;
+            transform: translateX(0);
+        }
+    }
     
 }
 

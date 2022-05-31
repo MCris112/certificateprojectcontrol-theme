@@ -1,4 +1,27 @@
 
+
+@media screen and (max-height: 800px){
+    .cpc_hero{
+        .text{
+            top: 70%;
+            .content{
+                .cpc_btn{
+                    margin-top: 2rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-height: 600px){
+    .cpc_hero{
+        .text{
+            top: 90%;
+        }
+    }
+}
+
+
 @media screen and (max-width: 992px){
     .cpc_hero{
         .text{

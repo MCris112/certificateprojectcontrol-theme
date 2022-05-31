@@ -11,9 +11,11 @@ function cpc_add_capacitacion_to_cart(btn, add_to_cart_url) {
     },
     success: function (data) {
       menu = $(data).find("#cpc_menu_shop_content_items");
-      console.log(menu);
+      subtotal = $(data).find("#cpc_menu_shop_content_subtotal");
+      
 
       $("#cpc_menu_shop_content_items").html(menu);
+      $("#cpc_menu_shop_content_subtotal").html(subtotal);
 
       btn.html("<i class='fa fa-check pe-2'></i> Añadido");
       cpc_shop_cart_update_badge();

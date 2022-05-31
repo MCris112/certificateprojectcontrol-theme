@@ -17,7 +17,7 @@ $opt_register = get_option('woocommerce_enable_myaccount_registration');
 
 $can_register = false;
 
-if($opt_register == 'yes'){
+if ($opt_register == 'yes') {
     $can_register = true;
 }
 
@@ -135,6 +135,8 @@ if($opt_register == 'yes'){
                                                             foreach ($hierarchy as $menuitem) {
                                                                 cpc_menu_show_items($menuitem);
                                                             }
+
+
                                                             ?>
                                                         </ul>
                                                     </div>
@@ -191,12 +193,12 @@ if($opt_register == 'yes'){
                                                                 <div class="d-flex">
                                                                     <div class="img">
                                                                         <?php echo $getProductDetail->get_image('woocommerce_thumbnail', array('class' => 'img-fluid rounded-start', 'style' => "width: 100%;")); ?>
-                                                                        <button onclick="cpc_remove_capacitacion_to_cart($(this), '<?php echo $cart_delete_url; ?>');" class="btn btn-danger" cpc-data-cpt-id="<?php echo $values['data']->get_id(); ?>"><i class="fa fa-trash-o fa-lg"></i></button>
+                                                                        <button onclick="cpc_remove_capacitacion_to_cart($(this), '<?php echo $cart_delete_url; ?>');" class="btn btn-danger btn-sm mt-2" cpc-data-cpt-id="<?php echo $values['data']->get_id(); ?>"><i class="fa fa-trash-o"></i></button>
                                                                     </div>
                                                                     <div class="body">
                                                                         <h5 class="title"><?php echo $_product->get_title(); ?></h5>
-                                                                        <p class="quantity text-muted">Cantidad <?php echo $values['quantity']; ?></p>
-                                                                        <p class="price text-end"><?php echo $price; ?></p>
+                                                                        <p class="quantity text-muted">Cantidad: <?php echo $values['quantity']; ?></p>
+                                                                        <p class="price text-end"><?php echo get_woocommerce_currency_symbol() . $price; ?></p>
                                                                     </div>
                                                                 </div>
                                                             </li>
@@ -211,10 +213,11 @@ if($opt_register == 'yes'){
                                                     </li>
                                                     <div class="p-3 cpc_menu_shop_content_subtotal">
                                                         <div class="row mb-3">
-                                                            <div class="col-6">
-                                                                Subtotal
+                                                            <div class="col-3">
+                                                                <span class="text-nowrap">Subtotal</span>
+                                                                <input type="hidden" id="cri_woo_currency_symbol" value="<?php echo get_woocommerce_currency_symbol(); ?>">
                                                             </div>
-                                                            <div class="col-6 subtotal text-end">
+                                                            <div id="cpc_menu_shop_content_subtotal" class="col-9 subtotal text-end">
                                                                 <?php echo $cart->get_cart_subtotal(); ?>
                                                             </div>
                                                         </div>

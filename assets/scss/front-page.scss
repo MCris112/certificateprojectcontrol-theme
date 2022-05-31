@@ -3,7 +3,8 @@
 
 .cpc_slider_front_page_hero{
     width: 100%;
-    height: 100vh!important;
+    height: fit-content;
+    min-height: 100vh!important;
 
     .swiper-pagination{
         bottom: 100px;
@@ -17,7 +18,7 @@
 
 .cpc_hero{
     width: 100%;
-    height: 100vh;
+    height: 110vh;
     position: relative;
 
     margin-top: -1.6rem;

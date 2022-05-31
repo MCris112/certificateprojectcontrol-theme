@@ -39,9 +39,22 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                 <hr class="cpc_hr mx-auto mx-lg-0 mb-4">
                 <p class="short_desc mx-auto mx-lg-0"><?php echo $product->get_short_description(); ?></p>
                 <div class="d-lg-none w-100 cpc_product_price_c align-items-center">
-                    <p class="cpc_product_price"><?php echo get_woocommerce_currency_symbol() . $product->get_price(); ?></p>
+                <p class="cpc_product_price">
+                    <?php
+
+                    if ($product->is_on_sale()) {
+                        ?>
+                        <span class="text-decoration-line-through d-block fs-2 text-end text-muted"><?php echo get_woocommerce_currency_symbol() .$product->get_regular_price(); ?></span>
+                        <?php
+                        echo get_woocommerce_currency_symbol() .$product->get_sale_price();
+                    }else{
+                        echo get_woocommerce_currency_symbol() .$product->get_price();
+                    }
+
+                    ?>
+                </p>
                     <div class="d-flex gap-4 cpc_product_price_btn">
-                        <div class="btn btn-outline-primary">Contáctanos</div>
+                        <a href="#cpc_email_form_single_cpt" class="btn btn-outline-primary">Contáctanos</a>
                         <button onclick="cpc_add_capacitacion_to_cart($(this), '<?php echo esc_url($product->add_to_cart_url()); ?>')" rel="nofollow" data-product_id="<?php echo esc_attr($product->get_id()); ?>" data-product_sku="<?php echo esc_attr($product->get_sku()); ?>" class="btn btn-primary">Comprar Ahora</button>
                     </div>
                 </div>
@@ -134,7 +147,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                 </p>
 
                 <div class="d-flex gap-4 cpc_product_price_btn">
-                    <div class="btn btn-outline-primary">Contáctanos</div>
+                    <a href="#cpc_email_form_single_cpt" class="btn btn-outline-primary">Contáctanos</a>
                     <button onclick="cpc_add_capacitacion_to_cart($(this), '<?php echo esc_url($product->add_to_cart_url()); ?>')" rel="nofollow" data-product_id="<?php echo esc_attr($product->get_id()); ?>" data-product_sku="<?php echo esc_attr($product->get_sku()); ?>" class="btn btn-primary">Comprar Ahora</button>
                 </div>
             </div>

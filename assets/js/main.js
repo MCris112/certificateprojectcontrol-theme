@@ -1,3 +1,16 @@
+/*******
+ * GENERATE A SPACE BETWEEN THE MENU AND SOME CONTENT NEAR TO IT,
+ */
+function cpc_near_to_top_set(){
+  header = $(".cpc_header");
+  var items = $(".cpc_near_menu_top");
+  
+  $.each(items, function(key, item){
+    $(item).css("padding-top", header.outerHeight() + 40 + "px");
+  });
+
+}
+
 navbar_hide_items = document.querySelectorAll(".cpc_navbar_hide_on_sticky");
 
 var cpc_menu = $(".cpc_navbar").offset().top;
@@ -27,6 +40,7 @@ function cpc_menu_function_display_menu_items(
   if (phone_screen_down.matches) {
     cpc_menu_function_display(".cpc_navbar_hide_on_sticky");
     cpc_menu_function_display(".cpc_navbar_show_on_sticky", true);
+    cpc_near_to_top_set();
     return;
   }
 
@@ -103,10 +117,6 @@ ScrollTrigger.create({
 
 */
 
-$(document).ready(function () {
-  header = $(".cpc_header");
-  $(".cpc_near_menu_top").css("padding-top", header.outerHeight() + 30 + "px");
-});
 
 /*******
  *
