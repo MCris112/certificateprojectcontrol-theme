@@ -44,7 +44,7 @@ get_header();
                         <h1 class="cpc_title cpc_hero_title">Nuestros Próximos Inicios</h1>
                         <span class="cpc_subtitle cpc_hero_subtitle">¿Listos para comenzar?</span>
 
-                        <a href="<?php echo get_permalink( get_theme_mod('cpc_front_page_link_proximos_inicios') ); ?>" class="cpc_btn icon_side cpc_hero_btn">
+                        <a href="<?php echo get_permalink(get_theme_mod('cpc_front_page_link_proximos_inicios')); ?>" class="cpc_btn icon_side cpc_hero_btn">
                             <div class="icon">
                                 <i class="fa fa-book"></i>
                             </div>
@@ -70,10 +70,10 @@ get_header();
                 <h1 class="cpc_title">Certificate Project Control</h1>
                 <hr class="cpc_hr">
                 <p class="desc">
-                Estamos firmemente convencidos que las buenas prácticas corporativas deben regular toda actividad en los negocios, y que actuar en todo momento y situación, con integridad, transparencia y una cultura ética, representan el impulso necesario para generar confianza y vínculos laborales estratégicos con nuestros clientes, colaboradores, y entorno en general donde realizamos nuestras operaciones.
+                    Estamos firmemente convencidos que las buenas prácticas corporativas deben regular toda actividad en los negocios, y que actuar en todo momento y situación, con integridad, transparencia y una cultura ética, representan el impulso necesario para generar confianza y vínculos laborales estratégicos con nuestros clientes, colaboradores, y entorno en general donde realizamos nuestras operaciones.
                 </p>
 
-                <a href="<?php echo get_permalink( get_theme_mod('cpc_front_page_link_about_us') ); ?>" class="btn btn-primary">Saber Más</a>
+                <a href="<?php echo get_permalink(get_theme_mod('cpc_front_page_link_about_us')); ?>" class="btn btn-primary">Saber Más</a>
             </div>
             <div class="col col-lg-7 d-flex align-middle">
                 <div class="cpc_presentation">
@@ -92,14 +92,13 @@ $terms = get_terms([
     'order' => 'desc',
 ]);;
 
-foreach ($terms as $term){
+foreach ($terms as $term) {
 
     $args = array(
         'modalidad' => $term->slug,
         'post_per_page' => 4,
     );
     get_template_part('template-parts/section', 'capacitacion-list', $args);
-    
 }
 
 get_template_part('template-parts/section', 'payment-methods');

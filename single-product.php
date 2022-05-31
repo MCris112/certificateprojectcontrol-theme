@@ -4,6 +4,9 @@ get_header();
 $product = wc_get_product(get_the_id());
 $modalidad = cpc_get_meta_field('_cpc_capacitacion_field_modalidad');
 $fechas = get_post_meta(get_the_ID(), '_cpc_capacitacion_field_modalidad_fechas', true);
+
+$is_onsale = $product->is_on_sale();
+
 if (!empty($fechas)) $fechas = json_decode($fechas, true);
 
 function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
@@ -39,20 +42,29 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                 <hr class="cpc_hr mx-auto mx-lg-0 mb-4">
                 <p class="short_desc mx-auto mx-lg-0"><?php echo $product->get_short_description(); ?></p>
                 <div class="d-lg-none w-100 cpc_product_price_c align-items-center">
-                <p class="cpc_product_price">
-                    <?php
-
-                    if ($product->is_on_sale()) {
-                        ?>
-                        <span class="text-decoration-line-through d-block fs-2 text-end text-muted"><?php echo get_woocommerce_currency_symbol() .$product->get_regular_price(); ?></span>
+                    <p class="cpc_product_price" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
                         <?php
-                        echo get_woocommerce_currency_symbol() .$product->get_sale_price();
-                    }else{
-                        echo get_woocommerce_currency_symbol() .$product->get_price();
-                    }
 
-                    ?>
-                </p>
+                        if ($is_onsale) {
+                        ?>
+                            <span class="text-decoration-line-through d-block fs-2 text-end text-muted"><?php echo get_woocommerce_currency_symbol() . $product->get_regular_price(); ?></span>
+                        <?php
+                            echo get_woocommerce_currency_symbol() . $product->get_sale_price();
+                        } else {
+                            echo get_woocommerce_currency_symbol() . $product->get_price();
+                        }
+
+                        if ($is_onsale) {
+                            $sales_price_to = get_post_meta(get_the_id(), '_sale_price_dates_to', true);
+
+                            $date = "Válido hasta el " . date_i18n('d \d\e F', $sales_price_to);
+                        ?>
+                            <span class="d-block fs-2 text-end text-muted" style="color: white !important; opacity: 0.6;"><?php echo $date; ?></span>
+                        <?php
+                        }
+
+                        ?>
+                    </p>
                     <div class="d-flex gap-4 cpc_product_price_btn">
                         <a href="#cpc_email_form_single_cpt" class="btn btn-outline-primary">Contáctanos</a>
                         <button onclick="cpc_add_capacitacion_to_cart($(this), '<?php echo esc_url($product->add_to_cart_url()); ?>')" rel="nofollow" data-product_id="<?php echo esc_attr($product->get_id()); ?>" data-product_sku="<?php echo esc_attr($product->get_sku()); ?>" class="btn btn-primary">Comprar Ahora</button>
@@ -131,18 +143,25 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                 </div>
             </div>
             <div class="d-none d-lg-flex col-4 cpc_product_price_c">
-                <p class="cpc_product_price">
+                <p class="cpc_product_price" style="display: flex; flex-direction: column; justify-content: end; align-items: end;">
                     <?php
-
-                    if ($product->is_on_sale()) {
-                        ?>
-                        <span class="text-decoration-line-through d-block fs-2 text-end text-muted"><?php echo get_woocommerce_currency_symbol() .$product->get_regular_price(); ?></span>
-                        <?php
-                        echo get_woocommerce_currency_symbol() .$product->get_sale_price();
-                    }else{
-                        echo get_woocommerce_currency_symbol() .$product->get_price();
+                    if ($is_onsale) {
+                    ?>
+                        <span class="text-decoration-line-through d-block fs-2 text-end text-muted"><?php echo get_woocommerce_currency_symbol() . $product->get_regular_price(); ?></span>
+                    <?php
+                        echo get_woocommerce_currency_symbol() . $product->get_sale_price();
+                    } else {
+                        echo get_woocommerce_currency_symbol() . $product->get_price();
                     }
 
+                    if ($is_onsale) {
+                        $sales_price_to = get_post_meta(get_the_id(), '_sale_price_dates_to', true);
+
+                        $date = "Válido hasta el " . date_i18n('d \d\e F', $sales_price_to);
+                    ?>
+                        <span class="d-block fs-2 text-end text-muted" style="color: white !important; opacity: 0.6;"><?php echo $date; ?></span>
+                    <?php
+                    }
                     ?>
                 </p>
 
