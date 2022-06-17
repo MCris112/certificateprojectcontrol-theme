@@ -1,0 +1,95 @@
+.cpc_header{
+    width: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    z-index: 99;
+
+    .header_icons{
+        i{
+            color: white;
+        }
+    }
+
+    .cpc_menu_container{
+        max-width: 90% !important;
+    }
+    .cpc_head_logo{
+        padding: 2.3rem 0 !important;
+    }
+
+    .cpc_logo{
+        height: 100px;
+        
+        img{
+            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-position: left;
+        }
+    }
+
+    .navbar{
+        border-radius: 10px;
+        z-index: 10;
+    }
+}
+
+.header_icons{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    list-style: none;
+
+    gap: 24px;
+
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+
+    i{
+        font-size: 30px;
+    }
+
+    .text{
+        color: $primary;
+        transition: all .3s;
+
+        &:hover{
+            color: $accent;
+        }
+
+        .title{
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .sub{
+            font-size: 14px;
+            font-weight: normal;
+        }
+    }
+}
+
+.cpc_menu_phone_c{
+    .cpc_menu_phone_div{
+        display: none;
+    }
+}
+
+.cpc_section_title{
+    margin: 0;
+    padding-top: 25vh;
+    padding-bottom: 1rem;
+
+    .cpc_content{
+        text-align: center;
+        color: white;
+
+        margin: 6rem 0;
+    }
+}
+
+@import 'media-query/header.scss';
