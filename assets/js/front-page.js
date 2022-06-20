@@ -1,19 +1,33 @@
-var swiper_front_page = new Swiper(".cpc_slider_front_page_hero", {
-  spaceBetween: 30,
-  effect: "fade",
-  loop: true,
-  autoplay: {
-    delay: 9000,
-    disableOnInteraction: false,
-  },
+// var swiper_front_page = new Swiper(".cpc_slider_front_page_hero", {
+//   spaceBetween: 30,
+//   effect: "fade",
+//   loop: true,
+//   autoplay: {
+//     delay: 9000,
+//     disableOnInteraction: false,
+//   },
 
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
+//   navigation: {
+//     nextEl: ".swiper-button-next",
+//     prevEl: ".swiper-button-prev",
+//   },
+//   pagination: {
+//     el: ".swiper-pagination",
+//     clickable: true,
+//   },
+// });
+
+var swiper = new Swiper(".cpc_slider_front_page_hero", {
+  grabCursor: false,
+  effect: "creative",
+  creativeEffect: {
+    prev: {
+      shadow: true,
+      translate: [0, 0, -400],
+    },
+    next: {
+      translate: ["100%", 0, 0],
+    },
   },
 });
 

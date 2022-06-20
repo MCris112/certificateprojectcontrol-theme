@@ -92,7 +92,7 @@ if ($args['count'] == 1) {
                 ?>
             </div>
 
-            <a href="<?php echo get_permalink(); ?>" class="btn btn-primary d-block">Ver Curso</a>
+            <a href="<?php echo get_permalink(); ?>" class="btn btn-primary d-block">Lo Quiero</a>
         </div>
     </div>
 
@@ -142,7 +142,7 @@ if ($args['count'] == 1) {
                 ?>
             </div>
 
-            <a href="<?php echo get_permalink(); ?>" class="btn btn-primary d-block">Ver Curso</a>
+            <a href="<?php echo get_permalink(); ?>" class="btn btn-primary d-block">Lo Quiero</a>
         </div>
     </div>
 

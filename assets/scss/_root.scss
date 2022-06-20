@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 
+#wpadminbar{
+    //top: calc( var(--wp-admin--admin-bar--height) * -1);
+    z-index: 999;
+}
 body, p, .desc{
     font-size: $txt-body;
     font-family: var(--text-font-body);

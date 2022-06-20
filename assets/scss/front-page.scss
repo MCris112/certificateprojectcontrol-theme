@@ -1,13 +1,73 @@
 @use 'vars' as *;
 
+.certificates{
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+    grid-auto-rows: 1fr;
+    gap: 6px;
+
+    img{
+        max-height: 6rem;
+        object-fit: contain;
+    }
+}
 
 .cpc_slider_front_page_hero{
     width: 100%;
     height: fit-content;
-    min-height: 100vh!important;
+    background: #002F5A;
+    color: white;
+
+    min-height: 80vh!important;
 
     .swiper-pagination{
         bottom: 100px;
+    }
+
+    .swiper-slide{
+        width: 100vw;
+        height: 80vh;
+        position: relative;
+
+        .bg{
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+
+            img, picture{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .slider_person{
+            width: 90%;
+            height: 90%;
+
+            object-fit: contain;
+        }
+
+        .slider_content{
+            position: absolute;
+            top: 50%;
+            right: 0;
+
+            width: 80%;
+
+            transform: translateY(-50%);
+
+            img{
+                object-fit: contain;
+            }
+        }
+
     }
 }
 

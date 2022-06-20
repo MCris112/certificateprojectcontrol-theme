@@ -13,12 +13,6 @@ Hover EFFECT ON NAVBAR ITEM
         left: 0;
     }
 
-    #cpc_menu_shop_content{
-        left: auto;
-        right: 0;
-        transform: translateX(0);
-    }
-
     .nav-link{
         position: relative;
 
@@ -45,45 +39,6 @@ Hover EFFECT ON NAVBAR ITEM
             &:after{
                 bottom: 0;
                 opacity: .9;
-            }
-        }
-    }
-
-    .dropdown-menu{
-        width: 300px !important;
-        max-width: 90vw !important;
-    
-        transform: translateX(-50%);
-
-        #cpc_menu_shop_content_items{
-            max-height: 300px;
-            overflow-y: scroll;
-        }
-        .cpc_menu_shop_content_item{
-            margin-bottom: 1rem;
-            padding: .6rem 1rem;
-
-            .img{
-                width: 7rem !important;
-                height: 7rem !important;
-                border-radius: 10px;
-                object-fit: cover;
-            }
-
-            .body{
-                padding-left: .6rem;
-            }
-
-            .title{
-                font-size: $txt-h3;
-                font-weight: 700;
-                color: $secondary;
-                margin-bottom: .6rem;
-            }
-
-            .quantity{
-                font-size: $txt-small;
-                margin-bottom: .6rem;
             }
         }
     }

@@ -1,5 +1,6 @@
 :root{
-    --primary: #0F3249;
+    --primary: #0057A6;
+    --primary-dark: #003C73;
     --secondary: #097AC0;
     --accent: #0E6FE8;
     --bg: linear-gradient(101.77deg, #097AC0 0%, #6509C0 100%);
@@ -10,6 +11,7 @@
 
 
 $primary: var(--primary);
+$primary-dark: var(--primary-dark);
 $secondary: var(--secondary);
 $accent: var(--accent);
 $bg: var(--bg);
@@ -90,6 +92,8 @@ $txt-font-body: var(--text-font-body);
 @media only screen and (max-width: 500px) {
     :root{
         --text-mega-title: 2rem;
-        --text-title: 50px;
+        --text-title: 36px;
+        --text-body: 14px;
+        --text-small: 10px;
     }
 }

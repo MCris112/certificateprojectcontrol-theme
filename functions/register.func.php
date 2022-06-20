@@ -134,6 +134,7 @@ add_action('customize_register', 'cpc_register_panel');
 
 
 require __DIR__ . '/ponentes.func.php';
+require __DIR__ . '/certificates.func.php';
 require __DIR__ . '/admin.func.php';
 require __DIR__ . '/ajax.func.php';
 //require __DIR__ . '/functions/front-page.func.php';
