@@ -20,6 +20,7 @@
 var swiper_front_page = new Swiper(".cpc_slider_front_page_hero", {
   grabCursor: false,
   effect: "creative",
+  loop: true,
   
   creativeEffect: {
     prev: {
@@ -66,6 +67,14 @@ function cpc_front_page_ani_slider(slide, index){
   tl.to(txt, {x: 0, duration: 1, opacity: 1});
   
   slidesAni[index] = tl;
+
+
+  certificates = $(slide).find(".certificates");
+  console.log(certificates.children());
+
+  $.each(certificates.children(), function(index, certificate) {
+    tl.to(certificate, {x: 0, duration: .3, opacity:1});
+  });
 }
 
 swiper_front_page.on('activeIndexChange', function (swiper) {

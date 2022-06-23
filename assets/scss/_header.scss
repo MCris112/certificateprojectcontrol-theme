@@ -18,11 +18,18 @@ $coupon-h: 40px;
 
     .content{
         display: flex;
-        gap: 2rem;
+        gap: 15vw;
         //animation: scrollText 20s infinite linear;
 
         .cpc_coupons_item{
             display: flex !important;
+            align-items: center;
+
+            img{
+                width: auto;
+                max-height: 6rem;
+                margin: 0 1rem;
+            }
         }
     }
 }
@@ -278,9 +285,16 @@ $coupon-h: 40px;
     }
 }
 
-@keyframes scrollText {
-    from   { transform: translateX(200%); }
-    to { transform: translateX(-200%); }
-}
+.cpc_section_title{
+    margin: 0;
+    padding-top: 25vh;
+    padding-bottom: 1rem;
 
+    .cpc_content{
+        text-align: center;
+        color: white;
+
+        margin: 6rem 0;
+    }
+}
 @import 'media-query/header';

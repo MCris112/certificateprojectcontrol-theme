@@ -84,50 +84,52 @@
 
         $menu_name = 'cpc_footer';
         $locations = get_nav_menu_locations();
-        $menu = wp_get_nav_menu_object($locations[$menu_name]);
-        $menuitems = wp_get_nav_menu_items($menu->term_id, array('order' => 'DESC'));
-
-        $hierarchy = cpc_combineHierarchy($menuitems, $menuitems);
-
-        foreach ($hierarchy as $menuitem) {
-            if (isset($menuitem->cpc_sunmenu) && !empty(count($menuitem->cpc_sunmenu))) {
-                $class_main = $menuitem->classes;
-        ?>
-
-                <div class="cpc_footer_i down">
-                    <span class="text-muted mb-3 fw"> <?php echo $menuitem->title; ?></span>
-                    <?php
-
-                    foreach ($menuitem->cpc_sunmenu as $item) {
-                        $classes = $item->classes;
-                    ?>
-                        <span>
-                            <?php
-
-                            if (count($classes) > 0) {
-                                $classes = implode(" ", $classes);
-                                echo '<i class="' . $classes . '"></i>';
-                            }
-                            ?>
-                            <a class="ms-2" href="<?php echo $item->url; ?>"><?php echo $item->title; ?></a>
-                        </span>
-                    <?php
-                    }
-
-                    if (in_array('display_menu_social', $class_main)) {
-                        cpc_menu_get_social_links(
-                            array(
-                                'div' => 'w-100 mt-4',
-                                'ul' => 'header_icons justify-content-start w-100 align-items-start',
-                                'a' => 'd-flex align-items-center gap-1 text-decoration-none rounded p-2 bg-secondary',
-                            ),
-                        );
-                    }
-
-                    ?>
-                </div>
-
-        <?php
+        if(isset($locations[$menu_name])){
+            $menu = wp_get_nav_menu_object($locations[$menu_name]);
+            $menuitems = wp_get_nav_menu_items($menu->term_id, array('order' => 'DESC'));
+    
+            $hierarchy = cpc_combineHierarchy($menuitems, $menuitems);
+    
+            foreach ($hierarchy as $menuitem) {
+                if (isset($menuitem->cpc_sunmenu) && !empty(count($menuitem->cpc_sunmenu))) {
+                    $class_main = $menuitem->classes;
+            ?>
+    
+                    <div class="cpc_footer_i down">
+                        <span class="text-muted mb-3 fw"> <?php echo $menuitem->title; ?></span>
+                        <?php
+    
+                        foreach ($menuitem->cpc_sunmenu as $item) {
+                            $classes = $item->classes;
+                        ?>
+                            <span>
+                                <?php
+    
+                                if (count($classes) > 0) {
+                                    $classes = implode(" ", $classes);
+                                    echo '<i class="' . $classes . '"></i>';
+                                }
+                                ?>
+                                <a class="ms-2" href="<?php echo $item->url; ?>"><?php echo $item->title; ?></a>
+                            </span>
+                        <?php
+                        }
+    
+                        if (in_array('display_menu_social', $class_main)) {
+                            cpc_menu_get_social_links(
+                                array(
+                                    'div' => 'w-100 mt-4',
+                                    'ul' => 'header_icons justify-content-start w-100 align-items-start',
+                                    'a' => 'd-flex align-items-center gap-1 text-decoration-none rounded p-2 bg-secondary',
+                                ),
+                            );
+                        }
+    
+                        ?>
+                    </div>
+    
+            <?php
+                }
             }
         }
         ?>
@@ -154,6 +156,7 @@ wp_footer();
 
 ?>
 
+</div> <!-- /.wrapper end -->
 
 <script>
     var swiper = new Swiper(".mySwiper", {

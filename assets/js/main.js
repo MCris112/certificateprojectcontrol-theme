@@ -57,11 +57,11 @@ if(screen.width < coupon_content.width()){
   coupon_move_base = coupon_content.width();
 }
 coupon_tl.set(coupon_content, {
-  x: -coupon_move_base
+  x: coupon_move_base
 })
 coupon_tl.to(coupon_content, {
   duration: coupon_duration,
-  x: coupon_move,
+  x: -coupon_move,
   ease: "none",
   repeat: -1
 });

@@ -47,7 +47,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
 
                         if ($is_onsale) {
                         ?>
-                            <span class="text-decoration-line-through d-block fs-2 text-end text-muted"><?php echo get_woocommerce_currency_symbol() . $product->get_regular_price(); ?></span>
+                            <span class="text-decoration-line-through d-block fs-2 text-end text-white"><?php echo get_woocommerce_currency_symbol() . $product->get_regular_price(); ?></span>
                         <?php
                             echo get_woocommerce_currency_symbol() . $product->get_sale_price();
                         } else {
@@ -147,7 +147,7 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                     <?php
                     if ($is_onsale) {
                     ?>
-                        <span class="text-decoration-line-through d-block fs-2 text-end text-muted"><?php echo get_woocommerce_currency_symbol() . $product->get_regular_price(); ?></span>
+                        <span class="text-decoration-line-through d-block fs-2 text-end text-white"><?php echo get_woocommerce_currency_symbol() . $product->get_regular_price(); ?></span>
                     <?php
                         echo get_woocommerce_currency_symbol() . $product->get_sale_price();
                     } else {

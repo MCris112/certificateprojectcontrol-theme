@@ -4,6 +4,11 @@
     //top: calc( var(--wp-admin--admin-bar--height) * -1);
     z-index: 999;
 }
+
+.wrapper{
+    overflow: hidden;
+}
+
 body, p, .desc{
     font-size: $txt-body;
     font-family: var(--text-font-body);

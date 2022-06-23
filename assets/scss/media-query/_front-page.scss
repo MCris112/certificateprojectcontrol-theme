@@ -72,6 +72,12 @@
 
                 .certificates{
                     width: 60%;
+                    margin-right: 9vw;
+
+                    img{
+                        opacity: 0;
+                        transform: translate(0, 30px);
+                    }
                 }
             }
     
