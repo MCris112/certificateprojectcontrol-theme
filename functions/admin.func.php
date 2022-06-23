@@ -14,6 +14,8 @@ add_action( 'admin_print_styles', 'cpc_edit_post_add_custom_styles', 10, 1 );
 function cpc_edit_post_add_custom_scripts()
 {
 	wp_enqueue_script( 'cpc_admin_mainr_script', get_template_directory_uri().'/assets/js/admin-capacitacion.js', array( ), '1.0.0', true );
+	wp_enqueue_media();
+	wp_enqueue_script( 'cpc_admin_homeslider_script', get_template_directory_uri().'/assets/js/admin-homeslider.js', array( ), '1.0.0', true );
 	wp_enqueue_script( 'cpc_admin_modaliad_script', get_template_directory_uri().'/assets/js/admin-capacitacion-modalidad.js', array('jquery', 'jquery-ui-datepicker' ), '1.0.0', true );
 	wp_enqueue_script( 'cpc_admin_ponentes_script', get_template_directory_uri().'/assets/js/admin-capacitacion-ponentes.js', array('jquery', 'jquery-ui-datepicker' ), '1.0.0', true );
 	wp_enqueue_script( 'cpc_time_picker_script', 'https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js', array(), '1.0.0', true );

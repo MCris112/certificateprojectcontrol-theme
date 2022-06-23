@@ -332,7 +332,8 @@ function cpc_menu_show_items($menuitem, $level = 0)
 				if(count($classes) > 1 && $classes[0] == 'cri_icon'){
 					echo '<i class="' . implode(' ', $classes) . '"></i>';
 				}else{
-					echo $menuitem->title  . ' <i class="fa fa-caret-down" aria-hidden="true"></i>'; 
+					//echo $menuitem->title  . ' <i class="fa fa-caret-down" aria-hidden="true"></i>'; //IN CASE DOTS
+					echo $menuitem->title; 
 				}
 				 ?>
 			</a>

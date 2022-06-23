@@ -64,7 +64,6 @@
     </div>
 </section>
 
-
 <footer>
     <div class="container">
         <div class="cpc_footer_i img">
@@ -139,6 +138,12 @@
     </div>
 </footer>
 
+<?php cpc_menu_get_social_links(
+    array(
+        'div' => 'cpc_social_media',
+        'ul' => 'header_icons justify-content-around w-100 text-white',
+    )
+); ?>
 
 <?php
 

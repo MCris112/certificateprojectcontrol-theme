@@ -1,4 +1,160 @@
 
+@media screen and (min-width: 800px) {
+    .cpc_menu{
+        .cpc_menu_content{
+            grid-template-columns: 40% auto;
+        }
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .cpc_menu{
+        .cpc_menu_header{
+            color: $primary-dark;
+    
+            button{
+                color: $primary-dark
+            }
+        }
+    
+        .cpc_menu_content{
+            grid-template-columns: 20% 60% 20%;
+        }
+
+        .cpc_menu_actions{
+            z-index: 9993;
+            position: relative;
+
+            display: flex;
+            gap: 1rem;
+    
+            &::before{
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 90%;
+                width: 100vw;
+                height: 120%;
+                background: $primary-dark;
+                z-index: -1;
+            }
+            &::after{
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                content: "";
+                display: block;
+                width: 100%;
+                height: 120%;
+                background: $primary-dark;
+                z-index: 9990;
+
+                clip-path: polygon(0 0, 100% 0%, 100% 100%, 25% 100%);
+            }
+    
+            .btn-menu{ display: none; }
+
+            .cpc_btn_pc{
+                display: block;
+                z-index: 9993;
+
+                color: white;
+                position: relative;
+
+                i{
+                    color: white;
+                    font-size: calc($txt-body + 6px);
+                }
+            }
+
+            .btn-shop{
+                .btn-shop_content{
+    
+                    position: absolute;
+                    top: 130%;
+                    left: auto;
+                    right: -100%;
+    
+                    width: 30vw;
+                    height: auto;
+
+                    background: white;
+                    color: $primary-dark;
+                    border-radius: 8px;
+
+                    .cpc_menu_shop_content_item{
+                        .body{
+                            width: 100%;
+    
+                            display: grid;
+                            grid-template-columns: 1fr;
+                            grid-template-rows: repeat(3, 1fr);
+                            .title{
+                                font-size: $txt-body;
+                            }
+    
+                            .price{
+                                font-weight: bold;
+                                color: $primary-dark;
+                                font-size: calc($txt-body + 6px);
+                            }
+                        }
+                    }
+    
+                    .btn{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+    
+                        width: 100%;
+                    }
+                }
+            }
+    
+            .btn-menu{
+                color: white;
+            }
+    
+            .btn-menu, .btn-shop{
+                i{ font-size: calc($txt-body + 6px);}
+            }
+        }
+    
+        .cpc_menu_nav{
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+
+            opacity: 1 !important;
+    
+            position: relative;
+
+            background: none;
+
+            .container{
+                width: 100% !important;
+            }
+
+            .cpc_menu_header{display: none;}
+
+            .navbar-nav{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+            }
+    
+            .dropdown-menu{
+                position: absolute !important;
+                width: fit-content !important;
+                border-radius: 8px;
+            }
+        }
+    }
+}
+
+
 @media only screen and (max-width: 1200px) {
     .cpc_navbar_hide_on_sticky{
         display: none !important;

@@ -27,9 +27,17 @@
     }
 
     .swiper-slide{
+        opacity: 0 !important;
+
+        &.swiper-slide-active{
+            opacity: 1 !important;
+        }
         width: 100vw;
         height: 80vh;
         position: relative;
+
+        display: flex;
+        align-items: flex-end;
 
         .bg{
             position: absolute;
@@ -49,22 +57,29 @@
 
         .slider_person{
             width: 90%;
-            height: 90%;
+            height: 80%;
 
             object-fit: contain;
+            margin-bottom: 3rem;
+            
+            opacity: 0; //Swipper animation
+            transform: translate(0, 100px);
         }
 
         .slider_content{
             position: absolute;
-            top: 50%;
+            bottom: 9%;
             right: 0;
 
             width: 80%;
 
-            transform: translateY(-50%);
-
             img{
                 object-fit: contain;
+            }
+
+            .slide_txt{
+                opacity: 0;
+                transform: translate(400px, 0);
             }
         }
 

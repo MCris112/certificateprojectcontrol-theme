@@ -18,6 +18,13 @@ if ($wp_certificates->have_posts()) {
     }
 }
 
+$wp_homesliders = new WP_Query([
+    'post_type' => 'home-sliders',
+    'posts_per_page' => -1,
+    'orderby' => 'date',
+    'order' => 'rand',
+]);
+
 ?>
 
 <div class="swiper cpc_slider_front_page_hero">
@@ -25,16 +32,16 @@ if ($wp_certificates->have_posts()) {
         <div class="swiper-slide">
             <div class="bg">
                 <picture>
-                    <source media="(min-width: 800px)" srcset="elva-800w.jpg">
-                    <img src="<?php echo get_template_directory_uri() . '/assets/images/sliders/home_slider_phone_bg.png'; ?>" alt="Chris standing up holding his daughter Elva">
+                    <source media="(min-width: 800px)" srcset="<?php echo get_template_directory_uri(); ?>/assets/images/sliders/home_slider_pc_bg.png">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/sliders/home_slider_phone_bg.png" alt="Chris standing up holding his daughter Elva">
                 </picture>
             </div>
             <img src="<?php echo get_template_directory_uri() . '/assets/images/sliders/home_slider_ingeniero.png'; ?>" class="slider_person">
 
             <div class="slider_content">
                 <picture>
-                    <source media="(min-width: 800px)" srcset="elva-800w.jpg">
-                    <img src="<?php echo get_template_directory_uri() . '/assets/images/sliders/home_slider_phone_txt.png'; ?>" alt="Chris standing up holding his daughter Elva">
+                    <source media="(min-width: 800px)" srcset="<?php echo get_template_directory_uri(); ?>/assets/images/sliders/home_slider_pc_txt.png">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/sliders/home_slider_phone_txt.png" class="slide_txt">
                 </picture>
                 <div class="certificates">
                     <?php foreach ($certificates_url as $certificate) {
@@ -43,14 +50,52 @@ if ($wp_certificates->have_posts()) {
                 </div>
             </div>
         </div>
-        <div class="swiper-slide">Slide 2</div>
-        <div class="swiper-slide">Slide 3</div>
-        <div class="swiper-slide">Slide 4</div>
-        <div class="swiper-slide">Slide 5</div>
-        <div class="swiper-slide">Slide 6</div>
-        <div class="swiper-slide">Slide 7</div>
-        <div class="swiper-slide">Slide 8</div>
-        <div class="swiper-slide">Slide 9</div>
+
+        <?php
+
+        if ($wp_homesliders->have_posts()) {
+            while ($wp_homesliders->have_posts()) {
+                $wp_homesliders->the_post();
+
+                $content_phone = [];
+                $content_pc = [];
+
+                try{
+                    $content_phone = json_decode(get_post_meta(get_the_ID(), '_cpc_homeslider_phone_key', true), true);
+                    $content_pc = json_decode(get_post_meta(get_the_ID(), '_cpc_homeslider_pc_key', true), true);
+                }catch(Exception $e){
+                    continue;
+                }
+
+                if(!isset($content_pc['bg'])) continue;
+        ?>
+                <div class="swiper-slide">
+                    <div class="bg">
+                        <picture>
+                            <source media="(min-width: 800px)" srcset="<?php echo $content_pc['bg'] ?? ""; ?>">
+                            <img src="<?php echo $content_phone['bg'] ?? ""; ?>" alt="Chris standing up holding his daughter Elva">
+                        </picture>
+                    </div>
+                    <img src="<?php echo get_the_post_thumbnail_url(); ?>" class="slider_person">
+
+                    <div class="slider_content">
+                        <picture>
+                            <source media="(min-width: 800px)" srcset="<?php echo $content_pc['txt'] ?? ""; ?>">
+                            <img src="<?php echo $content_phone['txt'] ?? ""; ?>" class="slide_txt">
+                        </picture>
+                        <div class="certificates">
+                            <?php foreach ($certificates_url as $certificate) {
+                                echo '<img src="' . $certificate . '" alt="">';
+                            } ?>
+                        </div>
+                    </div>
+                </div>
+
+        <?php
+            }
+        }
+
+        ?>
     </div>
 </div>
 

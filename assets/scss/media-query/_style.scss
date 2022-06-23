@@ -73,3 +73,35 @@
         }
     }
 }
+
+@media (min-width: 1000px){
+    .cpc_social_media{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        color: white;
+        z-index: 9992;
+    
+        &::before{
+            content: "";
+            position: absolute;
+            width: 120%;
+            height: 100%;
+    
+            background: black;
+            z-index: -1;
+    
+            clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
+        }
+    
+        .header_icons{
+            padding: 1rem 2rem;
+    
+            a{
+                color: white;
+                font-size: $txt-body;
+            }
+        }
+    }
+    
+}

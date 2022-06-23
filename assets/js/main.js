@@ -37,6 +37,36 @@ function cpc_menu_toggle() {
  *
  */
 
+coupon_tl = new gsap.timeline();
+
+coupon_content = $("#cpc_coupons_content");
+
+coupon_duration = 0;
+
+$.each( coupon_content.find(".cpc_coupons_item"), function(i, item) {
+  coupon_duration = coupon_duration + 30;
+});
+
+console.log("durarion", coupon_duration);
+
+coupon_move = screen.width;
+
+coupon_move_base = screen.width;
+
+if(screen.width < coupon_content.width()){
+  coupon_move_base = coupon_content.width();
+}
+coupon_tl.set(coupon_content, {
+  x: -coupon_move_base
+})
+coupon_tl.to(coupon_content, {
+  duration: coupon_duration,
+  x: coupon_move,
+  ease: "none",
+  repeat: -1
+});
+
+
 function cpc_manu_open_close() {
   bg = jQuery("#cpcp_menu_phone_bg");
   container = jQuery("#cpc_menu_phone_c");

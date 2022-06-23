@@ -78,18 +78,43 @@ if ($opt_register == 'yes') {
     $menu_name = 'cpc_primary';
     $locations = get_nav_menu_locations();
 
-    if( isset($locations[$menu_name]) ){
+    if (isset($locations[$menu_name])) {
         $menu = wp_get_nav_menu_object($locations[$menu_name]);
         $menuitems = wp_get_nav_menu_items($menu->term_id, array('order' => 'DESC'));
-    
+
         $hierarchy = cpc_combineHierarchy($menuitems, $menuitems);
     }
     ?>
 
     <header class="cpc_header">
-        <div class="coupons">
+        <?php
 
-        </div>
+        $wp_scrollheader = new WP_Query([
+            'post_type' => 'scroll-header',
+            'post_per_page' => -1
+        ]);
+
+        if ($wp_scrollheader->have_posts()) {
+        ?>
+            <div class="coupons">
+                <div id="cpc_coupons_content" class="content">
+                    <?php
+
+                    while ($wp_scrollheader->have_posts()) {
+                        $wp_scrollheader->the_post();
+                    ?>
+                        <div class="cpc_coupons_item">
+                            <?php echo htmlspecialchars_decode( get_post_meta(get_the_ID(), '_cpc_scrollheader_key', true) ); ?>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </div>
+            </div>
+        <?php
+        }
+        ?>
+
         <div class="cpc_menu">
             <div class="container cpc_menu_content">
                 <a href="<?php echo site_url(); ?>" class="cpc_menu_logo">
@@ -121,7 +146,7 @@ if ($opt_register == 'yes') {
                 </div>
                 <div class="cpc_menu_actions">
 
-                    <div class="btn-shop">
+                    <div class="cpc_btn_pc btn-shop">
                         <?php
 
                         $cart = WC()->cart;
@@ -199,6 +224,10 @@ if ($opt_register == 'yes') {
                             </div>
                         </ul>
                     </div>
+
+                    <a href="" class="cpc_btn_pc btn btn-user">
+                        <i class="fa fa-user"></i>
+                    </a>
 
                     <button class="btn btn-menu" type="button" onclick="cpc_menu_toggle();">
                         <i class="fa fa-bars"></i>

@@ -4,7 +4,27 @@ $coupon-h: 40px;
 .coupons{
     background: black;
     width: 100%;
-    height: $coupon-h;
+    overflow: hidden;
+
+    min-height: $coupon-h;
+    padding: .6rem 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    white-space: nowrap;
+    color: white;
+
+    .content{
+        display: flex;
+        gap: 2rem;
+        //animation: scrollText 20s infinite linear;
+
+        .cpc_coupons_item{
+            display: flex !important;
+        }
+    }
 }
 
 .cpc_menu{
@@ -34,14 +54,15 @@ $coupon-h: 40px;
         height: 100%;
 
         display: grid;
-        grid-template-columns: 60% 40%;
+        grid-template-columns: 70% 30%;
         grid-template-rows: 1fr;
         gap: .6rem;
     }
     .cpc_menu_logo{
 
         width: 100%;
-        height: 100%;
+        height: 130%;
+        padding: .6rem 0;
 
         position: relative;
 
@@ -59,13 +80,14 @@ $coupon-h: 40px;
             z-index: 9996;
 
             margin-bottom: -6rem;
+
             &::before{
                 content: '';
                 position: absolute;
                 top: 0;
-                right: 100%;
-                width: 100%;
-                height: 130%;
+                right: 90%;
+                width: 100vw;
+                height: 116%;
                 background: $primary-dark;
                 z-index: -1;
             }
@@ -73,7 +95,7 @@ $coupon-h: 40px;
                 content: "";
                 display: block;
                 width: 100%;
-                height: 130%;
+                height: 116%;
                 background: $primary-dark;
                 margin-bottom: -3rem;
                 z-index: 9996;
@@ -107,7 +129,12 @@ $coupon-h: 40px;
             display: none;
         }
 
+        .cpc_btn_pc{
+            display: none;
+        }
+
         .btn-shop{
+            display: block;
             color: white;
             position: relative;
 
@@ -175,6 +202,10 @@ $coupon-h: 40px;
 
         .btn-menu{
             color: white;
+        }
+
+        .btn-menu, .btn-shop{
+            i{ font-size: calc($txt-body + 6px);}
         }
     }
 
@@ -246,3 +277,10 @@ $coupon-h: 40px;
         }
     }
 }
+
+@keyframes scrollText {
+    from   { transform: translateX(200%); }
+    to { transform: translateX(-200%); }
+}
+
+@import 'media-query/header';
