@@ -162,11 +162,11 @@ defined('ABSPATH') || exit;
 
 						<div class="info row">
 							<div class="col desc">Subtotal:</div>
-							<div class="col price"><?php echo get_woocommerce_currency_symbol() . $order->get_subtotal(); ?></div>
+							<div class="col price"><?php echo'US'.get_woocommerce_currency_symbol() . $order->get_subtotal(); ?></div>
 						</div>
 						<div class="info total row">
 							<div class="col desc">Total</div>
-							<div class="col price"><?php echo get_woocommerce_currency_symbol() . $order->get_total(); ?></div>
+							<div class="col price"><?php echo'US'.get_woocommerce_currency_symbol() . $order->get_total(); ?></div>
 						</div>
 					</div>
 				</div>

@@ -74,7 +74,7 @@ $order_conditional = isset($args) && array_key_exists('is_order', $args) && $arg
                         <div class="price">
                             <span>
                                 <span class="price_unit" id="cpc_shop_card_item_<?php echo $product_id; ?>_quantity"><?php echo $quantity; ?>x -</span>
-                                <span class="price_unit" id="cpc_shop_card_item_<?php echo $product_id; ?>_price_currency"><?php echo get_woocommerce_currency_symbol(); ?></span>
+                                <span class="price_unit" id="cpc_shop_card_item_<?php echo $product_id; ?>_price_currency"><?php echo'US'.get_woocommerce_currency_symbol(); ?></span>
                                 <span class="price_unit" id="cpc_shop_card_item_<?php echo $product_id; ?>_price_unit"><?php echo $product->get_price(); ?></span>
                             </span>
                             <p id="cpc_shop_card_item_<?php echo $product_id; ?>_price_total" class="price_totals">$<?php echo $total; ?></p>
@@ -159,12 +159,12 @@ $order_conditional = isset($args) && array_key_exists('is_order', $args) && $arg
 
                             <div class="price">
                                 <span>
-                                    <span class="price_unit" id="cpc_shop_card_item_<?php echo $product_id; ?>_price_currency"><?php echo get_woocommerce_currency_symbol(); ?></span>
+                                    <span class="price_unit" id="cpc_shop_card_item_<?php echo $product_id; ?>_price_currency"><?php echo'US'.get_woocommerce_currency_symbol(); ?></span>
                                     <span class="price_unit" id="cpc_shop_card_item_<?php echo $product_id; ?>_price_unit"><?php echo  $_product->get_price(); ?></span>
                                 </span>
                                 <p <?php
                                     echo 'id="cpc_shop_card_item_' . $product_id . '_price_totals"';
-                                    ?> class="price_total"><?php echo  get_woocommerce_currency_symbol() . $_product->get_price(); ?></p>
+                                    ?> class="price_total"><?php echo 'US'.get_woocommerce_currency_symbol() . $_product->get_price(); ?></p>
                             </div>
 
                             <?php

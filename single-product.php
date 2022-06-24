@@ -47,11 +47,11 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
 
                         if ($is_onsale) {
                         ?>
-                            <span class="text-decoration-line-through d-block fs-2 text-end text-white"><?php echo get_woocommerce_currency_symbol() . $product->get_regular_price(); ?></span>
+                            <span class="text-decoration-line-through d-block fs-2 text-end text-white"><?php echo 'US' . get_woocommerce_currency_symbol() . $product->get_regular_price(); ?></span>
                         <?php
-                            echo get_woocommerce_currency_symbol() . $product->get_sale_price();
+                            echo 'US' . get_woocommerce_currency_symbol() . $product->get_sale_price();
                         } else {
-                            echo get_woocommerce_currency_symbol() . $product->get_price();
+                            echo 'US' . get_woocommerce_currency_symbol() . $product->get_price();
                         }
 
                         if ($is_onsale) {
@@ -143,15 +143,32 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                 </div>
             </div>
             <div class="d-none d-lg-flex col-4 cpc_product_price_c">
-                <p class="cpc_product_price" style="display: flex; flex-direction: column; justify-content: end; align-items: end;">
+                <div class="cpc_product_price" style="display: flex; flex-direction: column; justify-content: end; align-items: end;">
                     <?php
                     if ($is_onsale) {
                     ?>
-                        <span class="text-decoration-line-through d-block fs-2 text-end text-white"><?php echo get_woocommerce_currency_symbol() . $product->get_regular_price(); ?></span>
+                        <span class="d-flex">
+                            <span class="text-decoration-line-through d-block fs-2 text-end text-white"><?php echo 'US' . get_woocommerce_currency_symbol() . $product->get_regular_price(); ?></span>
+                            <?php
+                            $discount_percent = get_post_meta($product->get_id(), '_cpc_product_discount_percent', true);
+
+                            if (!empty($discount_percent)) {
+                            ?>
+                                <span class="">
+                                    <span class="badge bg-danger cpc-text-small d-block">
+                                        <?php echo $discount_percent ?>% OFF
+                                    </span>
+                                </span>
+
+                            <?php
+                            }
+                            ?>
+                        </span>
+
                     <?php
-                        echo get_woocommerce_currency_symbol() . $product->get_sale_price();
+                        echo 'US' . get_woocommerce_currency_symbol() . $product->get_sale_price();
                     } else {
-                        echo get_woocommerce_currency_symbol() . $product->get_price();
+                        echo 'US' . get_woocommerce_currency_symbol() . $product->get_price();
                     }
 
                     if ($is_onsale) {
@@ -163,12 +180,11 @@ function cpc_capacitacion_cpt_box_desc($title, $content, $content_extra = "")
                     <?php
                     }
                     ?>
-                </p>
-
-                <div class="d-flex gap-4 cpc_product_price_btn">
-                    <a href="#cpc_email_form_single_cpt" class="btn btn-outline-primary">Contáctanos</a>
-                    <button onclick="cpc_add_capacitacion_to_cart($(this), '<?php echo esc_url($product->add_to_cart_url()); ?>')" rel="nofollow" data-product_id="<?php echo esc_attr($product->get_id()); ?>" data-product_sku="<?php echo esc_attr($product->get_sku()); ?>" class="btn btn-primary">Comprar Ahora</button>
                 </div>
+
+            <div class="d-flex gap-4 cpc_product_price_btn">
+                <a href="#cpc_email_form_single_cpt" class="btn btn-outline-primary">Contáctanos</a>
+                <button onclick="cpc_add_capacitacion_to_cart($(this), '<?php echo esc_url($product->add_to_cart_url()); ?>')" rel="nofollow" data-product_id="<?php echo esc_attr($product->get_id()); ?>" data-product_sku="<?php echo esc_attr($product->get_sku()); ?>" class="btn btn-primary">Comprar Ahora</button>
             </div>
         </div>
     </div>

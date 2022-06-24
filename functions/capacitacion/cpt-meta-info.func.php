@@ -5,6 +5,20 @@
 function cpc_capacitacion_func_meta_fields_add(){
  
 	echo '<div class="options_group">';
+    woocommerce_wp_text_input( 
+        array( 
+            'id'                => '_cpc_product_discount_percent',
+            'label'             => 'Descuento de la promoción', 
+            'placeholder'       => '', 
+            'desc_tip'    => 'true',
+            'description'       => 'Por favor insertar el número del porcentaje para el descuento.',
+            'type'              => 'number', 
+            'custom_attributes' => array(
+                    'step' 	=> 'any',
+                    'min'	=> '0'
+                ) 
+        )
+    );
 
     woocommerce_wp_text_input( 
         array( 
@@ -70,6 +84,7 @@ function cpc_capacitacion_func_meta_fields_save( $post_id ){
     $woo_sessions = $_POST['_cpc_product_sessions'];
     $woo_brochure_link = $_POST['_cpc_product_brochure_link'];
     $woo_video = $_POST['_cpc_product_video_link'];
+    $woo_discount_percent = $_POST['_cpc_product_discount_percent'];
 
 	if( !empty( $woocommerce_number_field ) )
 		update_post_meta( $post_id, '_cpc_product_duration', esc_attr( $woocommerce_number_field ) );
@@ -83,6 +98,8 @@ function cpc_capacitacion_func_meta_fields_save( $post_id ){
     if( !empty( $woo_video ) )
         update_post_meta( $post_id, '_cpc_product_video_link', esc_attr( $woo_video ) );
 
+    if( !empty( $woo_discount_percent ) )
+        update_post_meta( $post_id, '_cpc_product_discount_percent', esc_attr($woo_discount_percent) );
 	//if( !empty( $_POST['super_product'] ) ) {
 		//update_post_meta( $id, 'super_product', $_POST['super_product'] );
 	//} else {

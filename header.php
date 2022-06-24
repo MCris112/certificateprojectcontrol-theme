@@ -199,7 +199,7 @@ if ($opt_register == 'yes') {
                                                 <div class="body">
                                                     <h5 class="title"><?php echo $_product->get_title(); ?></h5>
                                                     <p class="quantity text-muted">Cantidad: <?php echo $values['quantity']; ?></p>
-                                                    <p class="price text-end"><?php echo get_woocommerce_currency_symbol() . $price; ?></p>
+                                                    <p class="price text-end"><?php echo'US'.get_woocommerce_currency_symbol() . $price; ?></p>
                                                 </div>
                                             </li>
 
@@ -215,7 +215,7 @@ if ($opt_register == 'yes') {
                                         <div class="row mb-3">
                                             <div class="col-3">
                                                 <span class="text-nowrap">Subtotal</span>
-                                                <input type="hidden" id="cri_woo_currency_symbol" value="<?php echo get_woocommerce_currency_symbol(); ?>">
+                                                <input type="hidden" id="cri_woo_currency_symbol" value="<?php echo'US'.get_woocommerce_currency_symbol(); ?>">
                                             </div>
                                             <div id="cpc_menu_shop_content_subtotal" class="col-9 subtotal text-end">
                                                 <?php echo $cart->get_cart_subtotal(); ?>

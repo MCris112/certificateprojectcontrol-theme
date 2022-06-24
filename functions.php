@@ -164,7 +164,7 @@ function cpc_menu_get_social_links($classes = array(), $args = array('order' => 
 
 	$menu_name = 'cpc_social_media';
 
-	if($is_header){
+	if ($is_header) {
 		$menu_name = 'cpc_social_media_header';
 	}
 	$locations = get_nav_menu_locations();
@@ -298,7 +298,8 @@ function cpc_theme_get_white_logo()
 	return $logo_white;
 }
 
-function cpc_get_site_icon_url(){
+function cpc_get_site_icon_url()
+{
 	$site_icon_url = get_site_icon_url();
 
 	if (empty($site_icon_url)) {
@@ -329,13 +330,13 @@ function cpc_menu_show_items($menuitem, $level = 0)
 					} ?> nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 				<?php
-				if(count($classes) > 1 && $classes[0] == 'cri_icon'){
+				if (count($classes) > 1 && $classes[0] == 'cri_icon') {
 					echo '<i class="' . implode(' ', $classes) . '"></i>';
-				}else{
+				} else {
 					//echo $menuitem->title  . ' <i class="fa fa-caret-down" aria-hidden="true"></i>'; //IN CASE DOTS
-					echo $menuitem->title; 
+					echo $menuitem->title;
 				}
-				 ?>
+				?>
 			</a>
 			<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 				<?php
@@ -363,7 +364,7 @@ function cpc_menu_show_items($menuitem, $level = 0)
 		</a>
 	</li>
 
-<?php
+	<?php
 }
 
 function cpc_combineHierarchy($groups, $categories)
@@ -395,7 +396,8 @@ function cpc_combineHierarchy($groups, $categories)
 	return $hierarchy;
 }
 
-function cpc_get_video_link_about_us(){
+function cpc_get_video_link_about_us()
+{
 	$video_link = get_theme_mod('cpc_video_link_about_us');
 
 	if (empty($video_link)) {
@@ -414,16 +416,35 @@ function cpc_get_video_link_about_us(){
 function cpc_show_block_item_price($product)
 {
 	echo '<span class="price position-relative">';
-    echo get_woocommerce_currency_symbol() . $product->get_price();
 
-    if ($product->is_on_sale()) {
-?>
-        <span class="badge bg-danger cpc-text-small" style="transform: scale(.6);">
-            ON SALE
-            <span class="visually-hidden">Producto ON SALE</span>
-        </span>
-    <?php
-    }
+	if ($product->is_on_sale()) {
+		$discount_percent = get_post_meta($product->get_id(), '_cpc_product_discount_percent', true);
+
+		if (!empty($discount_percent)) {
+	?>
+			<span class="text-decoration-line-through"><?php echo 'US' . get_woocommerce_currency_symbol() . $product->get_regular_price(); ?></span>
+			<?php echo 'US' . get_woocommerce_currency_symbol() . $product->get_sale_price(); ?>
+
+			<span class="badge bg-danger cpc-text-small" style="transform: scale(.8);">
+				<?php echo $discount_percent ?>% OFF
+				<span class="visually-hidden">Producto ON SALE</span>
+			</span>
+
+		<?php
+		} else {
+		?>
+			<span class="text-decoration-line-through"><?php echo 'US' . get_woocommerce_currency_symbol() . $product->get_regular_price(); ?></span>
+			<?php echo 'US' . get_woocommerce_currency_symbol() . $product->get_sale_price(); ?>
+
+			<span class="badge bg-danger cpc-text-small" style="transform: scale(.8);">
+				ON SALE
+				<span class="visually-hidden">Producto ON SALE</span>
+			</span>
+<?php
+		}
+	}else{
+		echo 'US' . get_woocommerce_currency_symbol() . $product->get_price();
+	}
 
 	echo '</span>';
 }

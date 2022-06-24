@@ -47,6 +47,9 @@
 }
 
 @media (max-width: 576px){
+    .chaty-tooltip::after{
+            display: none !important;
+    }
     .cpc_mewsletter{
         padding: 4rem 1rem;
     }
